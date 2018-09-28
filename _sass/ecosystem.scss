@@ -137,9 +137,17 @@
 
   @include small-desktop {
     padding: rem(10px);
+    height: auto !important;
   }
 
   @include desktop {
     height: 150px;
+  }
+
+  a {
+    @include small-desktop {
+      display: flex;
+      align-items: center;
+    }
   }
 }
