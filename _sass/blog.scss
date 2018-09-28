@@ -82,8 +82,11 @@
   }
 
   .jumbotron {
+    padding-top: rem(100px);
+
     @include desktop {
       height: 550px;
+      padding-top: 0;
     }
 
     .container {
@@ -113,7 +116,7 @@
       }
     }
     .blog-detail-container {
-      padding-top: rem(344px);
+      padding-top: rem(244px);
     }
 
     p {
@@ -126,6 +129,10 @@
     .btn {
       margin-top: rem(12px);
       padding-top: rem(9px);
+      margin-bottom: rem(10px);
+      @include desktop {
+        margin-bottom: 0;
+      }
     }
   }
 
@@ -201,4 +208,3 @@ twitterwidget {
   margin-top: rem(18px) !important;
   margin-bottom: rem(18px) !important;
 }
-
