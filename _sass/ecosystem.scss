@@ -131,3 +131,15 @@
     border-color: #ecedf1;
   }
 }
+
+.ecosystem .ecosystem-card {
+  height: auto;
+
+  @include small-desktop {
+    padding: rem(10px);
+  }
+
+  @include desktop {
+    height: 150px;
+  }
+}
