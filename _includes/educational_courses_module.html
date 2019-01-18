@@ -1,24 +1,27 @@
 <div class="container-fluid article-page-module">
-  <div class="container">
+  <div class="container educational-resources-container">
     <div class="row">
       <div class="col-md-12">
-        <h3>Educational Courses</h3>
-        <a href="{{ site.external_urls.udacity_courses }}" class="btn btn-lg with-right-arrow module-button" target="_blank">
-          See all Courses
-        </a>
+        <h2>Educational Courses</h2>
       </div>
+    </div>
+
+    <div class="educational-courses-intro">
+      <p>There are many educational resources available for learning and supporting AI / ML development with PyTorch.
+      Here are a few to get you started.</p>
     </div>
 
     <div class="row module-content-wrapper">
       {% assign courses = site.courses | sort: 'order' %}
 
-      {% for course in courses limit: 4 %}
-        <div class="col-md-3">
+      {% for course in courses %}
+        <div class="col-md-4">
           <a href="{{ course.link }}" target="_blank">
+            <h5>{{ course.platform }}</h5>
             <img src="{{ course.thumbnail }}" />
-            <h5>{{ course.title }}</h5>
-            <p>{{ course.summary }}</p>
+            <h4>{{ course.title }}</h4>
           </a>
+          <p>{{ course.summary }}</p>
         </div>
       {% endfor %}
     </div>

@@ -1,7 +1,8 @@
 ---
 title: Course 3
 summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-thumbnail: http://via.placeholder.com/560x360/ffffff/d8d8d8
+thumbnail: http://placehold.it/387x219/f3f4f7
 link: https://pytorch.org
 order: 3
+platform: Udacity
 ---
