@@ -5,7 +5,6 @@
   }
 
   h1 {
-    padding-top: rem(120px);
     #hub-header, #hub-sub-header {
       color: $orange;
       font-weight: lighter;
@@ -66,6 +65,10 @@
 
 .hub .detail-arrow {
   color: $orange;
+  @include desktop {
+    font-size: 4.5rem;
+  }
+  font-size: 2.5rem;
 }
 
 .hub .with-right-white-arrow {
@@ -97,9 +100,9 @@
 }
 
 .hub.hub-detail .jumbotron {
-  height: 100px;
+  height: 350px;
   @include desktop {
-    height: 100px;
+    height: 400px;
   }
 }
 
@@ -247,6 +250,8 @@
 .hub #dropdownFilter, #dropdownSort, #dropdownSortLeft {
   color: $mid_gray;
   cursor: pointer;
+  z-index: 1;
+  position: absolute;
 }
 
 .hub #dropdownSort, #dropdownSortLeft {
@@ -478,6 +483,7 @@
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
+  margin-bottom: 5px;
   &:hover {
     border: 1px solid $orange;
     color: $orange;
@@ -510,5 +516,13 @@
 
   .active .page {
     background-color: #dee2e6;
+  }
+}
+
+.hub .hub-tags-container {
+  width: 40%;
+
+  &.active {
+    width: 0;
   }
 }

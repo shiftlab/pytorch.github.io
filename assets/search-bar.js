@@ -30,7 +30,7 @@ $("#search-icon").on("click", function() {
 
 $("#close-search").on("click", function() {
   $(this).hide();
-  $("#search-icon").show();
+  $("#search-icon").toggle();
   $(".search-border")
     .attr("style", "")
     .removeClass("active-background");
