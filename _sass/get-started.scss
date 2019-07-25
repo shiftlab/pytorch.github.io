@@ -114,6 +114,16 @@
     background: $light_grey;
   }
 
+  .library-option {
+    color: $orange;
+    outline: 1px solid $orange;
+    outline-offset: -3px;
+  }
+
+  .library-option.selected, .library-option:hover {
+    color: $white;
+  }
+
   .title-block {
     border: 2px solid $white;
   }

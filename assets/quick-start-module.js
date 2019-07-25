@@ -11,6 +11,9 @@ var opts = {
   pm: 'conda',
   language: 'python3.6',
   ptbuild: 'stable',
+  torchaudio: "torchaudio",
+  torchtext: "torchtext",
+  torchvision: "torchvision"
 };
 
 var supportedCloudPlatforms = [
@@ -24,6 +27,7 @@ var package = $(".package > .option");
 var language = $(".language > .option");
 var cuda = $(".cuda > .option");
 var ptbuild = $(".ptbuild > .option");
+var library = $(".library > .option");
 
 os.on("click", function() {
   selectedOption(os, this, "os");
@@ -40,6 +44,23 @@ cuda.on("click", function() {
 ptbuild.on("click", function() {
   selectedOption(ptbuild, this, "ptbuild")
 });
+library.on("click", function() {
+  selectedOption(library, this)
+});
+
+$("#preview").on("click", function() {
+  deselectLibraries();
+})
+
+// When "Preview" is selected remove selected libraries
+
+function deselectLibraries() {
+  libraries = ["#torchaudio", "#torchvision", "#torchtext"];
+  libraries.forEach(function(library) {
+    $(library).removeClass("selected");
+  });
+  Object.assign(opts, { torchaudio: "", torchtext: "", torchvision: "" });
+}
 
 // Pre-select user's operating system
 $(document).ready(function() {
@@ -82,9 +103,14 @@ function getAnchorSelectedOS() {
 }
 
 function selectedOption(option, selection, category) {
-  $(option).removeClass("selected");
-  $(selection).addClass("selected");
-  opts[category] = selection.id;
+  if (option == library) {
+    librarySelection(selection)
+  }
+  else {
+    $(option).removeClass("selected");
+    $(selection).addClass("selected");
+    opts[category] = selection.id;
+    }
   if (category === "pm") {
     var elements = document.getElementsByClassName("language")[0].children;
     if (selection.id !== "libtorch" && elements["cplusplus"].classList.contains("selected")) {
@@ -124,6 +150,16 @@ function selectedOption(option, selection, category) {
   }
 }
 
+function librarySelection(selection) {
+  $(selection).toggleClass("selected");
+  if ($(selection).hasClass("selected")) {
+    opts[selection.id] = selection.id;
+  }
+  else {
+    opts[selection.id] = "";
+  }
+}
+
 function display(selection, id, category) {
   var container = document.getElementById(id);
   // Check if there's a container to display the selection
@@ -150,8 +186,29 @@ function buildMatcher() {
     "," +
     opts.cuda.toLowerCase() +
     "," +
-    opts.language.toLowerCase()
+    opts.language.toLowerCase() +
+    libraryOptions()
   );
+}
+
+function libraryOptions() {
+  var optionsArray = [opts.torchaudio, opts.torchtext, opts.torchvision];
+  var results = optionsArray
+    .filter(function(library) {
+      return library !== "";
+    })
+    .join(",");
+
+  if (opts.ptbuild == "preview") {
+    deselectLibraries();
+    results = "";
+  }
+
+  if (results == "") {
+    return "";
+  } else {
+    return "," + results;
+  }
 }
 
 // Cloud Partners sub-menu toggle listeners

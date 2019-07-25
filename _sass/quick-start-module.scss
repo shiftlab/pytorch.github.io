@@ -93,6 +93,12 @@
     cursor: pointer;
   }
 
+  .library-option {
+    color: $orange;
+    outline: 1px solid $orange;
+    outline-offset: -3px;
+  }
+
   .option:hover {
     background-color: $orange;
     color: $white;
@@ -119,6 +125,14 @@
     line-height: rem(20px);
     display: flex;
     align-items: center;
+
+    .library-title {
+      color: $orange;
+    }
+
+    .optional-libraries {
+      color: $dark_grey;
+    }
   }
 
   .title-block:before {
@@ -129,6 +143,10 @@
     height: 100%;
     position: absolute;
     left: 0;
+  }
+
+  .title-block.library-title-block:before, .mobile-heading.library-title:before {
+    border-left: 2px solid $orange;
   }
 
   #command {
