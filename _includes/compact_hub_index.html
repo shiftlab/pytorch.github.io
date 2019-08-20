@@ -1,0 +1,97 @@
+<div class="container">
+    <!-- START CONTENT -->
+  <div class="row" id="model-row">
+
+    <nav class="navbar navbar-expand-lg navbar-light research-menu">
+      {% include hub_model_tags.html category="researchers" %}
+
+          <!--
+          <a id="dropdownSortLeft" data-toggle="dropdown" data-target="#dropdownSortMenuLeft" >
+            Sort <img src="{{ site.baseurl }}/assets/images/filter-arrow.svg">
+          </a>
+
+          <div class="dropdown-menu sort-menu" id="dropdownSortMenuLeft">
+            <div class="hub-filter-menu">
+              <ul>
+                <li>
+                  <a class= "hub-filter" id="sortLowLeft">Lowest</a>
+                </li>
+
+                <li>
+                  <a class= "hub-filter" id="sortHighLeft">Highest</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        -->
+    </nav>
+    <div class="hub-select-container col-3">
+      <a class="full-hub-icon" href="{{ site.baseurl }}/hub"><img src="/assets/images/full-hub-icon.svg"></a>
+      <a class="compact-hub-icon-selected" href="{{ site.baseurl }}"><img src="/assets/images/compact-hub-icon-selected.svg"></a>
+    </div>
+         
+
+    <hr class="compact-hub-divider col-12">
+
+    <div id="hub-index-cards" class="col-12">
+      <div class="list compact-cards cards-left">
+        {% assign hub = site.hub | where: "category", "researchers" | sort: "order" %}
+
+        {% for item in hub %}
+        <div class="col-md compact-hub-card-wrapper" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
+          <div class="compact-model-card">
+            <a href="{{ site.baseurl }}{{ item.url }}">
+              <div class="compact-card-body">
+                <div class="compact-card-container">
+                  <h4 class="compact-item-title col-6">{{ item.title }}</h4>
+                  <p class="compact-card-summary card-summary col-6">{{ item.summary }}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="row how-it-works col-md">
+<div class="col-md-12 how-it-works-title-col">
+  <h3 class="research-hub-title">How it works —</h3>
+</div>
+<div class="col-md-6">
+  <h3 class="research-hub-sub-title">Publishing Models</h3>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="how-it-works-text">
+        PyTorch Hub supports publishing pre-trained models (model definitions and pre-trained weights) to a GitHub repository by adding a simple <code class="hub-code-text">hubconf.py</code> file.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <h3 class="research-hub-sub-title">Loading models</h3>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="how-it-works-text">
+        Users can load pre-trained models using <code class="hub-code-text">torch.hub.load()</code> API.
+      </div>
+      <p class="how-it-works-text">Here’s an example showing how to load the <code class="hub-code-text">resnet18</code> entrypoint from the <code class="hub-code-text">pytorch/vision</code> repo.</p>
+      <p class="how-it-works-text"><code class="hub-code-text hub-code-block">model = torch.hub.load('pytorch/vision', 'resnet18', pretrained=True)</code></p>
+      <button class="full-docs-button"><a href="https://pytorch.org/docs/stable/hub.html">See Full Documentation</a></button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script list-id="hub-index-cards" display-count="200" pagination="false" src="{{ site.baseurl }}/assets/filter-hub-tags.js"></script>
+
