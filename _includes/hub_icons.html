@@ -1,0 +1,16 @@
+{% if page.compact == researcher_compact %}
+
+<a class="full-hub-icon" href="{{ site.baseurl }}/hub/research-models/"><img src="/assets/images/full-hub-icon.svg"></a>
+<a class="compact-hub-icon-selected" href="{{ site.baseurl }}/hub/research-models/compact"><img src="/assets/images/compact-hub-icon-selected.svg"></a>
+
+{% elsif page.compact == developer_compact %}
+
+<a class="full-hub-icon" href="{{ site.baseurl }}/hub/developer-models/"><img src="/assets/images/full-hub-icon.svg"></a>
+<a class="compact-hub-icon-selected" href="{{ site.baseurl }}/hub/developer-models/compact"><img src="/assets/images/compact-hub-icon-selected.svg"></a>
+
+{% else %}
+
+<a class="full-hub-icon" href="{{ site.baseurl }}"><img src="/assets/images/full-hub-icon.svg"></a>
+<a class="compact-hub-icon-selected" href="{{ site.baseurl }}"><img src="/assets/images/compact-hub-icon-selected.svg"></a>
+
+{% endif %}
