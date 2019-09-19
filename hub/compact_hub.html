@@ -9,17 +9,4 @@ summary: Explore and extend models from the latest cutting edge research.
 
 {% include compact_hub_tags_and_icons.html %}
 
-{% if page.compact == researcher_compact %}
-
-  {% include compact_researcher_cards.html %}
-
-{% elsif page.compact  == developer_compact %}
-
-  {% include compact_developer_cards.html %}
-
-</div>
-
-{% endif %}
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
-<script list-id="hub-index-cards" display-count="200" pagination="false" src="{{ site.baseurl }}/assets/filter-hub-tags.js"></script>
+{% include compact_hub_cards.html %}
