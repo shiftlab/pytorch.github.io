@@ -2,20 +2,67 @@
   .jumbotron {
     height: 250px;
   }
+
   .deep-learning-background {
     @include desktop {
       height: 440px;
     }
   }
+
   .deep-learning-content {
+    padding-left: 20px;
+    padding-right: 20px;
     @include desktop {
       padding-top: 0;
     }
   }
 }
+
+  .deep-learning-thank-you {
+    .deep-learning-jumbotron {
+      height: 50%;
+    }
+  }
+
 .deep-learning-container {
+  display: flex;
+  color: white;
+  align-items: center;
+}
+
+.deep-learning-thank-you-container {
+  display: flex;
   color: white;
 }
+
 .deep-learning-logo {
   background-image: url($baseurl + "/assets/images/pytorch-logo.png");
+}
+
+.deep-learning-text {
+  max-height: 430px;
+}
+
+.deep-learning-background-thank-you {
+  height: 76%;
+}
+
+.deep-learning-thank-you-footer {
+  position: absolute;
+  bottom: 0;
+  height: 25%;
+}
+
+.deep-learning-row {
+  display: flex;
+  align-items: center;
+  .lead {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.deep-learning-book {
+  max-width: 100%;
+  height: auto;
 }

@@ -167,6 +167,9 @@ a, .btn {
   &.deep-learning-background {
     background-image: url($baseurl + "/assets/images/deep-learning-background.jpg");
   }
+  &.deep-learning-background-thank-you {
+    background-image: url($baseurl + "/assets/images/deep-learning-thank-you-background.jpg");
+  }
 }
 
 .bg-light-grey {
