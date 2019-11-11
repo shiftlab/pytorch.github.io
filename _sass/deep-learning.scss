@@ -116,13 +116,5 @@
 }
 
 .deep-learning-form {
-  padding-bottom: rem(48px);
-
-    .mc-field-group {
-      padding-bottom: rem(25px);
-
-      .error-message {
-        color: $orange;
-      }
-    }
+  margin-left: -1rem;
 }
