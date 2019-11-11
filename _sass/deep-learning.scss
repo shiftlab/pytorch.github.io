@@ -1,6 +1,18 @@
 .deep-learning-index {
+  .header-container {
+    @include max-width-desktop {
+      margin-bottom: 1rem;
+    }
+  }
   .jumbotron {
     height: 250px;
+    .deep-learning-row {
+      h1 {
+        @include small-desktop {
+          font-size: 3rem;
+        }
+      }
+    }
   }
 
   .deep-learning-background {
@@ -19,6 +31,9 @@
 }
 
   .deep-learning-thank-you {
+    .header-holder {
+      height: 90px;
+    }
     .deep-learning-jumbotron {
       height: 50%;
     }
@@ -39,18 +54,28 @@
   background-image: url($baseurl + "/assets/images/pytorch-logo.png");
 }
 
+.deep-learning-thank-you-logo {
+  max-width: 60%;
+  height: auto;
+  padding-bottom: 1.5rem;
+}
+
 .deep-learning-text {
   max-height: 430px;
 }
 
 .deep-learning-background-thank-you {
-  height: 76%;
+  height: 90%;
 }
 
 .deep-learning-thank-you-footer {
   position: absolute;
+  background-color: #4b4f56;
   bottom: 0;
-  height: 25%;
+  height: 26%;
+  .footer-container {
+    padding-top: 2rem;
+  }
 }
 
 .deep-learning-row {
@@ -60,9 +85,44 @@
     margin-top: 2rem;
     margin-bottom: 2rem;
   }
+  h1 {
+    @include small-desktop {
+      font-size: 3rem;
+    }
+  }
 }
 
 .deep-learning-book {
   max-width: 100%;
   height: auto;
+}
+
+.deep-learning-footer-link-contain {
+  display: flex;
+  color: white;
+  bottom: 1rem;
+  .deep-learning-footer-links {
+    display: flex;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  .deep-learning-footer-items {
+    margin-right: .5rem;
+    padding-bottom: 0;
+    color: white;
+  } 
+}
+
+.deep-learning-form {
+  padding-bottom: rem(48px);
+
+    .mc-field-group {
+      padding-bottom: rem(25px);
+
+      .error-message {
+        color: $orange;
+      }
+    }
 }
