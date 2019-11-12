@@ -1,81 +1,55 @@
-{% if page.deep-learning-thank-you == true %}
-<body class="deep-learning-thank-you">
-    
-    <div class="container-fluid header-holder">
-      <div class="container">
-        <div class="header-container">
-          <a class="header-logo" href="{{ site.url }}{{ site.baseurl }}" aria-label="PyTorch"></a>
-        </div>
-      </div>
-    </div>
-    
-    <div class="main-background deep-learning-background-thank-you"></div>
-
-    <div class="jumbotron jumbotron-fluid deep-learning-jumbotron">
-      <div class="container deep-learning-thank-you-container">
-        <div class="deep-learning-row">
-          <div class="deep-learning-text col-md-7 col-8">
-            <h1>Deep Learning with PyTorch</h1>
-            <p class="lead">Thanks for requesting a copy of the Deep Learning with PyTorch book! <a href="/assets/images/Deep_Learning_with_PyTorch.pdf" target="_blank">Click here</a> to download the book.</p>
-          </div> 
-          <div class="col-md-5 col-4">
-            <img class="deep-learning-book" src="/assets/images/DeepLearningThumbnail.png">
-          </div>  
-        </div>
-      </div>
-    </div>
-    {% include deep_learning_thank_you_footer.html %}
-  </body>
-
-{% elsif page.deep-learning-index == true %}
-
 <body class="deep-learning-index">
     
-    <div class="container-fluid header-holder">
-      <div class="container">
-        <div class="header-container">
-          <a class="header-logo" href="{{ site.url }}{{ site.baseurl }}" aria-label="PyTorch"></a>
-        </div>
+  <div class="container-fluid header-holder">
+    <div class="container">
+      <div class="header-container">
+        <a class="header-logo" href="{{ site.url }}{{ site.baseurl }}" aria-label="PyTorch"></a>
       </div>
     </div>
+  </div>
     
-    <div class="main-background deep-learning-background"></div>
+  <div class="main-background deep-learning-background"></div>
 
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container deep-learning-container"> 
-        <div class="deep-learning-row">
-          <div class="col-md-7 col-8">
-            <h1>Deep Learning with PyTorch</h1>
-            <p class="lead">Download a free copy of the book and learn how to get started with AI / ML development using PyTorch</p>
-          </div>
-          <div class="col-md-5 col-4">
-            <img class="deep-learning-book" src="/assets/images/DeepLearningThumbnail.png">
-          </div> 
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container deep-learning-container"> 
+      <div class="deep-learning-row">
+        <div class="col-md-7 col-8">
+          <h1>Deep Learning with PyTorch</h1>
+          <p class="lead">Download a free copy of the book and learn how to get started with AI / ML development using PyTorch</p>
         </div>
+        <div class="col-md-5 col-4">
+          <img class="deep-learning-book" src="/assets/images/DeepLearningThumbnail.png">
+        </div> 
       </div>
     </div>
+  </div>
 
-    <div class="main-content-wrapper">
-      <div class="main-content deep-learning-content">
-        <div class="container">
-          <div class="row">
-              <p>Deep Learning with PyTorch provides a detailed, hands-on introduction to building and training neural networks with PyTorch, a popular open source machine learning framework. This book includes:</p>
-              <ul>
-                <li>Introduction to deep learning and the PyTorch library</li>
-                <li>Pre-trained networks</li>
-                <li>Tensors</li>
-                <li>The mechanics of learning</li>
-                <li>Using a neural network to fit data</li>
-              </ul>
+  <div class="main-content-wrapper">
+    <div class="main-content deep-learning-content">
+      <div class="container">
+        <div class="row">
+          {% if page.deep-learning-thank-you == true %}
+            <div class="deep-learning-thank-you-text-contain">
+              <h1 class="deep-learning-thank-you-text">Deep Learning with PyTorch</h1>
+              <p class="lead">Thanks for requesting a copy of the Deep Learning with PyTorch book! <a href="/assets/images/Deep_Learning_with_PyTorch.pdf" target="_blank">Click here</a> to download the book.</p>
             </div>
+          {% elsif page.deep-learning-index == true %}
+            <p>Deep Learning with PyTorch provides a detailed, hands-on introduction to building and training neural networks with PyTorch, a popular open source machine learning framework. This book includes:</p>
+            <ul>
+              <li>Introduction to deep learning and the PyTorch library</li>
+              <li>Pre-trained networks</li>
+              <li>Tensors</li>
+              <li>The mechanics of learning</li>
+              <li>Using a neural network to fit data</li>
+            </ul>
             <p>Get a free copy for a limited time.</p>
-            <div class="col-7 deep-learning-form">
-              {% include deep_learning_form.html %}
-            </div>
-          </div>
         </div>
+        <div class="deep-learning-form">
+          {% include deep_learning_form.html %}
+        </div>
+        {% endif %}
       </div>
     </div>
-    {% include footer.html %}
-  </body>
-{% endif %}
+  </div>
+  {% include footer.html %}
+</body>

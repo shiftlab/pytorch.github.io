@@ -165,9 +165,6 @@ a, .btn {
     background-image: url($baseurl + "/assets/images/get-started-background.jpg");
   }
   &.deep-learning-background {
-    background-image: url($baseurl + "/assets/images/deep-learning-background.jpg");
-  }
-  &.deep-learning-background-thank-you {
     background-image: url($baseurl + "/assets/images/deep-learning-thank-you-background.jpg");
   }
 }
@@ -239,7 +236,7 @@ a, .btn {
   :-moz-placeholder { /* Firefox 18- */
     color: $orange;
   }
-
+  
   input[type="submit"] {
     position: absolute;
     right: 0;
@@ -256,6 +253,14 @@ a, .btn {
     appearance: none;
     border: 0;
   }
+}
+
+.deep-learning-button {
+  background-image: url($baseurl + "/assets/images/DeepLearningThumbnail.png");
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center center;
+  height: 8rem;
 }
 
 .email-subscribe-form-fields-wrapper {

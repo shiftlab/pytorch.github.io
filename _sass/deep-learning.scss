@@ -30,42 +30,14 @@
   }
 }
 
-  .deep-learning-thank-you {
-    .header-holder {
-      height: 90px;
-    }
-    .deep-learning-jumbotron {
-      height: 50%;
-    }
-  }
-
 .deep-learning-container {
   display: flex;
   color: white;
   align-items: center;
 }
 
-.deep-learning-thank-you-container {
-  display: flex;
-  color: white;
-}
-
 .deep-learning-logo {
   background-image: url($baseurl + "/assets/images/pytorch-logo.png");
-}
-
-.deep-learning-thank-you-logo {
-  max-width: 60%;
-  height: auto;
-  padding-bottom: 1.5rem;
-}
-
-.deep-learning-text {
-  max-height: 430px;
-}
-
-.deep-learning-background-thank-you {
-  height: 90%;
 }
 
 .deep-learning-thank-you-footer {
@@ -82,12 +54,15 @@
   display: flex;
   align-items: center;
   .lead {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
   }
   h1 {
     @include small-desktop {
       font-size: 3rem;
+    }
+    @include desktop {
+      margin-top: 2rem;
     }
   }
 }
@@ -117,4 +92,19 @@
 
 .deep-learning-form {
   margin-left: -1rem;
+  @include desktop {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+}
+
+.deep-learning-thank-you-text-contain {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  @include desktop {
+    margin-top: -3rem;
+  }
+  .deep-learning-thank-you-text {
+    margin-bottom: 2rem;
+  }
 }
