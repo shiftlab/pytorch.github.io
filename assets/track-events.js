@@ -92,7 +92,7 @@ var trackEvents = {
     })
 
     // Clicks on Deep Learning Download button
-    $("#name-of-download-id").on(
+    $("#deep-learning-button").on(
       "click",
       function() {
         trackEvents.recordClick("Link", "Download");
