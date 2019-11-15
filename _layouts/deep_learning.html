@@ -53,5 +53,10 @@
       </div>
     </div>
     {% include footer.html %}
+
+    {% if page.deep-learning-index == true %}
+      {% include deep_learning_tracking.html %}
+    {% endif %}
+    
   </body>
 </html>
