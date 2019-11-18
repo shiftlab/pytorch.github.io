@@ -11,7 +11,7 @@
       height: 250px;
     }
 
-    .thank-you-container {
+    .thank-you-page-container {
       margin-top: 180px;
       @include desktop {
         margin-top: 0;
@@ -21,6 +21,10 @@
     .deep-learning-jumbotron-text {
       @include desktop {
         margin-top: 55px;
+      }
+      @include small-desktop {
+        max-width: 95%;
+        flex-basis: 100%;
       }
     }
 
@@ -40,10 +44,16 @@
       @include desktop {
         display: block
       }
+      @include small-desktop {
+        display: none;
+      }
     }
 
     .thank-you-book-container {
       display: block;
+      @include small-desktop {
+        display: none;
+      }
     }
   }
 
@@ -95,7 +105,7 @@
   }
 
   .thank-you-background  {
-    height: 436px;
+    height: 438px;
     @include desktop {
       height: 600px;
     }
@@ -154,5 +164,9 @@
       padding-left: .5rem;
       background-color: #f3f4f7;
     }
+  }
+
+  #mce-error-response {
+    color: $orange;
   }
 }
