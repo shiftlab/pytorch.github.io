@@ -12,9 +12,9 @@
     }
 
     .thank-you-page-container {
-      margin-top: 180px;
-      @include desktop {
-        margin-top: 0;
+      margin-top: 0;
+      @include small-desktop {
+        margin-top: 250px;
       }
     }
 
@@ -50,9 +50,12 @@
     }
 
     .thank-you-book-container {
-      display: block;
+      display: none;
       @include small-desktop {
-        display: none;
+        display: block;
+      }
+      @include desktop {
+        display: block;
       }
     }
   }
@@ -100,14 +103,14 @@
   .thank-you-wrapper {
     margin-top: 400px;
     @include desktop {
-      margin-top: 200px;
+      margin-top: 275px;
     }
   }
 
   .thank-you-background  {
     height: 438px;
     @include desktop {
-      height: 600px;
+      height: 680px;
     }
   }
 }
