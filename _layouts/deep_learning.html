@@ -42,9 +42,8 @@
 
     {% include footer.html %}
 
-    {% if page.deep-learning-landing == false %}
+    {% if page.deep-learning-landing == false and jekyll.environment == 'production' %}
       {% include deep_learning_event_tracking.html %}
     {% endif %}
-
   </body>
 </html>
