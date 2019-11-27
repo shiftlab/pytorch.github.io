@@ -1,10 +1,14 @@
-// Create the sidebar menus for each OS
+// Create the sidebar menus for each OS and Cloud Partner
 
 $([".macos", ".linux", ".windows"]).each(function(index, osClass) {
   buildSidebarMenu(osClass);
 });
 
-// On page load initially show the Mac OS menu
+$([".alibaba", ".aws", ".microsoft-azure", ".google-cloud"]).each(function(index, cloudPartner) {
+  buildCloudSidebarMenu(cloudPartner);
+});
+
+// On start locally page load initially show the Mac OS menu
 
 showSidebar("macos");
 
@@ -18,6 +22,34 @@ $("#linux").on("click", function() {
 
 $("#windows").on("click", function() {
   showSidebar("windows");
+});
+
+$("#alibaba").on("click", function() {
+  showCloudSidebar();
+});
+
+$("#microsoft-azure").on("click", function() {
+  if ($(this).parent().hasClass('open')) {
+    showCloudSidebar();
+  }else{
+    showCloudSidebar("microsoft-azure");
+  }
+});
+
+$("#google-cloud").on("click", function() {
+  if ($(this).parent().hasClass('open')) {
+    showCloudSidebar();
+  }else{
+    showCloudSidebar("google-cloud");
+  }
+});
+
+$("#aws").on("click", function() {
+  if ($(this).parent().hasClass('open')) {
+    showCloudSidebar();
+  }else{
+    showCloudSidebar("aws");
+  } 
 });
 
 function buildSidebarMenu(osClass) {
@@ -42,6 +74,26 @@ function buildSidebarMenu(osClass) {
   });
 }
 
+function buildCloudSidebarMenu(cloudPartner) {
+  $(cloudPartner + " > h2," + cloudPartner + " > h3").each(function(index, element) {
+    cloudPartner = cloudPartner.replace(".", "");
+
+    var indentMenuItem = $(element).get(0).tagName == "H3" ? "subitem" : "";
+
+    var cloudMenuItemClasses = [cloudPartner, indentMenuItem].join(" ");
+
+    $("#get-started-cloud-sidebar-list").append(
+      "<li class='" +
+        cloudMenuItemClasses +
+        "' style='display:none'><a href=#" +
+        this.id +
+        ">" +
+        this.textContent +
+        "</a></li>"
+    );
+  });
+}
+
 function showSidebar(osClass) {
   // Hide all of the menu items at first
   // Then filter for the selected OS
@@ -52,6 +104,17 @@ function showSidebar(osClass) {
       return $(this)
         .attr("class")
         .includes(osClass);
+    })
+    .show();
+}
+
+function showCloudSidebar(cloudPartner) {
+  $(".get-started-cloud-sidebar li")
+    .hide()
+    .filter(function() {
+      return $(this)
+        .attr("class")
+        .includes(cloudPartner);
     })
     .show();
 }
