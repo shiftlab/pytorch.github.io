@@ -240,13 +240,9 @@
 }
 
 .get-started .get-started-cloud-sidebar {
-  padding-top: rem(40px);
+  padding-top: rem(50px);
   padding-bottom: rem(40px);
   top: 15%;
-
-  @include desktop {
-    padding-top: 0;
-  }
 
   ul {
     padding-left: 0;

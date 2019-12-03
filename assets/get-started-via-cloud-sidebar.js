@@ -1,4 +1,4 @@
-// Create the sidebar menus for each OS
+// Create the sidebar menus for each cloud partner
 
 $([".aws", ".azure", ".google-cloud"]).each(function(index, cloudPartner) {
   buildSidebarMenu(cloudPartner);
@@ -13,7 +13,7 @@ $("#aws").on("click", function() {
 });
 
 $("#azure").on("click", function() {
-  showSidebar("azure");
+  showSidebar("microsoft-azure");
 });
 
 $("#google-cloud").on("click", function() {
@@ -44,7 +44,7 @@ function buildSidebarMenu(cloudPartner) {
 
 function showSidebar(cloudPartner) {
   // Hide all of the menu items at first
-  // Then filter for the selected OS
+  // Then filter for the selected cloud partner
 
   $(".get-started-cloud-sidebar li")
     .hide()
@@ -76,4 +76,3 @@ function addActiveClass(element) {
 if ($("#get-started-cloud-sidebar-list").text() == "") {
   $("#get-started-shortcuts-menu").hide();
 }
-
