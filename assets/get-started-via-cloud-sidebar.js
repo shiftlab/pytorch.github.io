@@ -1,23 +1,23 @@
 // Create the sidebar menus for each cloud partner
 
-$([".aws", ".azure", ".google-cloud"]).each(function(index, cloudPartner) {
+$([".alibaba", ".aws", ".microsoft-azure", ".google-cloud"]).each(function(index, cloudPartner) {
   buildSidebarMenu(cloudPartner);
 });
 
-// On page load hide menu
-
-showSidebar();
-
-$("#aws").on("click", function() {
-  showSidebar("aws");
+$("#alibaba").on("click", function() {
+  showSidebar();
 });
 
-$("#azure").on("click", function() {
+$("#microsoft-azure").on("click", function() {
   showSidebar("microsoft-azure");
 });
 
 $("#google-cloud").on("click", function() {
   showSidebar("google-cloud");
+});
+
+$("#aws").on("click", function() {
+  showSidebar("aws");
 });
 
 function buildSidebarMenu(cloudPartner) {
@@ -43,17 +43,13 @@ function buildSidebarMenu(cloudPartner) {
 }
 
 function showSidebar(cloudPartner) {
-  // Hide all of the menu items at first
-  // Then filter for the selected cloud partner
-
   $(".get-started-cloud-sidebar li")
-    .hide()
     .filter(function() {
       return $(this)
         .attr("class")
         .includes(cloudPartner);
-    })
-    .show();
+      })
+    .toggle();
 }
 
 $(".get-started-cloud-sidebar li").on("click", function() {
@@ -71,8 +67,4 @@ function addActiveClass(element) {
   $(element)
     .find("a")
     .addClass("active");
-}
-
-if ($("#get-started-cloud-sidebar-list").text() == "") {
-  $("#get-started-shortcuts-menu").hide();
 }
