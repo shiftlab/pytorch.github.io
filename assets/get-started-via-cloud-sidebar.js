@@ -48,7 +48,7 @@ function showSidebar(cloudPartner) {
       return $(this)
         .attr("class")
         .includes(cloudPartner);
-      })
+    })
     .toggle();
 }
 
