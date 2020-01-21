@@ -9,47 +9,26 @@ $([".alibaba", ".aws", ".microsoft-azure", ".google-cloud"]).each(function(index
 });
 
 // On start locally page load initially show the Mac OS menu
-
 showSidebar("macos");
 
-$("#macos").on("click", function() {
-  showSidebar("macos");
+$(["macos", "linux", "windows"]).each(function(index, osClass) {
+  $("#" + osClass).click(function() {
+    if ($(this).parent().hasClass('open')) {
+      showSidebar();
+    } else {
+      showSidebar(osClass);
+    } 
+  })
 });
 
-$("#linux").on("click", function() {
-  showSidebar("linux");
-});
-
-$("#windows").on("click", function() {
-  showSidebar("windows");
-});
-
-$("#alibaba").on("click", function() {
-  showCloudSidebar();
-});
-
-$("#microsoft-azure").on("click", function() {
-  if ($(this).parent().hasClass('open')) {
-    showCloudSidebar();
-  }else{
-    showCloudSidebar("microsoft-azure");
-  }
-});
-
-$("#google-cloud").on("click", function() {
-  if ($(this).parent().hasClass('open')) {
-    showCloudSidebar();
-  }else{
-    showCloudSidebar("google-cloud");
-  }
-});
-
-$("#aws").on("click", function() {
-  if ($(this).parent().hasClass('open')) {
-    showCloudSidebar();
-  }else{
-    showCloudSidebar("aws");
-  } 
+$(["alibaba", "aws", "microsoft-azure", "google-cloud"]).each(function(index, sidebarClass) {
+  $("#" + sidebarClass).click(function() {
+    if ($(this).parent().hasClass('open')) {
+      showCloudSidebar();
+    } else {
+      showCloudSidebar(sidebarClass);
+    } 
+  })
 });
 
 function buildSidebarMenu(osClass) {
