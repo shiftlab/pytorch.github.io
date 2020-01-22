@@ -13,14 +13,11 @@ showSidebar("macos");
 
 $(["macos", "linux", "windows"]).each(function(index, osClass) {
   $("#" + osClass).click(function() {
-    if ($(this).parent().hasClass('open')) {
-      showSidebar();
-    } else {
-      showSidebar(osClass);
-    } 
+    showSidebar(osClass);
   })
 });
 
+// Show cloud partner side nav on click or hide side nav if already open 
 $(["alibaba", "aws", "microsoft-azure", "google-cloud"]).each(function(index, sidebarClass) {
   $("#" + sidebarClass).click(function() {
     if ($(this).parent().hasClass('open')) {
