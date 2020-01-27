@@ -27,15 +27,15 @@ $(["alibaba", "aws", "microsoft-azure", "google-cloud"]).each(function(index, si
   })
 });
 
-function buildSidebarMenu(osClass, menuItem) {
-  $(osClass + " > h2," + osClass + " > h3").each(function(index, element) {
-    osClass = osClass.replace(".", "");
+function buildSidebarMenu(menuClass, menuItem) {
+  $(menuClass + " > h2," + menuClass + " > h3").each(function(index, element) {
+    menuClass = menuClass.replace(".", "");
 
     // If the menu item is an H3 tag then it should be indented
     var indentMenuItem = $(element).get(0).tagName == "H3" ? "subitem" : "";
 
     // Combine the menu item classes
-    var menuItemClasses = [osClass, indentMenuItem].join(" ");
+    var menuItemClasses = [menuClass, indentMenuItem].join(" ");
 
     $(menuItem).append(
       "<li class='" +
