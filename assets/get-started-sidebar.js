@@ -21,7 +21,7 @@ $(["macos", "linux", "windows"]).each(function(index, osClass) {
 $(["alibaba", "aws", "microsoft-azure", "google-cloud"]).each(function(index, sidebarClass) {
   $("#" + sidebarClass).click(function() {
     showSidebar(sidebarClass, ".get-started-cloud-sidebar li");
-    if ($("#" + sidebarClass).parent().hasClass('open')) {
+    if ($("#" + sidebarClass).parent().hasClass("open")) {
       $(".get-started-cloud-sidebar li").hide();
     }
   })
@@ -49,26 +49,15 @@ function buildSidebarMenu(menuClass, menuItem) {
   });
 }
 
-function showSidebar(osClass, menuItem) {
+function showSidebar(selectedClass, menuItem) {
   // Hide all of the menu items at first
-  // Then filter for the selected OS
+  // Then filter for the selected OS/cloud partner
   $(menuItem)
     .hide()
     .filter(function() {
       return $(this)
         .attr("class")
-        .includes(osClass);
-    })
-    .show();
-}
-
-function showSidebar(cloudPartner, menuItem) {
-  $(menuItem)
-    .hide()
-    .filter(function() {
-      return $(this)
-        .attr("class")
-        .includes(cloudPartner);
+        .includes(selectedClass);
     })
     .show();
 }
