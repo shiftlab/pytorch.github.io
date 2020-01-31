@@ -21,7 +21,11 @@ $(["macos", "linux", "windows"]).each(function(index, osClass) {
 $(["alibaba", "aws", "microsoft-azure", "google-cloud"]).each(function(index, sidebarClass) {
   $("#" + sidebarClass).click(function() {
     showSidebar(sidebarClass, ".get-started-cloud-sidebar li");
-    if(sidebarClass != "alibaba") {
+    // alibaba filter for centering cloud module
+    if (sidebarClass == "alibaba") {
+      $(".article-wrapper").parent().removeClass("col-md-8 offset-md-1").addClass("col-md-12");
+      $(".cloud-nav").hide();
+    } else {
       $(".article-wrapper").parent().removeClass("col-md-12").addClass("col-md-8 offset-md-1");
       $(".cloud-nav").show();
     }
