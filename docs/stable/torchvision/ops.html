@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -158,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.3.1 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.4.0 &#x25BC</a>
                 </div>
               
             
@@ -181,6 +181,8 @@
           </div>
 
           
+
+
             
             
               
@@ -192,20 +194,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/large_scale_deployments.html">Features for large-scale deployments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/multiprocessing.html">Multiprocessing best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/randomness.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/rref.html">Remote Reference Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/serialization.html">Serialization semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/javadoc/">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -224,6 +227,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onnx.html">torch.onnx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../optim.html">torch.optim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quantization.html">Quantization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rpc.html">Distributed RPC Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../random.html">torch.random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sparse.html">torch.sparse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../storage.html">torch.Storage</a></li>
@@ -251,14 +255,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
           
+
         </div>
       </div>
     </nav>
@@ -350,8 +356,8 @@ box.</p>
 <li><p><strong>boxes</strong> (<a class="reference internal" href="../tensors.html#torch.Tensor" title="torch.Tensor"><em>Tensor</em></a><em>[</em><em>N</em><em>, </em><em>4</em><em>]</em><em>)</em>) – boxes to perform NMS on. They
 are expected to be in (x1, y1, x2, y2) format</p></li>
 <li><p><strong>scores</strong> (<a class="reference internal" href="../tensors.html#torch.Tensor" title="torch.Tensor"><em>Tensor</em></a><em>[</em><em>N</em><em>]</em>) – scores for each one of the boxes</p></li>
-<li><p><strong>iou_threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – discards all overlapping
-boxes with IoU &lt; iou_threshold</p></li>
+<li><p><strong>iou_threshold</strong> (<em>python:float</em>) – discards all overlapping
+boxes with IoU &gt; iou_threshold</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -378,11 +384,11 @@ format where the regions will be taken from. If a single Tensor is passed,
 then the first column should contain the batch index. If a list of Tensors
 is passed, then each Tensor will correspond to the boxes for an element i
 in a batch</p></li>
-<li><p><strong>output_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – the size of the output after the cropping
+<li><p><strong>output_size</strong> (<em>python:int</em><em> or </em><em>Tuple</em><em>[</em><em>python:int</em><em>, </em><em>python:int</em><em>]</em>) – the size of the output after the cropping
 is performed, as (height, width)</p></li>
-<li><p><strong>spatial_scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – a scaling factor that maps the input coordinates to
+<li><p><strong>spatial_scale</strong> (<em>python:float</em>) – a scaling factor that maps the input coordinates to
 the box coordinates. Default: 1.0</p></li>
-<li><p><strong>sampling_ratio</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – number of sampling points in the interpolation grid
+<li><p><strong>sampling_ratio</strong> (<em>python:int</em>) – number of sampling points in the interpolation grid
 used to compute the output value of each pooled output bin. If &gt; 0,
 then exactly sampling_ratio x sampling_ratio grid points are used. If
 &lt;= 0, then an adaptive number of grid points are used (computed as
@@ -408,9 +414,9 @@ format where the regions will be taken from. If a single Tensor is passed,
 then the first column should contain the batch index. If a list of Tensors
 is passed, then each Tensor will correspond to the boxes for an element i
 in a batch</p></li>
-<li><p><strong>output_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – the size of the output after the cropping
+<li><p><strong>output_size</strong> (<em>python:int</em><em> or </em><em>Tuple</em><em>[</em><em>python:int</em><em>, </em><em>python:int</em><em>]</em>) – the size of the output after the cropping
 is performed, as (height, width)</p></li>
-<li><p><strong>spatial_scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – a scaling factor that maps the input coordinates to
+<li><p><strong>spatial_scale</strong> (<em>python:float</em>) – a scaling factor that maps the input coordinates to
 the box coordinates. Default: 1.0</p></li>
 </ul>
 </dd>
@@ -493,10 +499,10 @@ the box coordinates. Default: 1.0</p></li>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
      
 
   
@@ -509,7 +515,32 @@ the box coordinates. Default: 1.0</p></li>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90545585-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117752657-2"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'UA-117752657-2');
+</script>
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/795629140/?label=txkmCPmdtosBENSssfsC&amp;guid=ON&amp;script=0"/>
+
 
   <!-- Begin Footer -->
 

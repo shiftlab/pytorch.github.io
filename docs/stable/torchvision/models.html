@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -158,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.3.1 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.4.0 &#x25BC</a>
                 </div>
               
             
@@ -181,6 +181,8 @@
           </div>
 
           
+
+
             
             
               
@@ -192,20 +194,21 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/large_scale_deployments.html">Features for large-scale deployments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/multiprocessing.html">Multiprocessing best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/randomness.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/rref.html">Remote Reference Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/serialization.html">Serialization semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/javadoc/">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -224,6 +227,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onnx.html">torch.onnx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../optim.html">torch.optim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../quantization.html">Quantization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rpc.html">Distributed RPC Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../random.html">torch.random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../sparse.html">torch.sparse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../storage.html">torch.Storage</a></li>
@@ -251,14 +255,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
           
+
         </div>
       </div>
     </nav>
@@ -354,7 +360,7 @@ architectures for image classification:</p>
 <li><p><a class="reference external" href="https://arxiv.org/abs/1807.11626">MNASNet</a></p></li>
 </ul>
 <p>You can construct a model with random weights by calling its constructor:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="kn">as</span> <span class="nn">models</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="k">as</span> <span class="nn">models</span>
 <span class="n">resnet18</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">()</span>
 <span class="n">alexnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">alexnet</span><span class="p">()</span>
 <span class="n">vgg16</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">vgg16</span><span class="p">()</span>
@@ -371,19 +377,19 @@ architectures for image classification:</p>
 </div>
 <p>We provide pre-trained models, using the PyTorch <a class="reference internal" href="../model_zoo.html#module-torch.utils.model_zoo" title="torch.utils.model_zoo"><code class="xref py py-mod docutils literal notranslate"><span class="pre">torch.utils.model_zoo</span></code></a>.
 These can be constructed by passing <code class="docutils literal notranslate"><span class="pre">pretrained=True</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="kn">as</span> <span class="nn">models</span>
-<span class="n">resnet18</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">alexnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">alexnet</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">squeezenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">squeezenet1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">vgg16</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">vgg16</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">densenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">densenet161</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">inception</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">inception_v3</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">googlenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">googlenet</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">shufflenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">shufflenet_v2_x1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">mobilenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">resnext50_32x4d</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnext50_32x4d</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">wide_resnet50_2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">wide_resnet50_2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">mnasnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">mnasnet1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision.models</span> <span class="k">as</span> <span class="nn">models</span>
+<span class="n">resnet18</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">alexnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">alexnet</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">squeezenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">squeezenet1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">vgg16</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">vgg16</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">densenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">densenet161</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">inception</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">inception_v3</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">googlenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">googlenet</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">shufflenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">shufflenet_v2_x1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mobilenet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">resnext50_32x4d</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnext50_32x4d</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">wide_resnet50_2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">wide_resnet50_2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mnasnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">mnasnet1_0</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Instancing a pre-trained model will download its weights to a cache directory.
@@ -547,8 +553,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -565,8 +571,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -580,8 +586,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -595,8 +601,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -610,8 +616,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -625,8 +631,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -640,8 +646,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -655,8 +661,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -670,8 +676,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -688,8 +694,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -703,8 +709,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -718,8 +724,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -733,8 +739,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -748,8 +754,8 @@ You can use the following transform to normalize:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -766,8 +772,8 @@ accuracy with 50x fewer parameters and &lt;0.5MB model size”</a> paper.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -782,8 +788,8 @@ than SqueezeNet 1.0, without sacrificing accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -800,9 +806,9 @@ than SqueezeNet 1.0, without sacrificing accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>memory_efficient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>memory_efficient</strong> (<em>bool</em>) – but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p></li>
 </ul>
 </dd>
 </dl>
@@ -816,9 +822,9 @@ than SqueezeNet 1.0, without sacrificing accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>memory_efficient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>memory_efficient</strong> (<em>bool</em>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
 </p></li>
 </ul>
 </dd>
@@ -833,9 +839,9 @@ than SqueezeNet 1.0, without sacrificing accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>memory_efficient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>memory_efficient</strong> (<em>bool</em>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
 </p></li>
 </ul>
 </dd>
@@ -850,9 +856,9 @@ than SqueezeNet 1.0, without sacrificing accuracy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>memory_efficient</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>memory_efficient</strong> (<em>bool</em>) – <p>but slower. Default: <em>False</em>. See <a class="reference external" href="https://arxiv.org/pdf/1707.06990.pdf">“paper”</a></p>
 </p></li>
 </ul>
 </dd>
@@ -875,11 +881,11 @@ N x 3 x 299 x 299, so ensure your images are sized accordingly.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>aux_logits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, add an auxiliary branch that can improve training.
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>aux_logits</strong> (<em>bool</em>) – If True, add an auxiliary branch that can improve training.
 Default: <em>True</em></p></li>
-<li><p><strong>transform_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, preprocesses the input according to the method with which it
+<li><p><strong>transform_input</strong> (<em>bool</em>) – If True, preprocesses the input according to the method with which it
 was trained on ImageNet. Default: <em>False</em></p></li>
 </ul>
 </dd>
@@ -897,11 +903,11 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
-<li><p><strong>aux_logits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, adds two auxiliary branches that can improve training.
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>aux_logits</strong> (<em>bool</em>) – If True, adds two auxiliary branches that can improve training.
 Default: <em>False</em> when pretrained is True otherwise <em>True</em></p></li>
-<li><p><strong>transform_input</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, preprocesses the input according to the method with which it
+<li><p><strong>transform_input</strong> (<em>bool</em>) – If True, preprocesses the input according to the method with which it
 was trained on ImageNet. Default: <em>False</em></p></li>
 </ul>
 </dd>
@@ -919,8 +925,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -934,8 +940,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -949,8 +955,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -964,8 +970,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -982,8 +988,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1000,8 +1006,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1015,8 +1021,8 @@ was trained on ImageNet. Default: <em>False</em></p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1037,8 +1043,8 @@ channels, and in Wide ResNet-50-2 has 2048-1024-2048.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1056,8 +1062,8 @@ channels, and in Wide ResNet-50-2 has 2048-1024-2048.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on ImageNet</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on ImageNet</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1168,9 +1174,9 @@ in order:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017 which
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017 which
 contains the same classes as Pascal VOC</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1183,9 +1189,9 @@ contains the same classes as Pascal VOC</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017 which
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017 which
 contains the same classes as Pascal VOC</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1201,9 +1207,9 @@ contains the same classes as Pascal VOC</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017 which
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017 which
 contains the same classes as Pascal VOC</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1216,9 +1222,9 @@ contains the same classes as Pascal VOC</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017 which
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017 which
 contains the same classes as Pascal VOC</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1427,6 +1433,18 @@ follows:</p>
 </div></blockquote>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">fasterrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># For training</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span><span class="p">,</span> <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">1200</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">images</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">image</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">targets</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">d</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">targets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">targets</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># For inference</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">400</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1435,8 +1453,8 @@ follows:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1488,8 +1506,8 @@ with a value of 0.5 (<code class="docutils literal notranslate"><span class="pre
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1540,8 +1558,8 @@ follows:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on COCO train2017</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on COCO train2017</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 </dl>
@@ -1607,8 +1625,8 @@ images because it assumes the video is 4d.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on Kinetics-400</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on Kinetics-400</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1631,8 +1649,8 @@ images because it assumes the video is 4d.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on Kinetics-400</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on Kinetics-400</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1655,8 +1673,8 @@ images because it assumes the video is 4d.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pretrained</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, returns a model pre-trained on Kinetics-400</p></li>
-<li><p><strong>progress</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, displays a progress bar of the download to stderr</p></li>
+<li><p><strong>pretrained</strong> (<em>bool</em>) – If True, returns a model pre-trained on Kinetics-400</p></li>
+<li><p><strong>progress</strong> (<em>bool</em>) – If True, displays a progress bar of the download to stderr</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -1766,10 +1784,10 @@ images because it assumes the video is 4d.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
      
 
   
@@ -1782,7 +1800,32 @@ images because it assumes the video is 4d.</p>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90545585-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117752657-2"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'UA-117752657-2');
+</script>
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/795629140/?label=txkmCPmdtosBENSssfsC&amp;guid=ON&amp;script=0"/>
+
 
   <!-- Begin Footer -->
 

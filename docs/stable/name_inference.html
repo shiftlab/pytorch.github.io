@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.3.1 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.4.0 &#x25BC</a>
                 </div>
               
             
@@ -181,6 +181,8 @@
           </div>
 
           
+
+
             
             
               
@@ -192,20 +194,21 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/large_scale_deployments.html">Features for large-scale deployments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/multiprocessing.html">Multiprocessing best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/randomness.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/rref.html">Remote Reference Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/serialization.html">Serialization semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/javadoc/">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul class="current">
@@ -224,6 +227,7 @@
 <li class="toctree-l1"><a class="reference internal" href="onnx.html">torch.onnx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="optim.html">torch.optim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantization.html">Quantization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpc.html">Distributed RPC Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">torch.random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparse.html">torch.sparse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storage.html">torch.Storage</a></li>
@@ -251,14 +255,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
           
+
         </div>
       </div>
     </nav>
@@ -486,18 +492,18 @@ and their associated name inference rules.</p>
 <td><p><a class="reference internal" href="#keeps-input-names-doc"><span class="std std-ref">Keeps input names</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.cumprod" title="torch.Tensor.cumprod"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.cumprod()</span></code></a>, <a class="reference internal" href="torch.html#torch.cumprod" title="torch.cumprod"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.cumprod()</span></code></a></p></td>
-<td><p><a class="reference internal" href="#removes-dimensions-doc"><span class="std std-ref">Removes dimensions</span></a></p></td>
+<td><p><a class="reference internal" href="#keeps-input-names-doc"><span class="std std-ref">Keeps input names</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.cumsum" title="torch.Tensor.cumsum"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.cumsum()</span></code></a>, <a class="reference internal" href="torch.html#torch.cumsum" title="torch.cumsum"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.cumsum()</span></code></a></p></td>
-<td><p><a class="reference internal" href="#removes-dimensions-doc"><span class="std std-ref">Removes dimensions</span></a></p></td>
+<td><p><a class="reference internal" href="#keeps-input-names-doc"><span class="std std-ref">Keeps input names</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.data_ptr" title="torch.Tensor.data_ptr"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.data_ptr()</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.detach" title="torch.Tensor.detach"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.detach()</span></code></a>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.detach()</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.detach" title="torch.Tensor.detach"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.detach()</span></code></a>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.detach()</span></code></p></td>
 <td><p><a class="reference internal" href="#keeps-input-names-doc"><span class="std std-ref">Keeps input names</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.detach_" title="torch.Tensor.detach_"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.detach_()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.detach_" title="torch.Tensor.detach_"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.detach_()</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.device" title="torch.Tensor.device"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.device</span></code></a>, <a class="reference internal" href="tensor_attributes.html#torch.torch.device" title="torch.torch.device"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.device()</span></code></a></p></td>
@@ -599,7 +605,7 @@ and their associated name inference rules.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.get_device" title="torch.Tensor.get_device"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.get_device()</span></code></a>, <code class="xref py py-func docutils literal notranslate"><span class="pre">torch.get_device()</span></code></p></td>
 <td><p>None</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.grad" title="torch.Tensor.grad"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.grad</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.grad" title="torch.Tensor.grad"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.grad</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.gt" title="torch.Tensor.gt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.gt()</span></code></a>, <a class="reference internal" href="torch.html#torch.gt" title="torch.gt"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.gt()</span></code></a></p></td>
@@ -629,7 +635,7 @@ and their associated name inference rules.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.is_floating_point" title="torch.Tensor.is_floating_point"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.is_floating_point()</span></code></a>, <a class="reference internal" href="torch.html#torch.is_floating_point" title="torch.is_floating_point"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.is_floating_point()</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.is_leaf" title="torch.Tensor.is_leaf"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.is_leaf</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.is_leaf" title="torch.Tensor.is_leaf"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.is_leaf</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.is_pinned" title="torch.Tensor.is_pinned"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.is_pinned()</span></code></a></p></td>
@@ -800,7 +806,7 @@ and their associated name inference rules.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="named_tensor.html#torch.Tensor.refine_names" title="torch.Tensor.refine_names"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.refine_names()</span></code></a></p></td>
 <td><p>See documentation</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.register_hook" title="torch.Tensor.register_hook"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.register_hook()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.register_hook" title="torch.Tensor.register_hook"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.register_hook()</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="named_tensor.html#torch.Tensor.rename" title="torch.Tensor.rename"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.rename()</span></code></a></p></td>
@@ -809,7 +815,7 @@ and their associated name inference rules.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="named_tensor.html#torch.Tensor.rename_" title="torch.Tensor.rename_"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.rename_()</span></code></a></p></td>
 <td><p>See documentation</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.requires_grad" title="torch.Tensor.requires_grad"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.requires_grad</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="autograd.html#torch.Tensor.requires_grad" title="torch.Tensor.requires_grad"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Tensor.requires_grad</span></code></a></p></td>
 <td><p>None</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tensors.html#torch.Tensor.requires_grad_" title="torch.Tensor.requires_grad_"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Tensor.requires_grad_()</span></code></a></p></td>
@@ -1229,10 +1235,10 @@ from name inference. For example,</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/language_data.js"></script>
      
 
   
@@ -1245,7 +1251,32 @@ from name inference. For example,</p>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90545585-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117752657-2"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'UA-117752657-2');
+</script>
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/795629140/?label=txkmCPmdtosBENSssfsC&amp;guid=ON&amp;script=0"/>
+
 
   <!-- Begin Footer -->
 

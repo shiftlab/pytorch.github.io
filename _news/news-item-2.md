@@ -1,6 +1,6 @@
 ---
 order: 2
-link: http://bit.ly/2JdGIV9
-summary: Watch the full livestream from the 2019 PyTorch Developer Conference.
+link: https://pytorch.org/blog/pytorch-adds-new-tools-and-libraries-welcomes-preferred-networks-to-its-community/ 
+summary: PyTorch adds new tools and libraries, welcomes Preferred Networks to its community.
 ---
 

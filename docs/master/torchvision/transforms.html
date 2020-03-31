@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -158,7 +159,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -195,10 +196,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notes/faq.html">Frequently Asked Questions</a></li>
@@ -210,11 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -223,8 +225,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hub.html">torch.hub</a></li>
@@ -261,10 +265,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -357,7 +362,7 @@ This is useful if you have to build a more complex transformation pipeline
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">transforms</span><span class="o">.</span><span class="n">CenterCrop</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">])</span>
@@ -421,7 +426,7 @@ instead of sequence like (h, w), a square crop of size (size, size) is made.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">Compose</span><span class="p">([</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">Compose</span><span class="p">([</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">FiveCrop</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="c1"># this is a list of PIL Images</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">crops</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">ToTensor</span><span class="p">()(</span><span class="n">crop</span><span class="p">)</span> <span class="k">for</span> <span class="n">crop</span> <span class="ow">in</span> <span class="n">crops</span><span class="p">]))</span> <span class="c1"># returns a 4D tensor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">])</span>
@@ -661,7 +666,7 @@ This is popularly used to train the Inception networks.</p>
 
 <dl class="class">
 <dt id="torchvision.transforms.RandomRotation">
-<em class="property">class </em><code class="sig-prename descclassname">torchvision.transforms.</code><code class="sig-name descname">RandomRotation</code><span class="sig-paren">(</span><em class="sig-param">degrees</em>, <em class="sig-param">resample=False</em>, <em class="sig-param">expand=False</em>, <em class="sig-param">center=None</em>, <em class="sig-param">fill=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchvision/transforms/transforms.html#RandomRotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchvision.transforms.RandomRotation" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">torchvision.transforms.</code><code class="sig-name descname">RandomRotation</code><span class="sig-paren">(</span><em class="sig-param">degrees</em>, <em class="sig-param">resample=False</em>, <em class="sig-param">expand=False</em>, <em class="sig-param">center=None</em>, <em class="sig-param">fill=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchvision/transforms/transforms.html#RandomRotation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchvision.transforms.RandomRotation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotate the image by angle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -678,8 +683,9 @@ Note that the expand flag assumes rotation around the center and no translation.
 <li><p><strong>center</strong> (<em>2-tuple</em><em>, </em><em>optional</em>) – Optional center of rotation.
 Origin is the upper left corner.
 Default is the center of the image.</p></li>
-<li><p><strong>fill</strong> (<em>3-tuple</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – RGB pixel fill value for area outside the rotated image.
-If int, it is used for all channels respectively.</p></li>
+<li><p><strong>fill</strong> (<em>n-tuple</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Pixel fill value for area outside the rotated
+image. If int or float, the value is used for all bands respectively.
+Defaults to 0 for all bands. This option is only available for <code class="docutils literal notranslate"><span class="pre">pillow&gt;=5.2.0</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -749,7 +755,7 @@ made.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">Compose</span><span class="p">([</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">Compose</span><span class="p">([</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">TenCrop</span><span class="p">(</span><span class="n">size</span><span class="p">),</span> <span class="c1"># this is a list of PIL Images</span>
 <span class="gp">&gt;&gt;&gt; </span>   <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">crops</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">ToTensor</span><span class="p">()(</span><span class="n">crop</span><span class="p">)</span> <span class="k">for</span> <span class="n">crop</span> <span class="ow">in</span> <span class="n">crops</span><span class="p">]))</span> <span class="c1"># returns a 4D tensor</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">])</span>
@@ -796,10 +802,10 @@ perform SVD on this matrix and pass it as transformation_matrix.</p>
 <dd><p>Normalize a tensor image with mean and standard deviation.
 Given mean: <code class="docutils literal notranslate"><span class="pre">(M1,...,Mn)</span></code> and std: <code class="docutils literal notranslate"><span class="pre">(S1,..,Sn)</span></code> for <code class="docutils literal notranslate"><span class="pre">n</span></code> channels, this transform
 will normalize each channel of the input <code class="docutils literal notranslate"><span class="pre">torch.*Tensor</span></code> i.e.
-<code class="docutils literal notranslate"><span class="pre">input[channel]</span> <span class="pre">=</span> <span class="pre">(input[channel]</span> <span class="pre">-</span> <span class="pre">mean[channel])</span> <span class="pre">/</span> <span class="pre">std[channel]</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">output[channel]</span> <span class="pre">=</span> <span class="pre">(input[channel]</span> <span class="pre">-</span> <span class="pre">mean[channel])</span> <span class="pre">/</span> <span class="pre">std[channel]</span></code></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This transform acts out of place, i.e., it does not mutates the input tensor.</p>
+<p>This transform acts out of place, i.e., it does not mutate the input tensor.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -854,7 +860,7 @@ If a str of ‘random’, erasing each pixel with random values.</p></li>
 </dd>
 </dl>
 <dl>
-<dt># Examples:</dt><dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+<dt># Examples:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(),</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.485</span><span class="p">,</span> <span class="mf">0.456</span><span class="p">,</span> <span class="mf">0.406</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.229</span><span class="p">,</span> <span class="mf">0.224</span><span class="p">,</span> <span class="mf">0.225</span><span class="p">)),</span>
@@ -1159,23 +1165,22 @@ it is used for both directions</p></li>
 <dl class="function">
 <dt id="torchvision.transforms.functional.crop">
 <code class="sig-prename descclassname">torchvision.transforms.functional.</code><code class="sig-name descname">crop</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">top</em>, <em class="sig-param">left</em>, <em class="sig-param">height</em>, <em class="sig-param">width</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchvision/transforms/functional.html#crop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchvision.transforms.functional.crop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Crop the given PIL Image.
-:param img: Image to be cropped. (0,0) denotes the top left corner of the image.
-:type img: PIL Image
-:param top: Vertical component of the top left corner of the crop box.
-:type top: int
-:param left: Horizontal component of the top left corner of the crop box.
-:type left: int
-:param height: Height of the crop box.
-:type height: int
-:param width: Width of the crop box.
-:type width: int</p>
+<dd><p>Crop the given PIL Image.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Cropped image.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>PIL Image</em>) – Image to be cropped. (0,0) denotes the top left corner of the image.</p></li>
+<li><p><strong>top</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Vertical component of the top left corner of the crop box.</p></li>
+<li><p><strong>left</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Horizontal component of the top left corner of the crop box.</p></li>
+<li><p><strong>height</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Height of the crop box.</p></li>
+<li><p><strong>width</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Width of the crop box.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>PIL Image</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cropped image.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>PIL Image</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1401,7 +1406,7 @@ the aspect ratio. i.e, if height &gt; width, then image will be rescaled to
 
 <dl class="function">
 <dt id="torchvision.transforms.functional.rotate">
-<code class="sig-prename descclassname">torchvision.transforms.functional.</code><code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">angle</em>, <em class="sig-param">resample=False</em>, <em class="sig-param">expand=False</em>, <em class="sig-param">center=None</em>, <em class="sig-param">fill=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchvision/transforms/functional.html#rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchvision.transforms.functional.rotate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">torchvision.transforms.functional.</code><code class="sig-name descname">rotate</code><span class="sig-paren">(</span><em class="sig-param">img</em>, <em class="sig-param">angle</em>, <em class="sig-param">resample=False</em>, <em class="sig-param">expand=False</em>, <em class="sig-param">center=None</em>, <em class="sig-param">fill=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/torchvision/transforms/functional.html#rotate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torchvision.transforms.functional.rotate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rotate the image by angle.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1417,8 +1422,9 @@ Note that the expand flag assumes rotation around the center and no translation.
 <li><p><strong>center</strong> (<em>2-tuple</em><em>, </em><em>optional</em>) – Optional center of rotation.
 Origin is the upper left corner.
 Default is the center of the image.</p></li>
-<li><p><strong>fill</strong> (<em>3-tuple</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – RGB pixel fill value for area outside the rotated image.
-If int, it is used for all channels respectively.</p></li>
+<li><p><strong>fill</strong> (<em>n-tuple</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Pixel fill value for area outside the rotated
+image. If int or float, the value is used for all bands respectively.
+Defaults to 0 for all bands. This option is only available for <code class="docutils literal notranslate"><span class="pre">pillow&gt;=5.2.0</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1608,10 +1614,10 @@ and same for the flipped image.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
      
 
   

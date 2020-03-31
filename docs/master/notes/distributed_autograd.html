@@ -30,12 +30,13 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Extending PyTorch" href="extending.html" />
-    <link rel="prev" title="CUDA semantics" href="cuda.html" /> 
+    <link rel="prev" title="Distributed Data Parallel" href="ddp.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -158,7 +159,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -195,10 +196,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
@@ -210,11 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -223,8 +225,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../hub.html">torch.hub</a></li>
@@ -261,10 +265,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -436,7 +441,7 @@ distributed autograd pass.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.distributed.autograd</span> <span class="k">as</span> <span class="nn">dist_autograd</span>
 <span class="k">with</span> <span class="n">dist_autograd</span><span class="o">.</span><span class="n">context</span><span class="p">()</span> <span class="k">as</span> <span class="n">context_id</span><span class="p">:</span>
   <span class="n">loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">forward</span><span class="p">()</span>
-  <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+  <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">context_id</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -562,7 +567,7 @@ associated gradient and this map can be retrieved using the
   <span class="n">loss</span> <span class="o">=</span> <span class="n">t5</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
   <span class="c1"># Run the backward pass.</span>
-  <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">([</span><span class="n">loss</span><span class="p">])</span>
+  <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">context_id</span><span class="p">,</span> <span class="p">[</span><span class="n">loss</span><span class="p">])</span>
 
   <span class="c1"># Retrieve the gradients from the context.</span>
   <span class="n">dist_autograd</span><span class="o">.</span><span class="n">get_gradients</span><span class="p">(</span><span class="n">context_id</span><span class="p">)</span>
@@ -618,11 +623,12 @@ parameters on a worker, these updates are serialized via a lock.</p></li>
 </div>
 <div class="section" id="simple-end-to-end-example">
 <h2>Simple end to end example<a class="headerlink" href="#simple-end-to-end-example" title="Permalink to this headline">¶</a></h2>
-<p>Putting it all together, a very simple end to end example using distributed
-autograd and distributed optimizer is as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
-<span class="kn">import</span> <span class="nn">torch</span>
+<p>Putting it all together, the following is a simple end to end example using
+distributed autograd and the distributed optimizer. If the code is placed into a
+file called “dist_autograd_simple.py”, it can be run with the command
+<code class="code docutils literal notranslate"><span class="pre">MASTER_ADDR=&quot;localhost&quot;</span> <span class="pre">MASTER_PORT=29500</span> <span class="pre">python</span> <span class="pre">dist_autograd_simple.py</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
 <span class="kn">import</span> <span class="nn">torch.distributed.autograd</span> <span class="k">as</span> <span class="nn">dist_autograd</span>
 <span class="kn">from</span> <span class="nn">torch.distributed</span> <span class="kn">import</span> <span class="n">rpc</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">optim</span>
@@ -631,51 +637,46 @@ autograd and distributed optimizer is as follows:</p>
 <span class="k">def</span> <span class="nf">random_tensor</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">_run_process</span><span class="p">(</span><span class="n">self_rank</span><span class="p">,</span> <span class="n">dst_rank</span><span class="p">):</span>
-    <span class="n">self_name</span> <span class="o">=</span> <span class="s2">&quot;worker</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">self_rank</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_run_process</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">dst_rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;worker</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
     <span class="n">dst_name</span> <span class="o">=</span> <span class="s2">&quot;worker</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dst_rank</span><span class="p">)</span>
 
     <span class="c1"># Initialize RPC.</span>
     <span class="n">rpc</span><span class="o">.</span><span class="n">init_rpc</span><span class="p">(</span>
-        <span class="n">self_name</span><span class="o">=</span><span class="n">self_name</span><span class="p">,</span>
-        <span class="n">self_rank</span><span class="o">=</span><span class="n">self_rank</span><span class="p">,</span>
-        <span class="n">worker_name_to_id</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;worker0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;worker1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+        <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span>
+        <span class="n">world_size</span><span class="o">=</span><span class="n">world_size</span>
     <span class="p">)</span>
 
     <span class="c1"># Use a distributed autograd context.</span>
     <span class="k">with</span> <span class="n">dist_autograd</span><span class="o">.</span><span class="n">context</span><span class="p">()</span> <span class="k">as</span> <span class="n">context_id</span><span class="p">:</span>
-       <span class="c1"># Forward pass (create references on remote nodes).</span>
-       <span class="n">rref1</span> <span class="o">=</span> <span class="n">rpc</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">dst_name</span><span class="p">,</span> <span class="n">random_tensor</span><span class="p">)</span>
-       <span class="n">rref2</span> <span class="o">=</span> <span class="n">rpc</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">dst_name</span><span class="p">,</span> <span class="n">random_tensor</span><span class="p">)</span>
-       <span class="n">loss</span> <span class="o">=</span> <span class="n">rref1</span><span class="o">.</span><span class="n">to_here</span><span class="p">()</span> <span class="o">+</span> <span class="n">rref2</span><span class="o">.</span><span class="n">to_here</span><span class="p">()</span>
+        <span class="c1"># Forward pass (create references on remote nodes).</span>
+        <span class="n">rref1</span> <span class="o">=</span> <span class="n">rpc</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">dst_name</span><span class="p">,</span> <span class="n">random_tensor</span><span class="p">)</span>
+        <span class="n">rref2</span> <span class="o">=</span> <span class="n">rpc</span><span class="o">.</span><span class="n">remote</span><span class="p">(</span><span class="n">dst_name</span><span class="p">,</span> <span class="n">random_tensor</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">rref1</span><span class="o">.</span><span class="n">to_here</span><span class="p">()</span> <span class="o">+</span> <span class="n">rref2</span><span class="o">.</span><span class="n">to_here</span><span class="p">()</span>
 
-       <span class="c1"># Backward pass (run distributed autograd).</span>
-       <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">([</span><span class="n">loss</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
+        <span class="c1"># Backward pass (run distributed autograd).</span>
+        <span class="n">dist_autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">context_id</span><span class="p">,</span> <span class="p">[</span><span class="n">loss</span><span class="o">.</span><span class="n">sum</span><span class="p">()])</span>
 
-       <span class="c1"># Build DistributedOptimizer.</span>
-       <span class="n">dist_optim</span> <span class="o">=</span> <span class="n">DistributedOptimizer</span><span class="p">(</span>
-         <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span>
-         <span class="p">[</span><span class="n">rref1</span><span class="p">,</span> <span class="n">rref2</span><span class="p">],</span>
-         <span class="n">lr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-       <span class="p">)</span>
+        <span class="c1"># Build DistributedOptimizer.</span>
+        <span class="n">dist_optim</span> <span class="o">=</span> <span class="n">DistributedOptimizer</span><span class="p">(</span>
+        <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span>
+        <span class="p">[</span><span class="n">rref1</span><span class="p">,</span> <span class="n">rref2</span><span class="p">],</span>
+        <span class="n">lr</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="p">)</span>
 
-       <span class="c1"># Run the distributed optimizer step.</span>
-       <span class="n">dist_optim</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># Run the distributed optimizer step.</span>
+        <span class="n">dist_optim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">context_id</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">run_process</span><span class="p">(</span><span class="n">self_rank</span><span class="p">,</span> <span class="n">dst_rank</span><span class="p">):</span>
-    <span class="n">_run_process</span><span class="p">(</span><span class="n">self_rank</span><span class="p">,</span> <span class="n">dst_rank</span><span class="p">)</span>
-    <span class="n">rpc</span><span class="o">.</span><span class="n">wait_all_workers</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">run_process</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">):</span>
+    <span class="n">dst_rank</span> <span class="o">=</span> <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">world_size</span>
+    <span class="n">_run_process</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">dst_rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">)</span>
+    <span class="n">rpc</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 
-<span class="n">processes</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="c1"># Run two workers.</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">run_process</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">))</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-    <span class="n">processes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
-    <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="c1"># Run world_size workers</span>
+  <span class="n">world_size</span> <span class="o">=</span> <span class="mi">2</span>
+  <span class="n">mp</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">run_process</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">world_size</span><span class="p">,),</span> <span class="n">nprocs</span><span class="o">=</span><span class="n">world_size</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -692,7 +693,7 @@ autograd and distributed optimizer is as follows:</p>
         <a href="extending.html" class="btn btn-neutral float-right" title="Extending PyTorch" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
-        <a href="cuda.html" class="btn btn-neutral" title="CUDA semantics" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
+        <a href="ddp.html" class="btn btn-neutral" title="Distributed Data Parallel" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
       
     </div>
   
@@ -753,10 +754,10 @@ autograd and distributed optimizer is as follows:</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../_static/jquery.js"></script>
-         <script type="text/javascript" src="../_static/underscore.js"></script>
-         <script type="text/javascript" src="../_static/doctools.js"></script>
-         <script type="text/javascript" src="../_static/language_data.js"></script>
+         <script src="../_static/jquery.js"></script>
+         <script src="../_static/underscore.js"></script>
+         <script src="../_static/doctools.js"></script>
+         <script src="../_static/language_data.js"></script>
      
 
   

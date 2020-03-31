@@ -5,6 +5,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta name="robots" content="noindex">
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,8 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -156,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -193,10 +195,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/faq.html">Frequently Asked Questions</a></li>
@@ -208,11 +212,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -221,8 +224,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../hub.html">torch.hub</a></li>
@@ -259,10 +264,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -347,8 +353,6 @@
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.distributed</span> <span class="k">as</span> <span class="nn">dist</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">backend_registry</span>
-
 
 <span class="k">def</span> <span class="nf">is_available</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="p">,</span> <span class="s2">&quot;_rpc_init&quot;</span><span class="p">)</span>
@@ -359,9 +363,9 @@
 
 
 <span class="k">if</span> <span class="n">is_available</span><span class="p">():</span>
-    <span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="n">_init_rpc_backend</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">api</span><span class="p">,</span> <span class="n">backend_registry</span>
     <span class="kn">from</span> <span class="nn">.api</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa: F401</span>
-    <span class="kn">import</span> <span class="nn">torch.distributed.autograd</span>
+    <span class="kn">import</span> <span class="nn">torch.distributed.autograd</span> <span class="k">as</span> <span class="nn">dist_autograd</span>
 
 <div class="viewcode-block" id="init_rpc"><a class="viewcode-back" href="../../../rpc.html#torch.distributed.rpc.init_rpc">[docs]</a>    <span class="k">def</span> <span class="nf">init_rpc</span><span class="p">(</span>
         <span class="n">name</span><span class="p">,</span>
@@ -380,19 +384,27 @@
 <span class="sd">        collective communication.</span>
 
 <span class="sd">        Arguments:</span>
-<span class="sd">            backend (Enum): type of RPC backend implementation.</span>
-<span class="sd">                        Currently, process group backend is the only</span>
-<span class="sd">                        available backend implementation. (default:</span>
-<span class="sd">                        ``RpcBackend.PROCESS_GROUP``).</span>
+<span class="sd">            backend (Enum): type of RPC backend implementation. Currently,</span>
+<span class="sd">                process group backend is the only available backend</span>
+<span class="sd">                implementation. (default: ``RpcBackend.PROCESS_GROUP``).</span>
 <span class="sd">            name (str): a globally unique name of this node. (e.g.,</span>
-<span class="sd">                        ``Trainer3``, ``ParameterServer2``, ``Master``,</span>
-<span class="sd">                        ``Worker1``) Name can only contain number, alphabet,</span>
-<span class="sd">                        underscore, and/or dash, and must be shorter than</span>
-<span class="sd">                        128 characters.</span>
+<span class="sd">                ``Trainer3``, ``ParameterServer2``, ``Master``, ``Worker1``)</span>
+<span class="sd">                Name can only contain number, alphabet, underscore, and/or dash,</span>
+<span class="sd">                and must be shorter than 128 characters.</span>
 <span class="sd">            rank (int): a globally unique id/rank of this node.</span>
 <span class="sd">            world_size (int): The number of workers in the group.</span>
-<span class="sd">            rpc_backend_options (RpcBackendOptions): The options passed to RpcAgent</span>
-<span class="sd">                consturctor.</span>
+<span class="sd">            rpc_backend_options (RpcBackendOptions): The options passed to</span>
+<span class="sd">                RpcAgent constructor. It contains RpcAgent specific</span>
+<span class="sd">                initialization configurations. By default, it contains</span>
+<span class="sd">                ``rpc_timeout = timedelta(seconds=60)``,</span>
+<span class="sd">                ``init_method = &quot;env://&quot;``, ``num_send_recv_threads = 4`` for</span>
+<span class="sd">                process group agent. If using the default</span>
+<span class="sd">                ``rpc_backend_options``, RPC would initialize the underlying</span>
+<span class="sd">                process group backend using ``init_method = &quot;env://&quot;``,</span>
+<span class="sd">                meaning that environment variables ``MASTER_ADDRESS`` and</span>
+<span class="sd">                ``MASTER_PORT`` needs to be set properly. See</span>
+<span class="sd">                :class:`~torch.distributed.rpc.ProcessGroupRpcBackendOptions`</span>
+<span class="sd">                for examples.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">rpc_backend_options</span><span class="p">:</span>
@@ -402,6 +414,10 @@
             <span class="p">)</span>
 
         <span class="c1"># Rendezvous.</span>
+        <span class="c1"># This rendezvous state sometimes is destroyed before all processes</span>
+        <span class="c1"># finishing handshaking. To avoid that issue, we make it global to</span>
+        <span class="c1"># keep it alive.</span>
+        <span class="k">global</span> <span class="n">rendezvous_iterator</span>
         <span class="n">rendezvous_iterator</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">rendezvous</span><span class="p">(</span>
             <span class="n">rpc_backend_options</span><span class="o">.</span><span class="n">init_method</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="o">=</span><span class="n">world_size</span>
         <span class="p">)</span>
@@ -413,10 +429,19 @@
         <span class="c1"># and others might not have. As a result, a node calling</span>
         <span class="c1"># torch.distributed.autograd.backward() would run into errors since</span>
         <span class="c1"># other nodes might not have been initialized.</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">distributed</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
+        <span class="n">dist_autograd</span><span class="o">.</span><span class="n">_init</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
 
         <span class="c1"># Initialize RPC.</span>
-        <span class="n">_init_rpc_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">,</span> <span class="n">rpc_backend_options</span><span class="p">)</span></div>
+        <span class="n">api</span><span class="o">.</span><span class="n">_init_rpc_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">store</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">world_size</span><span class="p">,</span> <span class="n">rpc_backend_options</span><span class="p">)</span></div>
+
+
+    <span class="nd">@api</span><span class="o">.</span><span class="n">_require_initialized</span>
+    <span class="k">def</span> <span class="nf">_get_debug_info</span><span class="p">():</span>
+        <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_rref_context_get_debug_info</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">_rref_context_get_debug_info</span><span class="p">()</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">api</span><span class="o">.</span><span class="n">_get_current_rpc_agent</span><span class="p">()</span><span class="o">.</span><span class="n">get_debug_info</span><span class="p">())</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dist_autograd</span><span class="o">.</span><span class="n">_get_debug_info</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">info</span>
 </pre></div>
 
              </article>
@@ -465,10 +490,10 @@
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../../_static/language_data.js"></script>
+         <script src="../../../_static/jquery.js"></script>
+         <script src="../../../_static/underscore.js"></script>
+         <script src="../../../_static/doctools.js"></script>
+         <script src="../../../_static/language_data.js"></script>
      
 
   

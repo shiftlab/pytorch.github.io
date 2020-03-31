@@ -5,18 +5,19 @@
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta name="robots" content="noindex">
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>torch.quantization.QConfig &mdash; PyTorch master documentation</title>
+  <title>torchvision.ops.roi_align &mdash; PyTorch master documentation</title>
   
 
   
   
   
   
-    <link rel="canonical" href="https://pytorch.org/docs/stable/_modules/torch/quantization/QConfig.html"/>
+    <link rel="canonical" href="https://pytorch.org/docs/stable/_modules/torchvision/ops/roi_align.html"/>
   
 
   
@@ -295,11 +296,9 @@
         
           <li><a href="../../index.html">Module code</a> &gt;</li>
         
-          <li><a href="../../torch.html">torch</a> &gt;</li>
+          <li><a href="../../torchvision.html">torchvision</a> &gt;</li>
         
-          <li><a href="../quantization.html">torch.quantization</a> &gt;</li>
-        
-      <li>torch.quantization.QConfig</li>
+      <li>torchvision.ops.roi_align</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -327,110 +326,70 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <h1>Source code for torch.quantization.QConfig</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">.observer</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">.fake_quantize</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+  <h1>Source code for torchvision.ops.roi_align</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch</span> <span class="k">import</span> <span class="n">nn</span><span class="p">,</span> <span class="n">Tensor</span>
 
-<div class="viewcode-block" id="QConfig"><a class="viewcode-back" href="../../../quantization.html#torch.quantization.QConfig">[docs]</a><span class="k">class</span> <span class="nc">QConfig</span><span class="p">(</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;QConfig&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;activation&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">])):</span>
+<span class="kn">from</span> <span class="nn">torch.nn.modules.utils</span> <span class="k">import</span> <span class="n">_pair</span>
+<span class="kn">from</span> <span class="nn">torch.jit.annotations</span> <span class="k">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">._utils</span> <span class="k">import</span> <span class="n">convert_boxes_to_roi_format</span>
+
+
+<div class="viewcode-block" id="roi_align"><a class="viewcode-back" href="../../../torchvision/ops.html#torchvision.ops.roi_align">[docs]</a><span class="k">def</span> <span class="nf">roi_align</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">boxes</span><span class="p">,</span> <span class="n">output_size</span><span class="p">,</span> <span class="n">spatial_scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">sampling_ratio</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># type: (Tensor, Tensor, int, float, int) -&gt; Tensor</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Describes how to quantize a layer or a part of the network by providing</span>
-<span class="sd">    settings (observer classes) for activations and weights respectively.</span>
+<span class="sd">    Performs Region of Interest (RoI) Align operator described in Mask R-CNN</span>
 
+<span class="sd">    Arguments:</span>
+<span class="sd">        input (Tensor[N, C, H, W]): input tensor</span>
+<span class="sd">        boxes (Tensor[K, 5] or List[Tensor[L, 4]]): the box coordinates in (x1, y1, x2, y2)</span>
+<span class="sd">            format where the regions will be taken from. If a single Tensor is passed,</span>
+<span class="sd">            then the first column should contain the batch index. If a list of Tensors</span>
+<span class="sd">            is passed, then each Tensor will correspond to the boxes for an element i</span>
+<span class="sd">            in a batch</span>
+<span class="sd">        output_size (int or Tuple[int, int]): the size of the output after the cropping</span>
+<span class="sd">            is performed, as (height, width)</span>
+<span class="sd">        spatial_scale (float): a scaling factor that maps the input coordinates to</span>
+<span class="sd">            the box coordinates. Default: 1.0</span>
+<span class="sd">        sampling_ratio (int): number of sampling points in the interpolation grid</span>
+<span class="sd">            used to compute the output value of each pooled output bin. If &gt; 0,</span>
+<span class="sd">            then exactly sampling_ratio x sampling_ratio grid points are used. If</span>
+<span class="sd">            &lt;= 0, then an adaptive number of grid points are used (computed as</span>
+<span class="sd">            ceil(roi_width / pooled_w), and likewise for height). Default: -1</span>
 
-<span class="sd">    Note that QConfig needs to contain observer **classes** (like MinMaxObserver) or a callable that returns</span>
-<span class="sd">    instances on invocation, not the concrete observer instances themselves.</span>
-<span class="sd">    Quantization preparation function will instantiate observers multiple times for each of the layers.</span>
-
-
-<span class="sd">    Observer classes have usually reasonable default arguments, but they can be overwritten with `with_args`</span>
-<span class="sd">    method (that behaves like functools.partial):</span>
-
-<span class="sd">      my_qconfig = QConfig(activation=MinMaxObserver.with_args(dtype=torch.qint8),</span>
-<span class="sd">                           weight=default_observer.with_args(dtype=torch.qint8))</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        output (Tensor[K, C, output_size[0], output_size[1]])</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
-        <span class="c1"># catch common mistakes</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">activation</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;QConfig received observer instance, please pass observer class instead. &quot;</span> <span class="o">+</span>
-                             <span class="s2">&quot;Use MyObserver.with_args(x=1) to override arguments to constructor if needed&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">QConfig</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">activation</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span></div>
+    <span class="n">rois</span> <span class="o">=</span> <span class="n">boxes</span>
+    <span class="n">output_size</span> <span class="o">=</span> <span class="n">_pair</span><span class="p">(</span><span class="n">output_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rois</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">rois</span> <span class="o">=</span> <span class="n">convert_boxes_to_roi_format</span><span class="p">(</span><span class="n">rois</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">torchvision</span><span class="o">.</span><span class="n">roi_align</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="n">spatial_scale</span><span class="p">,</span>
+                                           <span class="n">output_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">output_size</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                           <span class="n">sampling_ratio</span><span class="p">)</span></div>
 
 
-<span class="n">default_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">default_observer</span><span class="p">,</span>
-                          <span class="n">weight</span><span class="o">=</span><span class="n">default_weight_observer</span><span class="p">)</span>
-
-<span class="n">default_debug_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">weight</span><span class="o">=</span><span class="n">default_weight_observer</span><span class="p">,</span>
-                                <span class="n">activation</span><span class="o">=</span><span class="n">default_debug_observer</span><span class="p">)</span>
-
-<span class="n">default_per_channel_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">default_observer</span><span class="p">,</span>
-                                      <span class="n">weight</span><span class="o">=</span><span class="n">default_per_channel_weight_observer</span><span class="p">)</span>
-
-<div class="viewcode-block" id="QConfigDynamic"><a class="viewcode-back" href="../../../quantization.html#torch.quantization.QConfigDynamic">[docs]</a><span class="k">class</span> <span class="nc">QConfigDynamic</span><span class="p">(</span><span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;QConfigDynamic&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])):</span>
+<div class="viewcode-block" id="RoIAlign"><a class="viewcode-back" href="../../../torchvision/ops.html#torchvision.ops.RoIAlign">[docs]</a><span class="k">class</span> <span class="nc">RoIAlign</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Describes how to dynamically quantize a layer or a part of the network by providing</span>
-<span class="sd">    settings (observer classe) for weights.</span>
-
-<span class="sd">    It&#39;s like QConfig, but for dynamic quantization.</span>
-
-<span class="sd">    Note that QConfigDynamic needs to contain observer **classes** (like MinMaxObserver) or a callable that returns</span>
-<span class="sd">    instances on invocation, not the concrete observer instances themselves.</span>
-<span class="sd">    Quantization function will instantiate observers multiple times for each of the layers.</span>
-
-<span class="sd">    Observer classes have usually reasonable default arguments, but they can be overwritten with `with_args`</span>
-<span class="sd">    method (that behaves like functools.partial):</span>
-
-<span class="sd">      my_qconfig = QConfigDynamic(weight=default_observer.with_args(dtype=torch.qint8))</span>
+<span class="sd">    See roi_align</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
-        <span class="c1"># catch common mistakes</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;QConfigDynamic received observer instance, please pass observer class instead. &quot;</span> <span class="o">+</span>
-                             <span class="s2">&quot;Use MyObserver.with_args(x=1) to override arguments to constructor if needed&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">QConfigDynamic</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_size</span><span class="p">,</span> <span class="n">spatial_scale</span><span class="p">,</span> <span class="n">sampling_ratio</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">RoIAlign</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span> <span class="o">=</span> <span class="n">output_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spatial_scale</span> <span class="o">=</span> <span class="n">spatial_scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampling_ratio</span> <span class="o">=</span> <span class="n">sampling_ratio</span>
 
-<span class="n">default_dynamic_qconfig</span> <span class="o">=</span> <span class="n">QConfigDynamic</span><span class="p">(</span><span class="n">weight</span><span class="o">=</span><span class="n">default_weight_observer</span><span class="p">)</span>
-<span class="n">float16_dynamic_qconfig</span> <span class="o">=</span> <span class="n">QConfigDynamic</span><span class="p">(</span><span class="n">weight</span><span class="o">=</span><span class="n">NoopObserver</span><span class="o">.</span><span class="n">with_args</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">,</span> <span class="n">rois</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">roi_align</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">rois</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spatial_scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sampling_ratio</span><span class="p">)</span>
 
-<span class="n">default_qat_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">default_fake_quant</span><span class="p">,</span>
-                              <span class="n">weight</span><span class="o">=</span><span class="n">default_weight_fake_quant</span><span class="p">)</span>
-
-<span class="n">default_weight_only_quant_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">,</span>
-                                            <span class="n">weight</span><span class="o">=</span><span class="n">default_weight_fake_quant</span><span class="p">)</span>
-<span class="n">default_activation_only_quant_qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">default_fake_quant</span><span class="p">,</span>
-                                                <span class="n">weight</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Identity</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">get_default_qconfig</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;fbgemm&#39;</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;fbgemm&#39;</span><span class="p">:</span>
-        <span class="n">qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">HistogramObserver</span><span class="o">.</span><span class="n">with_args</span><span class="p">(</span><span class="n">reduce_range</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                          <span class="n">weight</span><span class="o">=</span><span class="n">default_per_channel_weight_observer</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;qnnpack&#39;</span><span class="p">:</span>
-        <span class="n">qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">HistogramObserver</span><span class="o">.</span><span class="n">with_args</span><span class="p">(</span><span class="n">reduce_range</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-                          <span class="n">weight</span><span class="o">=</span><span class="n">default_weight_observer</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown backend, please specify qconfig manually&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">qconfig</span>
-
-<span class="k">def</span> <span class="nf">get_default_qat_qconfig</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;fbgemm&#39;</span><span class="p">):</span>
-    <span class="c1"># Histogram observer is too slow for quantization aware training</span>
-    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;fbgemm&#39;</span><span class="p">:</span>
-        <span class="n">qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">FakeQuantize</span><span class="o">.</span><span class="n">with_args</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">MovingAverageMinMaxObserver</span><span class="p">,</span>
-                                                            <span class="n">quant_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                                            <span class="n">quant_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
-                                                            <span class="n">reduce_range</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                          <span class="n">weight</span><span class="o">=</span><span class="n">default_per_channel_weight_fake_quant</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s1">&#39;qnnpack&#39;</span><span class="p">:</span>
-        <span class="n">qconfig</span> <span class="o">=</span> <span class="n">QConfig</span><span class="p">(</span><span class="n">activation</span><span class="o">=</span><span class="n">FakeQuantize</span><span class="o">.</span><span class="n">with_args</span><span class="p">(</span><span class="n">observer</span><span class="o">=</span><span class="n">MovingAverageMinMaxObserver</span><span class="p">,</span>
-                                                            <span class="n">quant_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                                                            <span class="n">quant_max</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
-                                                            <span class="n">reduce_range</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-                          <span class="n">weight</span><span class="o">=</span><span class="n">default_weight_fake_quant</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown backend, please specify qconfig manually&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">qconfig</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">tmpstr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s1">&#39;(&#39;</span>
+        <span class="n">tmpstr</span> <span class="o">+=</span> <span class="s1">&#39;output_size=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_size</span><span class="p">)</span>
+        <span class="n">tmpstr</span> <span class="o">+=</span> <span class="s1">&#39;, spatial_scale=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spatial_scale</span><span class="p">)</span>
+        <span class="n">tmpstr</span> <span class="o">+=</span> <span class="s1">&#39;, sampling_ratio=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sampling_ratio</span><span class="p">)</span>
+        <span class="n">tmpstr</span> <span class="o">+=</span> <span class="s1">&#39;)&#39;</span>
+        <span class="k">return</span> <span class="n">tmpstr</span></div>
 </pre></div>
 
              </article>

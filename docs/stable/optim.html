@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.3.1 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.4.0 &#x25BC</a>
                 </div>
               
             
@@ -181,6 +181,8 @@
           </div>
 
           
+
+
             
             
               
@@ -192,20 +194,21 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/large_scale_deployments.html">Features for large-scale deployments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/multiprocessing.html">Multiprocessing best practices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/randomness.html">Reproducibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/rref.html">Remote Reference Protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/serialization.html">Serialization semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/javadoc/">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul class="current">
@@ -224,6 +227,7 @@
 <li class="toctree-l1"><a class="reference internal" href="onnx.html">torch.onnx</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">torch.optim</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quantization.html">Quantization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rpc.html">Distributed RPC Framework</a></li>
 <li class="toctree-l1"><a class="reference internal" href="random.html">torch.random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sparse.html">torch.sparse</a></li>
 <li class="toctree-l1"><a class="reference internal" href="storage.html">torch.Storage</a></li>
@@ -251,14 +255,16 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
           
+
         </div>
       </div>
     </nav>
@@ -360,7 +366,7 @@ consistent locations when optimizers are constructed and used.</p>
 <h3>Per-parameter options<a class="headerlink" href="#per-parameter-options" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Optimizer</span></code></a> s also support specifying per-parameter options. To do this, instead
 of passing an iterable of <code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code> s, pass in an iterable of
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> s. Each of them will define a separate parameter group, and should contain
+<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> s. Each of them will define a separate parameter group, and should contain
 a <code class="docutils literal notranslate"><span class="pre">params</span></code> key, containing a list of parameters belonging to it. Other keys
 should match the keyword arguments accepted by the optimizers, and will be used
 as optimization options for this group.</p>
@@ -422,7 +428,7 @@ compute the loss, and return it.</p>
 </div>
 </div>
 <div class="section" id="algorithms">
-<h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
+<span id="optimizer-algorithms"></span><h2>Algorithms<a class="headerlink" href="#algorithms" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="torch.optim.Optimizer">
 <em class="property">class </em><code class="sig-prename descclassname">torch.optim.</code><code class="sig-name descname">Optimizer</code><span class="sig-paren">(</span><em class="sig-param">params</em>, <em class="sig-param">defaults</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/optimizer.html#Optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.Optimizer" title="Permalink to this definition">¶</a></dt>
@@ -437,7 +443,7 @@ satisfy those properties are sets and iterators over values of dictionaries.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – an iterable of <a class="reference internal" href="tensors.html#torch.Tensor" title="torch.Tensor"><code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code></a> s or
-<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> s. Specifies what Tensors should be optimized.</p></li>
+<code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> s. Specifies what Tensors should be optimized.</p></li>
 <li><p><strong>defaults</strong> – (dict): a dict containing default values of optimization
 options (used when a parameter group doesn’t specify them).</p></li>
 </ul>
@@ -452,7 +458,7 @@ trainable and added to the <a class="reference internal" href="#torch.optim.Opti
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>param_group</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – Specifies what Tensors should be optimized along with group</p></li>
+<li><p><strong>param_group</strong> (<em>dict</em>) – Specifies what Tensors should be optimized along with group</p></li>
 <li><p><strong>optimization options.</strong> (<em>specific</em>) – </p></li>
 </ul>
 </dd>
@@ -465,7 +471,7 @@ trainable and added to the <a class="reference internal" href="#torch.optim.Opti
 <dd><p>Loads the optimizer state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>state_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – optimizer state. Should be an object returned
+<dd class="field-odd"><p><strong>state_dict</strong> (<em>dict</em>) – optimizer state. Should be an object returned
 from a call to <a class="reference internal" href="#torch.optim.Optimizer.state_dict" title="torch.optim.Optimizer.state_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code></a>.</p>
 </dd>
 </dl>
@@ -474,7 +480,7 @@ from a call to <a class="reference internal" href="#torch.optim.Optimizer.state_
 <dl class="method">
 <dt id="torch.optim.Optimizer.state_dict">
 <code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/optimizer.html#Optimizer.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.Optimizer.state_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the state of the optimizer as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+<dd><p>Returns the state of the optimizer as a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>.</p>
 <p>It contains two entries:</p>
 <ul class="simple">
 <li><dl class="simple">
@@ -516,13 +522,13 @@ returns the loss. Optional for most optimizers.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>rho</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – coefficient used for computing a running average
+<li><p><strong>rho</strong> (<em>python:float</em><em>, </em><em>optional</em>) – coefficient used for computing a running average
 of squared gradients (default: 0.9)</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-6)</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – coefficient that scale delta before it is applied
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – coefficient that scale delta before it is applied
 to the parameters (default: 1.0)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
 </ul>
 </dd>
 </dl>
@@ -551,10 +557,10 @@ and Stochastic Optimization</a>.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
-<li><p><strong>lr_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate decay (default: 0)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
+<li><p><strong>lr_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate decay (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-10)</p></li>
 </ul>
 </dd>
@@ -583,12 +589,12 @@ and returns the loss.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
-<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
+<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
 running averages of gradient and its square (default: (0.9, 0.999))</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-8)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
 <li><p><strong>amsgrad</strong> (<em>boolean</em><em>, </em><em>optional</em>) – whether to use the AMSGrad variant of this
 algorithm from the paper <a class="reference external" href="https://openreview.net/forum?id=ryQu7f-RZ">On the Convergence of Adam and Beyond</a>
 (default: False)</p></li>
@@ -620,12 +626,12 @@ The AdamW variant was proposed in <a class="reference external" href="https://ar
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
-<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
+<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
 running averages of gradient and its square (default: (0.9, 0.999))</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-8)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay coefficient (default: 1e-2)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay coefficient (default: 1e-2)</p></li>
 <li><p><strong>amsgrad</strong> (<em>boolean</em><em>, </em><em>optional</em>) – whether to use the AMSGrad variant of this
 algorithm from the paper <a class="reference external" href="https://openreview.net/forum?id=ryQu7f-RZ">On the Convergence of Adam and Beyond</a>
 (default: False)</p></li>
@@ -657,10 +663,10 @@ only those portions of the gradient get applied to the parameters.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
-<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-3)</p></li>
+<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
 running averages of gradient and its square (default: (0.9, 0.999))</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-8)</p></li>
 </ul>
 </dd>
@@ -689,12 +695,12 @@ and returns the loss.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 2e-3)</p></li>
-<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 2e-3)</p></li>
+<li><p><strong>betas</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – coefficients used for computing
 running averages of gradient and its square</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-8)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
 </ul>
 </dd>
 </dl>
@@ -723,11 +729,11 @@ averaging</a>.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
-<li><p><strong>lambd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – decay term (default: 1e-4)</p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – power for eta update (default: 0.75)</p></li>
-<li><p><strong>t0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – point at which to start averaging (default: 1e6)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
+<li><p><strong>lambd</strong> (<em>python:float</em><em>, </em><em>optional</em>) – decay term (default: 1e-4)</p></li>
+<li><p><strong>alpha</strong> (<em>python:float</em><em>, </em><em>optional</em>) – power for eta update (default: 0.75)</p></li>
+<li><p><strong>t0</strong> (<em>python:float</em><em>, </em><em>optional</em>) – point at which to start averaging (default: 1e6)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
 </ul>
 </dd>
 </dl>
@@ -769,17 +775,17 @@ try reducing the history size, or use a different algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – learning rate (default: 1)</p></li>
-<li><p><strong>max_iter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – maximal number of iterations per optimization step
+<li><p><strong>lr</strong> (<em>python:float</em>) – learning rate (default: 1)</p></li>
+<li><p><strong>max_iter</strong> (<em>python:int</em>) – maximal number of iterations per optimization step
 (default: 20)</p></li>
-<li><p><strong>max_eval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – maximal number of function evaluations per optimization
+<li><p><strong>max_eval</strong> (<em>python:int</em>) – maximal number of function evaluations per optimization
 step (default: max_iter * 1.25).</p></li>
-<li><p><strong>tolerance_grad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – termination tolerance on first order optimality
+<li><p><strong>tolerance_grad</strong> (<em>python:float</em>) – termination tolerance on first order optimality
 (default: 1e-5).</p></li>
-<li><p><strong>tolerance_change</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – termination tolerance on function
+<li><p><strong>tolerance_change</strong> (<em>python:float</em>) – termination tolerance on function
 value/parameter changes (default: 1e-9).</p></li>
-<li><p><strong>history_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – update history size (default: 100).</p></li>
-<li><p><strong>line_search_fn</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – either ‘strong_wolfe’ or None (default: None).</p></li>
+<li><p><strong>history_size</strong> (<em>python:int</em>) – update history size (default: 100).</p></li>
+<li><p><strong>line_search_fn</strong> (<em>str</em>) – either ‘strong_wolfe’ or None (default: None).</p></li>
 </ul>
 </dd>
 </dl>
@@ -832,14 +838,14 @@ of the squared gradient.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
-<li><p><strong>momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – momentum factor (default: 0)</p></li>
-<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – smoothing constant (default: 0.99)</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – term added to the denominator to improve
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
+<li><p><strong>momentum</strong> (<em>python:float</em><em>, </em><em>optional</em>) – momentum factor (default: 0)</p></li>
+<li><p><strong>alpha</strong> (<em>python:float</em><em>, </em><em>optional</em>) – smoothing constant (default: 0.99)</p></li>
+<li><p><strong>eps</strong> (<em>python:float</em><em>, </em><em>optional</em>) – term added to the denominator to improve
 numerical stability (default: 1e-8)</p></li>
-<li><p><strong>centered</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, compute the centered RMSProp,
+<li><p><strong>centered</strong> (<em>bool</em><em>, </em><em>optional</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, compute the centered RMSProp,
 the gradient is normalized by an estimation of its variance</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
 </ul>
 </dd>
 </dl>
@@ -866,11 +872,11 @@ and returns the loss.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
-<li><p><strong>etas</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – pair of (etaminus, etaplis), that
+<li><p><strong>lr</strong> (<em>python:float</em><em>, </em><em>optional</em>) – learning rate (default: 1e-2)</p></li>
+<li><p><strong>etas</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – pair of (etaminus, etaplis), that
 are multiplicative increase and decrease factors
 (default: (0.5, 1.2))</p></li>
-<li><p><strong>step_sizes</strong> (<em>Tuple</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em><em>, </em><em>optional</em>) – a pair of minimal and
+<li><p><strong>step_sizes</strong> (<em>Tuple</em><em>[</em><em>python:float</em><em>, </em><em>python:float</em><em>]</em><em>, </em><em>optional</em>) – a pair of minimal and
 maximal allowed step sizes (default: (1e-6, 50))</p></li>
 </ul>
 </dd>
@@ -900,16 +906,16 @@ and returns the loss.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>params</strong> (<em>iterable</em>) – iterable of parameters to optimize or dicts defining
 parameter groups</p></li>
-<li><p><strong>lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – learning rate</p></li>
-<li><p><strong>momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – momentum factor (default: 0)</p></li>
-<li><p><strong>weight_decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
-<li><p><strong>dampening</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – dampening for momentum (default: 0)</p></li>
-<li><p><strong>nesterov</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – enables Nesterov momentum (default: False)</p></li>
+<li><p><strong>lr</strong> (<em>python:float</em>) – learning rate</p></li>
+<li><p><strong>momentum</strong> (<em>python:float</em><em>, </em><em>optional</em>) – momentum factor (default: 0)</p></li>
+<li><p><strong>weight_decay</strong> (<em>python:float</em><em>, </em><em>optional</em>) – weight decay (L2 penalty) (default: 0)</p></li>
+<li><p><strong>dampening</strong> (<em>python:float</em><em>, </em><em>optional</em>) – dampening for momentum (default: 0)</p></li>
+<li><p><strong>nesterov</strong> (<em>bool</em><em>, </em><em>optional</em>) – enables Nesterov momentum (default: False)</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">loss_fn</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="nb">input</span><span class="p">),</span> <span class="n">target</span><span class="p">)</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
@@ -962,7 +968,7 @@ rate based on the number of epochs. <a class="reference internal" href="#torch.o
 allows dynamic learning rate reducing based on some validation measurements.</p>
 <p>Learning rate scheduling should be applied after optimizer’s update; e.g., you
 should write your code this way:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="o">...</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="o">...</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">train</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">validate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -987,15 +993,15 @@ times a given function. When last_epoch=-1, sets initial lr as lr.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>lr_lambda</strong> (<em>function</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – A function which computes a multiplicative
+<li><p><strong>lr_lambda</strong> (<em>function</em><em> or </em><em>list</em>) – A function which computes a multiplicative
 factor given an integer parameter epoch, or a list of such
 functions, one for each group in optimizer.param_groups.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer has two groups.</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer has two groups.</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lambda1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">epoch</span><span class="p">:</span> <span class="n">epoch</span> <span class="o">//</span> <span class="mi">30</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lambda2</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">epoch</span><span class="p">:</span> <span class="mf">0.95</span> <span class="o">**</span> <span class="n">epoch</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">LambdaLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">lr_lambda</span><span class="o">=</span><span class="p">[</span><span class="n">lambda1</span><span class="p">,</span> <span class="n">lambda2</span><span class="p">])</span>
@@ -1011,7 +1017,7 @@ functions, one for each group in optimizer.param_groups.</p></li>
 <dd><p>Loads the schedulers state.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>state_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – scheduler state. Should be an object returned
+<dd class="field-odd"><p><strong>state_dict</strong> (<em>dict</em>) – scheduler state. Should be an object returned
 from a call to <a class="reference internal" href="#torch.optim.lr_scheduler.LambdaLR.state_dict" title="torch.optim.lr_scheduler.LambdaLR.state_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code></a>.</p>
 </dd>
 </dl>
@@ -1020,7 +1026,57 @@ from a call to <a class="reference internal" href="#torch.optim.lr_scheduler.Lam
 <dl class="method">
 <dt id="torch.optim.lr_scheduler.LambdaLR.state_dict">
 <code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#LambdaLR.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.LambdaLR.state_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the state of the scheduler as a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>.</p>
+<dd><p>Returns the state of the scheduler as a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>.</p>
+<p>It contains an entry for every variable in self.__dict__ which
+is not the optimizer.
+The learning rate lambda functions will only be saved if they are callable objects
+and not if they are functions or lambdas.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="torch.optim.lr_scheduler.MultiplicativeLR">
+<em class="property">class </em><code class="sig-prename descclassname">torch.optim.lr_scheduler.</code><code class="sig-name descname">MultiplicativeLR</code><span class="sig-paren">(</span><em class="sig-param">optimizer</em>, <em class="sig-param">lr_lambda</em>, <em class="sig-param">last_epoch=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#MultiplicativeLR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.MultiplicativeLR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply the learning rate of each parameter group by the factor given
+in the specified function. When last_epoch=-1, sets initial lr as lr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
+<li><p><strong>lr_lambda</strong> (<em>function</em><em> or </em><em>list</em>) – A function which computes a multiplicative
+factor given an integer parameter epoch, or a list of such
+functions, one for each group in optimizer.param_groups.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer has two groups.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lmbda</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">epoch</span><span class="p">:</span> <span class="mf">0.95</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">LambdaLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">lr_lambda</span><span class="o">=</span><span class="n">lmbda</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">train</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">validate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="torch.optim.lr_scheduler.MultiplicativeLR.load_state_dict">
+<code class="sig-name descname">load_state_dict</code><span class="sig-paren">(</span><em class="sig-param">state_dict</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#MultiplicativeLR.load_state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.MultiplicativeLR.load_state_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the schedulers state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state_dict</strong> (<em>dict</em>) – scheduler state. Should be an object returned
+from a call to <a class="reference internal" href="#torch.optim.lr_scheduler.MultiplicativeLR.state_dict" title="torch.optim.lr_scheduler.MultiplicativeLR.state_dict"><code class="xref py py-meth docutils literal notranslate"><span class="pre">state_dict()</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="torch.optim.lr_scheduler.MultiplicativeLR.state_dict">
+<code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#MultiplicativeLR.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.MultiplicativeLR.state_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the state of the scheduler as a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>.</p>
 <p>It contains an entry for every variable in self.__dict__ which
 is not the optimizer.
 The learning rate lambda functions will only be saved if they are callable objects
@@ -1032,22 +1088,23 @@ and not if they are functions or lambdas.</p>
 <dl class="class">
 <dt id="torch.optim.lr_scheduler.StepLR">
 <em class="property">class </em><code class="sig-prename descclassname">torch.optim.lr_scheduler.</code><code class="sig-name descname">StepLR</code><span class="sig-paren">(</span><em class="sig-param">optimizer</em>, <em class="sig-param">step_size</em>, <em class="sig-param">gamma=0.1</em>, <em class="sig-param">last_epoch=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#StepLR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.StepLR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the learning rate of each parameter group to the initial lr
-decayed by gamma every step_size epochs. When last_epoch=-1, sets
-initial lr as lr.</p>
+<dd><p>Decays the learning rate of each parameter group by gamma every
+step_size epochs. Notice that such decay can happen simultaneously with
+other changes to the learning rate from outside this scheduler. When
+last_epoch=-1, sets initial lr as lr.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>step_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Period of learning rate decay.</p></li>
-<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Multiplicative factor of learning rate decay.
+<li><p><strong>step_size</strong> (<em>python:int</em>) – Period of learning rate decay.</p></li>
+<li><p><strong>gamma</strong> (<em>python:float</em>) – Multiplicative factor of learning rate decay.
 Default: 0.1.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer uses lr = 0.05 for all groups</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer uses lr = 0.05 for all groups</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.05     if epoch &lt; 30</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.005    if 30 &lt;= epoch &lt; 60</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.0005   if 60 &lt;= epoch &lt; 90</span>
@@ -1064,22 +1121,23 @@ Default: 0.1.</p></li>
 <dl class="class">
 <dt id="torch.optim.lr_scheduler.MultiStepLR">
 <em class="property">class </em><code class="sig-prename descclassname">torch.optim.lr_scheduler.</code><code class="sig-name descname">MultiStepLR</code><span class="sig-paren">(</span><em class="sig-param">optimizer</em>, <em class="sig-param">milestones</em>, <em class="sig-param">gamma=0.1</em>, <em class="sig-param">last_epoch=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#MultiStepLR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.MultiStepLR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the learning rate of each parameter group to the initial lr decayed
-by gamma once the number of epoch reaches one of the milestones. When
-last_epoch=-1, sets initial lr as lr.</p>
+<dd><p>Decays the learning rate of each parameter group by gamma once the
+number of epoch reaches one of the milestones. Notice that such decay can
+happen simultaneously with other changes to the learning rate from outside
+this scheduler. When last_epoch=-1, sets initial lr as lr.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>milestones</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – List of epoch indices. Must be increasing.</p></li>
-<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Multiplicative factor of learning rate decay.
+<li><p><strong>milestones</strong> (<em>list</em>) – List of epoch indices. Must be increasing.</p></li>
+<li><p><strong>gamma</strong> (<em>python:float</em>) – Multiplicative factor of learning rate decay.
 Default: 0.1.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer uses lr = 0.05 for all groups</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer uses lr = 0.05 for all groups</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.05     if epoch &lt; 30</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.005    if 30 &lt;= epoch &lt; 80</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.0005   if epoch &gt;= 80</span>
@@ -1095,14 +1153,14 @@ Default: 0.1.</p></li>
 <dl class="class">
 <dt id="torch.optim.lr_scheduler.ExponentialLR">
 <em class="property">class </em><code class="sig-prename descclassname">torch.optim.lr_scheduler.</code><code class="sig-name descname">ExponentialLR</code><span class="sig-paren">(</span><em class="sig-param">optimizer</em>, <em class="sig-param">gamma</em>, <em class="sig-param">last_epoch=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#ExponentialLR"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.ExponentialLR" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set the learning rate of each parameter group to the initial lr decayed
-by gamma every epoch. When last_epoch=-1, sets initial lr as lr.</p>
+<dd><p>Decays the learning rate of each parameter group by gamma every epoch.
+When last_epoch=-1, sets initial lr as lr.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Multiplicative factor of learning rate decay.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>gamma</strong> (<em>python:float</em>) – Multiplicative factor of learning rate decay.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1119,22 +1177,35 @@ schedule, where <span class="math"><span class="katex"><span class="katex-mathml
 
 </span> is the number of epochs since the last restart in SGDR:</p>
 <div class="math">
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mfrac><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac><mi>π</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 +
-\cos(\frac{T_{cur}}{T_{max}}\pi))
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mrow><mo fence="true">(</mo><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac><mi>π</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><mo mathvariant="normal">≠</mo><mo stretchy="false">(</mo><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo separator="true">;</mo><mspace linebreak="newline"></mspace><msub><mi>η</mi><mrow><mi>t</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>η</mi><mi>t</mi></msub><mo>+</mo><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mfrac><mn>1</mn><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac><mi>π</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo separator="true">,</mo><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><mo>=</mo><mo stretchy="false">(</mo><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mi mathvariant="normal">.</mi><mspace linebreak="newline"></mspace></mrow><annotation encoding="application/x-tex">\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})\left(1 +
+\cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)
+T_{cur} \neq (2k+1)T_{max};\\
+\eta_{t+1} = \eta_{t} + (\eta_{max} - \eta_{min})\frac{1 -
+\cos(\frac{1}{T_{max}}\pi)}{2},
+T_{cur} = (2k+1)T_{max}.\\
 
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.19633em;vertical-align:-0.8360000000000001em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.366208em;vertical-align:-0.686em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.680208em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.8351em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.13889em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.44509999999999994em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose">)</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">.</span></span><span class="mspace newline"></span></span></span></span>
 
-</div><p>When last_epoch=-1, sets initial lr as lr.</p>
-<p>It has been proposed in
+</div><p>When last_epoch=-1, sets initial lr as lr. Notice that because the schedule
+is defined recursively, the learning rate can be simultaneously modified
+outside this scheduler by other operators. If the learning rate is set
+solely by this scheduler, the learning rate at each step becomes:</p>
+<div class="math">
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mrow><mo fence="true">(</mo><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><msub><mi>T</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac><mi>π</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})\left(1 +
+\cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)
+
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span>
+
+</div><p>It has been proposed in
 <a class="reference external" href="https://arxiv.org/abs/1608.03983">SGDR: Stochastic Gradient Descent with Warm Restarts</a>. Note that this only
 implements the cosine annealing part of SGDR, and not the restarts.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>T_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Maximum number of iterations.</p></li>
-<li><p><strong>eta_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Minimum learning rate. Default: 0.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>T_max</strong> (<em>python:int</em>) – Maximum number of iterations.</p></li>
+<li><p><strong>eta_min</strong> (<em>python:float</em>) – Minimum learning rate. Default: 0.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1152,40 +1223,40 @@ of epochs, the learning rate is reduced.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – One of <cite>min</cite>, <cite>max</cite>. In <cite>min</cite> mode, lr will
+<li><p><strong>mode</strong> (<em>str</em>) – One of <cite>min</cite>, <cite>max</cite>. In <cite>min</cite> mode, lr will
 be reduced when the quantity monitored has stopped
 decreasing; in <cite>max</cite> mode it will be reduced when the
 quantity monitored has stopped increasing. Default: ‘min’.</p></li>
-<li><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Factor by which the learning rate will be
+<li><p><strong>factor</strong> (<em>python:float</em>) – Factor by which the learning rate will be
 reduced. new_lr = lr * factor. Default: 0.1.</p></li>
-<li><p><strong>patience</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of epochs with no improvement after
+<li><p><strong>patience</strong> (<em>python:int</em>) – Number of epochs with no improvement after
 which learning rate will be reduced. For example, if
 <cite>patience = 2</cite>, then we will ignore the first 2 epochs
 with no improvement, and will only decrease the LR after the
 3rd epoch if the loss still hasn’t improved then.
 Default: 10.</p></li>
-<li><p><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, prints a message to stdout for
+<li><p><strong>verbose</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, prints a message to stdout for
 each update. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
-<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Threshold for measuring the new optimum,
+<li><p><strong>threshold</strong> (<em>python:float</em>) – Threshold for measuring the new optimum,
 to only focus on significant changes. Default: 1e-4.</p></li>
-<li><p><strong>threshold_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – One of <cite>rel</cite>, <cite>abs</cite>. In <cite>rel</cite> mode,
+<li><p><strong>threshold_mode</strong> (<em>str</em>) – One of <cite>rel</cite>, <cite>abs</cite>. In <cite>rel</cite> mode,
 dynamic_threshold = best * ( 1 + threshold ) in ‘max’
 mode or best * ( 1 - threshold ) in <cite>min</cite> mode.
 In <cite>abs</cite> mode, dynamic_threshold = best + threshold in
 <cite>max</cite> mode or best - threshold in <cite>min</cite> mode. Default: ‘rel’.</p></li>
-<li><p><strong>cooldown</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of epochs to wait before resuming
+<li><p><strong>cooldown</strong> (<em>python:int</em>) – Number of epochs to wait before resuming
 normal operation after lr has been reduced. Default: 0.</p></li>
-<li><p><strong>min_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – A scalar or a list of scalars. A
+<li><p><strong>min_lr</strong> (<em>python:float</em><em> or </em><em>list</em>) – A scalar or a list of scalars. A
 lower bound on the learning rate of all param groups
 or each group respectively. Default: 0.</p></li>
-<li><p><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Minimal decay applied to lr. If the difference
+<li><p><strong>eps</strong> (<em>python:float</em>) – Minimal decay applied to lr. If the difference
 between new and old lr is smaller than eps, the update is
 ignored. Default: 1e-8.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">ReduceLROnPlateau</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">train</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -1207,42 +1278,39 @@ The distance between the two boundaries can be scaled on a per-iteration
 or per-cycle basis.</p>
 <p>Cyclical learning rate policy changes the learning rate after every batch.
 <cite>step</cite> should be called after a batch has been used for training.</p>
-<p>This class has three built-in policies, as put forth in the paper:
-“triangular”:</p>
-<blockquote>
-<div><p>A basic triangular cycle w/ no amplitude scaling.</p>
-</div></blockquote>
-<dl class="simple">
-<dt>“triangular2”:</dt><dd><p>A basic triangular cycle that scales initial amplitude by half each cycle.</p>
-</dd>
-<dt>“exp_range”:</dt><dd><p>A cycle that scales initial amplitude by gamma**(cycle iterations) at each
-cycle iteration.</p>
-</dd>
-</dl>
+<p>This class has three built-in policies, as put forth in the paper:</p>
+<ul class="simple">
+<li><p>“triangular”: A basic triangular cycle without amplitude scaling.</p></li>
+<li><p>“triangular2”: A basic triangular cycle that scales initial amplitude by half each cycle.</p></li>
+<li><p>“exp_range”: A cycle that scales initial amplitude by <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mtext>gamma</mtext><mtext>cycle iterations</mtext></msup></mrow><annotation encoding="application/x-tex">\text{gamma}^{\text{cycle iterations}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.043548em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord text"><span class="mord">gamma</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">cycle iterations</span></span></span></span></span></span></span></span></span></span></span></span></span>
+
+</span>
+at each cycle iteration.</p></li>
+</ul>
 <p>This implementation was adapted from the github repo: <a class="reference external" href="https://github.com/bckenstler/CLR">bckenstler/CLR</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>base_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Initial learning rate which is the
+<li><p><strong>base_lr</strong> (<em>python:float</em><em> or </em><em>list</em>) – Initial learning rate which is the
 lower boundary in the cycle for each parameter group.</p></li>
-<li><p><strong>max_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Upper learning rate boundaries in the cycle
+<li><p><strong>max_lr</strong> (<em>python:float</em><em> or </em><em>list</em>) – Upper learning rate boundaries in the cycle
 for each parameter group. Functionally,
 it defines the cycle amplitude (max_lr - base_lr).
 The lr at any cycle is the sum of base_lr
 and some scaling of the amplitude; therefore
 max_lr may not actually be reached depending on
 scaling function.</p></li>
-<li><p><strong>step_size_up</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of training iterations in the
+<li><p><strong>step_size_up</strong> (<em>python:int</em>) – Number of training iterations in the
 increasing half of a cycle. Default: 2000</p></li>
-<li><p><strong>step_size_down</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of training iterations in the
+<li><p><strong>step_size_down</strong> (<em>python:int</em>) – Number of training iterations in the
 decreasing half of a cycle. If step_size_down is None,
 it is set to step_size_up. Default: None</p></li>
-<li><p><strong>mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – One of {triangular, triangular2, exp_range}.
+<li><p><strong>mode</strong> (<em>str</em>) – One of {triangular, triangular2, exp_range}.
 Values correspond to policies detailed above.
 If scale_fn is not None, this argument is ignored.
 Default: ‘triangular’</p></li>
-<li><p><strong>gamma</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Constant in ‘exp_range’ scaling function:
+<li><p><strong>gamma</strong> (<em>python:float</em>) – Constant in ‘exp_range’ scaling function:
 gamma**(cycle iterations)
 Default: 1.0</p></li>
 <li><p><strong>scale_fn</strong> (<em>function</em>) – Custom scaling policy defined by a single
@@ -1250,20 +1318,20 @@ argument lambda function, where
 0 &lt;= scale_fn(x) &lt;= 1 for all x &gt;= 0.
 If specified, then ‘mode’ is ignored.
 Default: None</p></li>
-<li><p><strong>scale_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – {‘cycle’, ‘iterations’}.
+<li><p><strong>scale_mode</strong> (<em>str</em>) – {‘cycle’, ‘iterations’}.
 Defines whether scale_fn is evaluated on
 cycle number or cycle iterations (training
 iterations since start of cycle).
 Default: ‘cycle’</p></li>
-<li><p><strong>cycle_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, momentum is cycled inversely
+<li><p><strong>cycle_momentum</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, momentum is cycled inversely
 to learning rate between ‘base_momentum’ and ‘max_momentum’.
 Default: True</p></li>
-<li><p><strong>base_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Lower momentum boundaries in the cycle
+<li><p><strong>base_momentum</strong> (<em>python:float</em><em> or </em><em>list</em>) – Lower momentum boundaries in the cycle
 for each parameter group. Note that momentum is cycled inversely
 to learning rate; at the peak of a cycle, momentum is
 ‘base_momentum’ and learning rate is ‘max_lr’.
 Default: 0.8</p></li>
-<li><p><strong>max_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Upper momentum boundaries in the cycle
+<li><p><strong>max_momentum</strong> (<em>python:float</em><em> or </em><em>list</em>) – Upper momentum boundaries in the cycle
 for each parameter group. Functionally,
 it defines the cycle amplitude (max_momentum - base_momentum).
 The momentum at any cycle is the difference of max_momentum
@@ -1273,7 +1341,7 @@ scaling function. Note that momentum is cycled inversely
 to learning rate; at the start of a cycle, momentum is ‘max_momentum’
 and learning rate is ‘base_lr’
 Default: 0.9</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of the last batch. This parameter is used when
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of the last batch. This parameter is used when
 resuming a training job. Since <cite>step()</cite> should be invoked after each
 batch instead of after each epoch, this number represents the total
 number of <em>batches</em> computed, not the total number of epochs computed.
@@ -1283,7 +1351,7 @@ Default: -1</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CyclicLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">base_lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">max_lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -1316,72 +1384,64 @@ Very Fast Training of Neural Networks Using Large Learning Rates</a>.</p>
 <p>The 1cycle learning rate policy changes the learning rate after every batch.
 <cite>step</cite> should be called after a batch has been used for training.</p>
 <p>This scheduler is not chainable.</p>
-<p>This class has two built-in annealing strategies:
-“cos”:</p>
-<blockquote>
-<div><p>Cosine annealing</p>
-</div></blockquote>
-<dl class="simple">
-<dt>“linear”:</dt><dd><p>Linear annealing</p>
-</dd>
-</dl>
 <p>Note also that the total number of steps in the cycle can be determined in one
-of two ways (listed in order of precedence):
-1) A value for total_steps is explicitly provided.
-2) A number of epochs (epochs) and a number of steps per epoch</p>
-<blockquote>
-<div><p>(steps_per_epoch) are provided.
+of two ways (listed in order of precedence):</p>
+<ol class="arabic simple">
+<li><p>A value for total_steps is explicitly provided.</p></li>
+<li><p>A number of epochs (epochs) and a number of steps per epoch
+(steps_per_epoch) are provided.
 In this case, the number of total steps is inferred by
-total_steps = epochs * steps_per_epoch</p>
-</div></blockquote>
+total_steps = epochs * steps_per_epoch</p></li>
+</ol>
 <p>You must either provide a value for total_steps or provide a value for both
 epochs and steps_per_epoch.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>max_lr</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Upper learning rate boundaries in the cycle
+<li><p><strong>max_lr</strong> (<em>python:float</em><em> or </em><em>list</em>) – Upper learning rate boundaries in the cycle
 for each parameter group.</p></li>
-<li><p><strong>total_steps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The total number of steps in the cycle. Note that
+<li><p><strong>total_steps</strong> (<em>python:int</em>) – The total number of steps in the cycle. Note that
 if a value is provided here, then it must be inferred by providing
 a value for epochs and steps_per_epoch.
 Default: None</p></li>
-<li><p><strong>epochs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The number of epochs to train for. This is used along
+<li><p><strong>epochs</strong> (<em>python:int</em>) – The number of epochs to train for. This is used along
 with steps_per_epoch in order to infer the total number of steps in the cycle
 if a value for total_steps is not provided.
 Default: None</p></li>
-<li><p><strong>steps_per_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The number of steps per epoch to train for. This is
+<li><p><strong>steps_per_epoch</strong> (<em>python:int</em>) – The number of steps per epoch to train for. This is
 used along with epochs in order to infer the total number of steps in the
 cycle if a value for total_steps is not provided.
 Default: None</p></li>
-<li><p><strong>pct_start</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – The percentage of the cycle (in number of steps) spent
+<li><p><strong>pct_start</strong> (<em>python:float</em>) – The percentage of the cycle (in number of steps) spent
 increasing the learning rate.
 Default: 0.3</p></li>
-<li><p><strong>anneal_strategy</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – {‘cos’, ‘linear’}
-Specifies the annealing strategy.
+<li><p><strong>anneal_strategy</strong> (<em>str</em>) – {‘cos’, ‘linear’}
+Specifies the annealing strategy: “cos” for cosine annealing, “linear” for
+linear annealing.
 Default: ‘cos’</p></li>
-<li><p><strong>cycle_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, momentum is cycled inversely
+<li><p><strong>cycle_momentum</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, momentum is cycled inversely
 to learning rate between ‘base_momentum’ and ‘max_momentum’.
 Default: True</p></li>
-<li><p><strong>base_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Lower momentum boundaries in the cycle
+<li><p><strong>base_momentum</strong> (<em>python:float</em><em> or </em><em>list</em>) – Lower momentum boundaries in the cycle
 for each parameter group. Note that momentum is cycled inversely
 to learning rate; at the peak of a cycle, momentum is
 ‘base_momentum’ and learning rate is ‘max_lr’.
 Default: 0.85</p></li>
-<li><p><strong>max_momentum</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.8)"><em>list</em></a>) – Upper momentum boundaries in the cycle
+<li><p><strong>max_momentum</strong> (<em>python:float</em><em> or </em><em>list</em>) – Upper momentum boundaries in the cycle
 for each parameter group. Functionally,
 it defines the cycle amplitude (max_momentum - base_momentum).
 Note that momentum is cycled inversely
 to learning rate; at the start of a cycle, momentum is ‘max_momentum’
 and learning rate is ‘base_lr’
 Default: 0.95</p></li>
-<li><p><strong>div_factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Determines the initial learning rate via
+<li><p><strong>div_factor</strong> (<em>python:float</em>) – Determines the initial learning rate via
 initial_lr = max_lr/div_factor
 Default: 25</p></li>
-<li><p><strong>final_div_factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – Determines the minimum learning rate via
+<li><p><strong>final_div_factor</strong> (<em>python:float</em>) – Determines the minimum learning rate via
 min_lr = initial_lr/final_div_factor
 Default: 1e4</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – The index of the last batch. This parameter is used when
+<li><p><strong>last_epoch</strong> (<em>python:int</em>) – The index of the last batch. This parameter is used when
 resuming a training job. Since <cite>step()</cite> should be invoked after each
 batch instead of after each epoch, this number represents the total
 number of <em>batches</em> computed, not the total number of epochs computed.
@@ -1391,7 +1451,7 @@ Default: -1</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">OneCycleLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">max_lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">steps_per_epoch</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">data_loader</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -1416,10 +1476,10 @@ is the number of epochs since the last restart and <span class="math"><span clas
 </span> is the number
 of epochs between two warm restarts in SGDR:</p>
 <div class="math">
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mo stretchy="false">(</mo><mfrac><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><msub><mi>T</mi><mi>i</mi></msub></mfrac><mi>π</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 +
-\cos(\frac{T_{cur}}{T_{i}}\pi))
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy="false">(</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>−</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mrow><mo fence="true">(</mo><mn>1</mn><mo>+</mo><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><msub><mi>T</mi><mi>i</mi></msub></mfrac><mi>π</mi><mo fence="true">)</mo></mrow><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})\left(1 +
+\cos\left(\frac{T_{cur}}{T_{i}}\pi\right)\right)
 
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.19633em;vertical-align:-0.8360000000000001em;"></span><span class="mop">cos</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></span>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.7777700000000001em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.40003em;vertical-align:-0.95003em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">i</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.36033em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></span>
 
 </div><p>When <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><mo>=</mo><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">T_{cur}=T_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
 
@@ -1428,19 +1488,21 @@ of epochs between two warm restarts in SGDR:</p>
 </span>.
 When <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mrow><mi>c</mi><mi>u</mi><mi>r</mi></mrow></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">T_{cur}=0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">c</span><span class="mord mathdefault mtight">u</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>
 
-</span>eta_t=eta_{max}`.</p>
+</span> after restart, set <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>η</mi><mi>t</mi></msub><mo>=</mo><msub><mi>η</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\eta_t=\eta_{max}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">η</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
+
+</span>.</p>
 <p>It has been proposed in
 <a class="reference external" href="https://arxiv.org/abs/1608.03983">SGDR: Stochastic Gradient Descent with Warm Restarts</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>optimizer</strong> (<a class="reference internal" href="#torch.optim.Optimizer" title="torch.optim.Optimizer"><em>Optimizer</em></a>) – Wrapped optimizer.</p></li>
-<li><p><strong>T_0</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a>) – Number of iterations for the first restart.</p></li>
-<li><p><strong>T_mult</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – A factor increases <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">T_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
+<li><p><strong>T_0</strong> (<em>python:int</em>) – Number of iterations for the first restart.</p></li>
+<li><p><strong>T_mult</strong> (<em>python:int</em><em>, </em><em>optional</em>) – A factor increases <span class="math"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>T</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">T_{i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
 
 </span> after a restart. Default: 1.</p></li>
-<li><p><strong>eta_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>, </em><em>optional</em>) – Minimum learning rate. Default: 0.</p></li>
-<li><p><strong>last_epoch</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>eta_min</strong> (<em>python:float</em><em>, </em><em>optional</em>) – Minimum learning rate. Default: 0.</p></li>
+<li><p><strong>last_epoch</strong> (<em>python:int</em><em>, </em><em>optional</em>) – The index of last epoch. Default: -1.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1449,7 +1511,7 @@ When <span class="math"><span class="katex"><span class="katex-mathml"><math xml
 <code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param">epoch=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/optim/lr_scheduler.html#CosineAnnealingWarmRestarts.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.optim.lr_scheduler.CosineAnnealingWarmRestarts.step" title="Permalink to this definition">¶</a></dt>
 <dd><p>Step could be called after every batch update</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="n">T_mult</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="n">T_mult</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloader</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataloader</span><span class="p">):</span>
@@ -1464,7 +1526,7 @@ When <span class="math"><span class="katex"><span class="katex-mathml"><math xml
 </div>
 <p>This function can be called in an interleaved way.</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="n">T_mult</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">CosineAnnealingWarmRestarts</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_0</span><span class="p">,</span> <span class="n">T_mult</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">26</span><span class="p">)</span>
@@ -1551,10 +1613,10 @@ When <span class="math"><span class="katex"><span class="katex-mathml"><math xml
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/language_data.js"></script>
      
 
   
@@ -1567,7 +1629,32 @@ When <span class="math"><span class="katex"><span class="katex-mathml"><math xml
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+ 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-90545585-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-117752657-2"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'UA-117752657-2');
+</script>
+
+<img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/795629140/?label=txkmCPmdtosBENSssfsC&amp;guid=ON&amp;script=0"/>
+
 
   <!-- Begin Footer -->
 

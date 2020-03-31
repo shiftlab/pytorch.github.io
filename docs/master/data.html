@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,7 +159,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -195,10 +196,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/faq.html">Frequently Asked Questions</a></li>
@@ -210,11 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul class="current">
@@ -223,8 +225,10 @@
 <li class="toctree-l1"><a class="reference internal" href="nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hub.html">torch.hub</a></li>
@@ -261,10 +265,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -630,7 +635,7 @@ or <code class="xref py py-attr docutils literal notranslate"><span class="pre">
 <p>By default, each worker will have its PyTorch seed set to <code class="docutils literal notranslate"><span class="pre">base_seed</span> <span class="pre">+</span> <span class="pre">worker_id</span></code>,
 where <code class="docutils literal notranslate"><span class="pre">base_seed</span></code> is a long generated by main process using its RNG (thereby,
 consuming a RNG state mandatorily). However, seeds for other libraries may be
-duplicated upon initializing workers (w.g., NumPy), causing each worker to return
+duplicated upon initializing workers (e.g., NumPy), causing each worker to return
 identical random numbers. (See <a class="reference internal" href="notes/faq.html#dataloader-workers-random-seed"><span class="std std-ref">this section</span></a> in FAQ.).</p>
 <p>In <code class="xref py py-attr docutils literal notranslate"><span class="pre">worker_init_fn</span></code>, you may access the PyTorch seed set for each worker
 with either <a class="reference internal" href="#torch.utils.data.get_worker_info" title="torch.utils.data.get_worker_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">torch.utils.data.get_worker_info().seed</span></code></a>
@@ -740,12 +745,12 @@ to multiprocessing in PyTorch.</p>
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">len(dataloader)</span></code> heuristic is based on the length of the sampler used.
 When <code class="xref py py-attr docutils literal notranslate"><span class="pre">dataset</span></code> is an <a class="reference internal" href="#torch.utils.data.IterableDataset" title="torch.utils.data.IterableDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterableDataset</span></code></a>,
-an infinite sampler is used, whose <code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code> is not
-implemented, because the actual length depends on both the
-iterable as well as multi-process loading configurations. So one
-should not query this method unless they work with a map-style
-dataset. See <a class="reference internal" href="#dataset-types">Dataset Types</a> for more details on these two types
-of datasets.</p>
+<code class="docutils literal notranslate"><span class="pre">len(dataset)</span></code> (if implemented) is returned instead, regardless
+of multi-process loading configurations, because PyTorch trust
+user <code class="xref py py-attr docutils literal notranslate"><span class="pre">dataset</span></code> code in correctly handling multi-process
+loading to avoid duplicate data. See <a class="reference internal" href="#dataset-types">Dataset Types</a> for more
+details on these two types of datasets and how
+<a class="reference internal" href="#torch.utils.data.IterableDataset" title="torch.utils.data.IterableDataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">IterableDataset</span></code></a> interacts with <a class="reference internal" href="#multi-process-data-loading">Multi-process data loading</a>.</p>
 </div>
 </dd></dl>
 
@@ -1034,8 +1039,8 @@ sample index is drawn for a row, it cannot be drawn again for that row.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">WeightedRandomSampler</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="go">[0, 0, 0, 1, 0]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">WeightedRandomSampler</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">[4, 4, 1, 4, 5]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">WeightedRandomSampler</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">replacement</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="go">[0, 1, 4, 3, 2]</span>
 </pre></div>
@@ -1057,7 +1062,7 @@ its size would be less than <code class="docutils literal notranslate"><span cla
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">BatchSampler</span><span class="p">(</span><span class="n">SequentialSampler</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">BatchSampler</span><span class="p">(</span><span class="n">SequentialSampler</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 <span class="go">[[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">BatchSampler</span><span class="p">(</span><span class="n">SequentialSampler</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)),</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">drop_last</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <span class="go">[[0, 1, 2], [3, 4, 5], [6, 7, 8]]</span>
@@ -1088,6 +1093,20 @@ distributed training.</p></li>
 </ul>
 </dd>
 </dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In distributed mode, calling the <code class="docutils literal notranslate"><span class="pre">set_epoch</span></code> method is needed to
+make shuffling work; each process will use the same random seed
+otherwise.</p>
+</div>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sampler</span> <span class="o">=</span> <span class="n">DistributedSampler</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_distributed</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="p">(</span><span class="n">sampler</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">),</span>
+<span class="gp">... </span>                    <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_epoch</span><span class="p">,</span> <span class="n">n_epochs</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">is_distributed</span><span class="p">:</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -1176,10 +1195,10 @@ distributed training.</p></li>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/language_data.js"></script>
      
 
   

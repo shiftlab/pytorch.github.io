@@ -1,6 +1,7 @@
 ---
 order: 1
-link: https://pytorch.org/blog/pytorch-1-dot-3-adds-mobile-privacy-quantization-and-named-tensors/ 
-summary: PyTorch 1.3 is now available. Named tensors, quantization, and mobile. New libraries for model interpretability, privacy-preserving ML, computer vision, and speech.
+link: https://pytorch.org/blog/pytorch-1-dot-4-released-and-domain-libraries-updated/ 
+summary: PyTorch 1.4 is now available - adds ability to do fine grain build level customization for PyTorch Mobile, updated domain libraries, and new experimental features.
 ---
+
 

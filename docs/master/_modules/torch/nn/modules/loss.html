@@ -5,6 +5,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta name="robots" content="noindex">
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,8 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -156,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -193,10 +195,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/faq.html">Frequently Asked Questions</a></li>
@@ -208,11 +212,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -221,8 +224,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../hub.html">torch.hub</a></li>
@@ -259,10 +264,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -456,7 +462,8 @@
 <span class="sd">        l_n = - w_{y_n} x_{n,y_n}, \quad</span>
 <span class="sd">        w_{c} = \text{weight}[c] \cdot \mathbb{1}\{c \not= \text{ignore\_index}\},</span>
 
-<span class="sd">    where :math:`N` is the batch size. If :attr:`reduction` is not ``&#39;none&#39;``</span>
+<span class="sd">    where :math:`x` is the input, :math:`y` is the target, :math:`w` is the weight, and</span>
+<span class="sd">    :math:`N` is the batch size. If :attr:`reduction` is not ``&#39;none&#39;``</span>
 <span class="sd">    (default ``&#39;mean&#39;``), then</span>
 
 <span class="sd">    .. math::</span>
@@ -532,7 +539,7 @@
 <span class="sd">        &gt;&gt;&gt; output = loss(m(conv(data)), target)</span>
 <span class="sd">        &gt;&gt;&gt; output.backward()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ignore_index&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
+    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ignore_index&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span>
                  <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
@@ -727,7 +734,7 @@
 <span class="sd">    :math:`x` and :math:`y` are tensors of arbitrary shapes with a total</span>
 <span class="sd">    of :math:`n` elements each.</span>
 
-<span class="sd">    The sum operation still operates over all the elements, and divides by :math:`n`.</span>
+<span class="sd">    The mean operation still operates over all the elements, and divides by :math:`n`.</span>
 
 <span class="sd">    The division by :math:`n` can be avoided if one sets ``reduction = &#39;sum&#39;``.</span>
 
@@ -793,6 +800,23 @@
 <span class="sd">    an auto-encoder. Note that the targets :math:`y` should be numbers</span>
 <span class="sd">    between 0 and 1.</span>
 
+<span class="sd">    Notice that if :math:`x_n` is either 0 or 1, one of the log terms would be</span>
+<span class="sd">    mathematically undefined in the above loss equation. PyTorch chooses to set</span>
+<span class="sd">    :math:`\log (0) = -\infty`, since :math:`\lim_{x\to 0} \log (x) = -\infty`.</span>
+<span class="sd">    However, an infinite term in the loss equation is not desirable for several reasons.</span>
+
+<span class="sd">    For one, if either :math:`y_n = 0` or :math:`(1 - y_n) = 0`, then we would be</span>
+<span class="sd">    multipying 0 with infinity. Secondly, if we have an infinite loss value, then</span>
+<span class="sd">    we would also have an infinite term in our gradient, since</span>
+<span class="sd">    :math:`\lim_{x\to 0} \frac{d}{dx} \log (x) = \infty`.</span>
+<span class="sd">    This would make BCELoss&#39;s backward method nonlinear with respect to :math:`x_n`,</span>
+<span class="sd">    and using it for things like linear regression would not be straight-forward.</span>
+
+<span class="sd">    Our solution is that BCELoss clamps its log function outputs to be greater than</span>
+<span class="sd">    or equal to -100. This way, we can always have a finite loss value and a linear</span>
+<span class="sd">    backward method.</span>
+
+
 <span class="sd">    Args:</span>
 <span class="sd">        weight (Tensor, optional): a manual rescaling weight given to the loss</span>
 <span class="sd">            of each batch element. If given, has to be a Tensor of size `nbatch`.</span>
@@ -828,7 +852,7 @@
 <span class="sd">        &gt;&gt;&gt; output = loss(m(input), target)</span>
 <span class="sd">        &gt;&gt;&gt; output.backward()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reduction&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">BCELoss</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">size_average</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">reduction</span><span class="p">)</span>
@@ -885,11 +909,11 @@
 <span class="sd">    Examples::</span>
 
 <span class="sd">        &gt;&gt;&gt; target = torch.ones([10, 64], dtype=torch.float32)  # 64 classes, batch size = 10</span>
-<span class="sd">        &gt;&gt;&gt; output = torch.full([10, 64], 0.999)  # A prediction (logit)</span>
+<span class="sd">        &gt;&gt;&gt; output = torch.full([10, 64], 1.5)  # A prediction (logit)</span>
 <span class="sd">        &gt;&gt;&gt; pos_weight = torch.ones([64])  # All weights are equal to 1</span>
 <span class="sd">        &gt;&gt;&gt; criterion = torch.nn.BCEWithLogitsLoss(pos_weight=pos_weight)</span>
-<span class="sd">        &gt;&gt;&gt; criterion(output, target)  # -log(sigmoid(0.999))</span>
-<span class="sd">        tensor(0.3135)</span>
+<span class="sd">        &gt;&gt;&gt; criterion(output, target)  # -log(sigmoid(1.5))</span>
+<span class="sd">        tensor(0.2014)</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight (Tensor, optional): a manual rescaling weight given to the loss</span>
@@ -926,8 +950,6 @@
 <span class="sd">        &gt;&gt;&gt; output = loss(input, target)</span>
 <span class="sd">        &gt;&gt;&gt; output.backward()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;pos_weight&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">pos_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">BCEWithLogitsLoss</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">size_average</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">reduction</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
@@ -1243,7 +1265,7 @@
 <span class="sd">        &gt;&gt;&gt; output = loss(input, target)</span>
 <span class="sd">        &gt;&gt;&gt; output.backward()</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;ignore_index&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
+    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ignore_index&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span>
                  <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
@@ -1293,7 +1315,7 @@
 <span class="sd">        - Target: :math:`(N, C)`, label targets padded by -1 ensuring same shape as the input.</span>
 <span class="sd">        - Output: scalar. If :attr:`reduction` is ``&#39;none&#39;``, then :math:`(N)`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
+    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MultiLabelSoftMarginLoss</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">size_average</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">reduction</span><span class="p">)</span>
@@ -1440,7 +1462,7 @@
 <span class="sd">            and :attr:`reduce` are in the process of being deprecated, and in the meantime,</span>
 <span class="sd">            specifying either of those two args will override :attr:`reduction`. Default: ``&#39;mean&#39;``</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;margin&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
+    <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;p&#39;</span><span class="p">,</span> <span class="s1">&#39;margin&#39;</span><span class="p">,</span> <span class="s1">&#39;reduction&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">size_average</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">reduce</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reduction</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
@@ -1684,10 +1706,10 @@
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+         <script src="../../../../_static/jquery.js"></script>
+         <script src="../../../../_static/underscore.js"></script>
+         <script src="../../../../_static/doctools.js"></script>
+         <script src="../../../../_static/language_data.js"></script>
      
 
   

@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -158,7 +159,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -195,10 +196,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notes/faq.html">Frequently Asked Questions</a></li>
@@ -210,11 +213,10 @@
 <li class="toctree-l1"><a class="reference internal" href="notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul class="current">
@@ -223,8 +225,10 @@
 <li class="toctree-l1"><a class="reference internal" href="nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hub.html">torch.hub</a></li>
@@ -261,10 +265,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -349,7 +354,7 @@ bare minimum (but often sufficient) arguments to build a C++ extension.</p>
 <p>All arguments are forwarded to the <code class="xref py py-class docutils literal notranslate"><span class="pre">setuptools.Extension</span></code>
 constructor.</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">BuildExtension</span><span class="p">,</span> <span class="n">CppExtension</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">setup</span><span class="p">(</span>
 <span class="go">        name=&#39;extension&#39;,</span>
@@ -377,7 +382,7 @@ library.</p>
 <p>All arguments are forwarded to the <code class="xref py py-class docutils literal notranslate"><span class="pre">setuptools.Extension</span></code>
 constructor.</p>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">BuildExtension</span><span class="p">,</span> <span class="n">CUDAExtension</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">setup</span><span class="p">(</span>
 <span class="go">        name=&#39;cuda_extension&#39;,</span>
@@ -400,13 +405,24 @@ constructor.</p>
 <code class="sig-prename descclassname">torch.utils.cpp_extension.</code><code class="sig-name descname">BuildExtension</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/torch/utils/cpp_extension.html#BuildExtension"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#torch.utils.cpp_extension.BuildExtension" title="Permalink to this definition">¶</a></dt>
 <dd><p>A custom <code class="xref py py-mod docutils literal notranslate"><span class="pre">setuptools</span></code> build extension .</p>
 <p>This <code class="xref py py-class docutils literal notranslate"><span class="pre">setuptools.build_ext</span></code> subclass takes care of passing the
-minimum required compiler flags (e.g. <code class="docutils literal notranslate"><span class="pre">-std=c++11</span></code>) as well as mixed
+minimum required compiler flags (e.g. <code class="docutils literal notranslate"><span class="pre">-std=c++14</span></code>) as well as mixed
 C++/CUDA compilation (and support for CUDA files in general).</p>
 <p>When using <a class="reference internal" href="#torch.utils.cpp_extension.BuildExtension" title="torch.utils.cpp_extension.BuildExtension"><code class="xref py py-class docutils literal notranslate"><span class="pre">BuildExtension</span></code></a>, it is allowed to supply a dictionary
 for <code class="docutils literal notranslate"><span class="pre">extra_compile_args</span></code> (rather than the usual list) that maps from
 languages (<code class="docutils literal notranslate"><span class="pre">cxx</span></code> or <code class="docutils literal notranslate"><span class="pre">nvcc</span></code>) to a list of additional compiler flags to
 supply to the compiler. This makes it possible to supply different flags to
 the C++ and CUDA compiler during mixed compilation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">use_ninja</span></code> (bool): If <code class="docutils literal notranslate"><span class="pre">use_ninja</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> (default), then we
+attempt to build using the Ninja backend. Ninja greatly speeds up
+compilation compared to the standard <code class="docutils literal notranslate"><span class="pre">setuptools.build_ext</span></code>.
+Fallbacks to the standard distutils backend if Ninja is not available.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the Ninja backend uses #CPUS + 2 workers to build the
+extension. This may use up too many resources on some systems. One
+can control the number of workers by setting the <cite>MAX_JOBS</cite> environment
+variable to a non-negative number.</p>
+</div>
 </dd></dl>
 
 <dl class="function">
@@ -473,7 +489,7 @@ effect).</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">load</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">load</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">module</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span>
 <span class="go">        name=&#39;extension&#39;,</span>
 <span class="go">        sources=[&#39;extension.cpp&#39;, &#39;extension_kernel.cu&#39;],</span>
@@ -536,7 +552,7 @@ causes issues.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">load_inline</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">torch.utils.cpp_extension</span> <span class="kn">import</span> <span class="n">load_inline</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">source</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
 <span class="go">at::Tensor sin_add(at::Tensor x, at::Tensor y) {</span>
 <span class="go">  return x.sin() + y.sin();</span>
@@ -546,6 +562,13 @@ causes issues.</p></li>
 <span class="go">                         cpp_sources=[source],</span>
 <span class="go">                         functions=[&#39;sin_add&#39;])</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, the Ninja backend uses #CPUS + 2 workers to build the
+extension. This may use up too many resources on some systems. One
+can control the number of workers by setting the <cite>MAX_JOBS</cite> environment
+variable to a non-negative number.</p>
 </div>
 </dd></dl>
 
@@ -647,10 +670,10 @@ available on the system.</p>
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-         <script type="text/javascript" src="_static/jquery.js"></script>
-         <script type="text/javascript" src="_static/underscore.js"></script>
-         <script type="text/javascript" src="_static/doctools.js"></script>
-         <script type="text/javascript" src="_static/language_data.js"></script>
+         <script src="_static/jquery.js"></script>
+         <script src="_static/underscore.js"></script>
+         <script src="_static/doctools.js"></script>
+         <script src="_static/language_data.js"></script>
      
 
   

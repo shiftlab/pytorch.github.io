@@ -5,6 +5,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
+  <meta name="robots" content="noindex">
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,8 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-beta/dist/katex.min.css" type="text/css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/css/jit.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" type="text/css" />
   <link rel="stylesheet" href="../../../../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -156,7 +158,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.4.0a0+1e8ed02 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.5.0a0+6e2bb1c &#x25BC</a>
                 </div>
               
             
@@ -193,10 +195,12 @@
             
               <p class="caption"><span class="caption-text">Notes</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notes/amp_examples.html">Automatic Mixed Precision examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/autograd.html">Autograd mechanics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/broadcasting.html">Broadcasting semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/cpu_threading_torchscript_inference.html">CPU threading and TorchScript inference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/cuda.html">CUDA semantics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notes/ddp.html">Distributed Data Parallel</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/distributed_autograd.html">Distributed Autograd Design</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/extending.html">Extending PyTorch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/faq.html">Frequently Asked Questions</a></li>
@@ -208,11 +212,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../notes/windows.html">Windows FAQ</a></li>
 <li class="toctree-l1"><a class="reference external" href="http://pytorch.org/xla/">PyTorch on XLA Devices</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Community</span></p>
+<p class="caption"><span class="caption-text">Language Bindings</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/governance.html">PyTorch Governance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Javadoc</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -221,8 +224,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../nn.functional.html">torch.nn.functional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tensors.html">torch.Tensor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../tensor_attributes.html">Tensor Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tensor_view.html">Tensor Views</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../autograd.html">torch.autograd</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cuda.html">torch.cuda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../amp.html">torch.cuda.amp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">torch.distributed</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributions.html">torch.distributions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../hub.html">torch.hub</a></li>
@@ -259,10 +264,11 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/text">torchtext</a></li>
 </ul>
-<p class="caption"><span class="caption-text">Other Languages</span></p>
+<p class="caption"><span class="caption-text">Community</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference external" href="https://pytorch.org/cppdocs/">C++ API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../packages.html">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/contribution_guide.html">PyTorch Contribution Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/governance.html">PyTorch Governance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../community/persons_of_interest.html">PyTorch Governance | Persons of Interest</a></li>
 </ul>
 
             
@@ -381,6 +387,36 @@
     <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">avg_pool2d</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span>
                                           <span class="n">ceil_mode</span><span class="p">,</span> <span class="n">count_include_pad</span><span class="p">,</span>
                                           <span class="n">divisor_override</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">avg_pool3d</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ceil_mode</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="n">count_include_pad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">divisor_override</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies 3D average-pooling operation in :math:`kD \ times kH \times kW` regions by step size</span>
+<span class="sd">    :math:`sD \times sH \times sW` steps. The number of output features is equal to the number of</span>
+<span class="sd">    input planes.</span>
+
+<span class="sd">    .. note:: The input quantization parameters propagate to the output.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input: quantized input tensor :math:`(\text{minibatch} , \text{in\_channels} , iH , iW)`</span>
+<span class="sd">        kernel_size: size of the pooling region. Can be a single number or a</span>
+<span class="sd">          tuple `(kD, kH, kW)`</span>
+<span class="sd">        stride: stride of the pooling operation. Can be a single number or a</span>
+<span class="sd">          tuple `(sD, sH, sW)`. Default: :attr:`kernel_size`</span>
+<span class="sd">        padding: implicit zero paddings on both sides of the input. Can be a</span>
+<span class="sd">          single number or a tuple `(padD, padH, padW)`. Default: 0</span>
+<span class="sd">        ceil_mode: when True, will use `ceil` instead of `floor` in the formula</span>
+<span class="sd">            to compute the output shape. Default: ``False``</span>
+<span class="sd">        count_include_pad: when True, will include the zero-padding in the</span>
+<span class="sd">            averaging calculation. Default: ``True``</span>
+<span class="sd">        divisor_override: if specified, it will be used as divisor, otherwise</span>
+<span class="sd">             size of the pooling region will be used. Default: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">input</span><span class="o">.</span><span class="n">is_quantized</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input to &#39;quantized.avg_pool3d&#39; must be quantized!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">functional</span><span class="o">.</span><span class="n">avg_pool3d</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span>
+                                          <span class="n">ceil_mode</span><span class="p">,</span> <span class="n">count_include_pad</span><span class="p">,</span>
+                                          <span class="n">divisor_override</span><span class="p">)</span>
 
 <div class="viewcode-block" id="adaptive_avg_pool2d"><a class="viewcode-back" href="../../../../quantization.html#torch.nn.quantized.functional.adaptive_avg_pool2d">[docs]</a><span class="k">def</span> <span class="nf">adaptive_avg_pool2d</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output_size</span><span class="p">):</span>
     <span class="c1"># type: (Tensor, BroadcastingList2[int]) -&gt; Tensor</span>
@@ -566,7 +602,7 @@
                                            <span class="n">align_corners</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="linear"><a class="viewcode-back" href="../../../../quantization.html#torch.nn.quantized.functional.linear">[docs]</a><span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zero_point</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="c1"># type: (Tensor, Tensor, Optional[Tensor]) -&gt; Tensor</span>
+    <span class="c1"># type: (Tensor, Tensor, Optional[Tensor], Optional[float], Optional[int]) -&gt; Tensor</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Applies a linear transformation to the incoming quantized data:</span>
 <span class="sd">    :math:`y = xA^T + b`.</span>
@@ -631,6 +667,52 @@
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu_</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">leaky_relu</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">negative_slope</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+               <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zero_point</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># type: (Tensor, float, bool, float, int) -&gt; Tensor</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Quantized version of the.</span>
+<span class="sd">    leaky_relu(input, negative_slope=0.01, inplace=False, scale, zero_point) -&gt; Tensor</span>
+
+<span class="sd">    Applies element-wise,</span>
+<span class="sd">    :math:`\text{LeakyReLU}(x) = \max(0, x) + \text{negative\_slope} * \min(0, x)`</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input: Quaintized input</span>
+<span class="sd">        negative_slope: The slope of the negative input</span>
+<span class="sd">        inplace: Inplace modification of the input tensor</span>
+<span class="sd">        scale, zero_point: Scale and zero point of thhe output tensor.</span>
+
+<span class="sd">    See :class:`~torch.nn.LeakyReLU` for more details.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">zero_point</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">inplace</span><span class="p">,</span> <span class="s2">&quot;Cannot rescale with `inplace`&quot;</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">quantize_per_tensor</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span>
+                                           <span class="n">scale</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">zero_point</span><span class="p">),</span> <span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">negative_slope</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span>
+    <span class="k">if</span> <span class="n">inplace</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">leaky_relu_</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">negative_slope</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">_C</span><span class="o">.</span><span class="n">_nn</span><span class="o">.</span><span class="n">leaky_relu</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">negative_slope</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">clamp</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">min_</span><span class="p">,</span> <span class="n">max_</span><span class="p">):</span>
+    <span class="c1"># type: (Tensor, float, float) -&gt; Tensor</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;float(input, min_, max_) -&gt; Tensor</span>
+
+<span class="sd">    Applies the clamp function element-wise.</span>
+<span class="sd">    See :class:`~torch.nn.quantized.clamp` for more details.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        input: quantized input</span>
+<span class="sd">        min_: minimum value for clamping</span>
+<span class="sd">        max_: maximum value for clamping</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">input</span><span class="o">.</span><span class="n">is_quantized</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Input to &#39;quantized.clamp&#39; must be quantized!&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">min_</span><span class="p">,</span> <span class="n">max_</span><span class="p">)</span>
 
 <div class="viewcode-block" id="upsample"><a class="viewcode-back" href="../../../../quantization.html#torch.nn.quantized.functional.upsample">[docs]</a><span class="k">def</span> <span class="nf">upsample</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Upsamples the input to either the given :attr:`size` or the given</span>
@@ -776,10 +858,10 @@
 
      
        <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-         <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-         <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-         <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-         <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+         <script src="../../../../_static/jquery.js"></script>
+         <script src="../../../../_static/underscore.js"></script>
+         <script src="../../../../_static/doctools.js"></script>
+         <script src="../../../../_static/language_data.js"></script>
      
 
   
