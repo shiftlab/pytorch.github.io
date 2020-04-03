@@ -297,16 +297,7 @@
 }
 
 .hub-index .sort-menu {
-  left: 25%;
-  @media (min-width: 481px) and (max-width: 768px) {
-    left: 30%;
-  }
-  @include small-desktop {
-    left: 30%;
-  }
-  @include desktop {
-    left: 23%;
-  }
+  left: 23%;
 }
 
 .hub .research-hub-title,
