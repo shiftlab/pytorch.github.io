@@ -1,6 +1,6 @@
 <div id="hub-cards">
   <div class="list row hub-cards-wrapper cards-left">
-    {% assign hub = site.hub | where: "category", include.category | sort: "order" %}
+    {% assign hub = site.hub | where: "category", include.category | sort: "github-stars-count" %}
 
     {% for item in hub %}
       <div class="col-md-6 research-hub-card-wrapper" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
@@ -8,7 +8,7 @@
           <a href="{{ site.baseurl }}{{ item.url }}">
             <div class="card-body">
               <div class="hub-card-title-container">
-                <h4 class="card-title">{{ item.title }}</h4>
+                <h4 class="card-title name">{{ item.title }}</h4>
                 <div class="main-stars-container">
                   <div class="github-stars-image">
                     <img src="/assets/images/github-star.svg">

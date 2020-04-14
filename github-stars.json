@@ -6,7 +6,7 @@
     {% for item in site.hub %}
       {
         "id": "{{ item.title }}",
-        "order": "{{ item.order }}"
+        "GitHub Star Count": "{{ item.github-stars }}"
       },
     {% endfor %}
   ]
