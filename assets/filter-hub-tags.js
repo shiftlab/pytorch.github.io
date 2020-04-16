@@ -2,27 +2,30 @@ var filterScript = $("script[src*=filter-hub-tags]");
 var listId = filterScript.attr("list-id");
 var displayCount = Number(filterScript.attr("display-count"));
 var pagination = filterScript.attr("pagination");
+var options, hubList;
 
-var options = {
-  valueNames: [{ data: ["tags"] }],
-  page: displayCount
-};
+$.getJSON("/github-stars.json", function(data) {
+  githubInfo = data["data"];
 
-$(".next-news-item").on("click" , function(){
-  $(".pagination").find(".active").next().trigger( "click" );
+  for (var i = 0; i < githubInfo.length; i++) {
+    $("[data-id='" + githubInfo[i].id + "'] .github-stars-count").html(
+      githubInfo[i].count
+    );
+  }
+
+  options = {
+    valueNames: ["github-stars-count", { data: ["tags"] }],
+    page: displayCount
+  };
+
+  // Only the hub index pages should have pagination
+
+  if (pagination == "true") {
+    options.pagination = true;
+  }
+
+  hubList = new List("hub-cards", options);
 });
-
-$(".previous-news-item").on("click" , function(){
-  $(".pagination").find(".active").prev().trigger( "click" );
-});
-
-// Only the hub index page should have pagination
-
-if (pagination == "true") {
-  options.pagination = true;
-}
-
-var hubList = new List(listId, options);
 
 function filterSelectedTags(cardTags, selectedTags) {
   return cardTags.some(function(tag) {
@@ -66,4 +69,12 @@ $(".filter-btn").on("click", function() {
   }
 
   updateList();
+});
+
+$("#sortLowLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "asc" });
+});
+
+$("#sortHighLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "desc" });
 });

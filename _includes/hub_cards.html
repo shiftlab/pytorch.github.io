@@ -1,31 +1,29 @@
-<div id="hub-cards">
-  <div class="list row hub-cards-wrapper cards-left">
-    {% assign hub = site.hub | where: "category", include.category | sort: "github-stars-count" %}
+<div class="list row hub-cards-wrapper cards-left">
+  {% assign hub = site.hub | where: "category", include.category | sort: "github-stars-count" %}
 
-    {% for item in hub %}
-      <div class="col-md-6 research-hub-card-wrapper" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
-        <div class="card hub-card">
-          <a href="{{ site.baseurl }}{{ item.url }}">
-            <div class="card-body">
-              <div class="hub-card-title-container">
-                <h4 class="card-title name">{{ item.title }}</h4>
-                <div class="main-stars-container">
-                  <div class="github-stars-image">
-                    <img src="/assets/images/github-star.svg">
-                  </div>
-                  <div class="github-stars-count">{{ item.github-stars }}</div>
+  {% for item in hub %}
+    <div class="col-md-6 research-hub-card-wrapper" id="hub-cards" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
+      <div class="card hub-card">
+        <a href="{{ site.baseurl }}{{ item.url }}">
+          <div class="card-body">
+            <div class="hub-card-title-container">
+              <h4 class="card-title name">{{ item.title }}</h4>
+              <div class="main-stars-container">
+                <div class="github-stars-image">
+                  <img src="/assets/images/github-star.svg">
                 </div>
-              </div>
-              <p class="card-summary">{{ item.summary }}</p>
-              <div class="hub-image">
-                <img src="{{ site.baseurl }}/assets/images/{{ item.image }}">
+                <div class="github-stars-count">{{ item.github-stars }}</div>
               </div>
             </div>
-          </a>
-        </div>
+            <p class="card-summary">{{ item.summary }}</p>
+            <div class="hub-image">
+              <img src="{{ site.baseurl }}/assets/images/{{ item.image }}">
+            </div>
+          </div>
+        </a>
       </div>
-    {% endfor %}
-  </div>
-
-  <div class="pagination d-flex justify-content-center"></div>
+    </div>
+  {% endfor %}
 </div>
+
+<div class="pagination d-flex justify-content-center"></div>
