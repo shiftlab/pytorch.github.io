@@ -23,8 +23,17 @@ $.getJSON("/github-stars.json", function(data) {
   if (pagination == "true") {
     options.pagination = true;
   }
+});
 
-  hubList = new List("hub-cards", options);
+var hubList = new List("hub-cards", options);
+
+$("#sortLowLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "asc" });
+});
+
+$("#sortHighLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "desc" });
+  alert("highest");
 });
 
 function filterSelectedTags(cardTags, selectedTags) {
@@ -69,12 +78,4 @@ $(".filter-btn").on("click", function() {
   }
 
   updateList();
-});
-
-$("#sortLowLeft").on("click", function() {
-  hubList.sort("github-stars-count", { order: "asc" });
-});
-
-$("#sortHighLeft").on("click", function() {
-  hubList.sort("github-stars-count", { order: "desc" });
 });

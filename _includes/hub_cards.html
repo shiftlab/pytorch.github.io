@@ -2,7 +2,7 @@
   {% assign hub = site.hub | where: "category", include.category | sort: "github-stars-count" %}
 
   {% for item in hub %}
-    <div class="col-md-6 research-hub-card-wrapper" id="hub-cards" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
+    <div class="col-md-6 research-hub-card-wrapper" id="hubCards" data-item-count="{{ forloop.index }}" data-tags="{{ item.tags | join: ',' }}">
       <div class="card hub-card">
         <a href="{{ site.baseurl }}{{ item.url }}">
           <div class="card-body">

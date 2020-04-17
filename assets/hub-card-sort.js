@@ -1,15 +1,15 @@
-var options = {
-  valueNames: [ 'name', 'github-stars-count' ]
-};
+// var options = {
+//   valueNames: [ 'github-stars-count' ]
+// };
 
-var $wrapper = $("#hub-cards");
+// var cardList = new List('hubCards', options);
 
-console.log(options.valueNames);
 
-$("#sortLowLeft").on("click", function() {
-  sorter("low", $wrapper);
-});
+// $("#sortLowLeft").on("click", function() {
+//   cardList.sort("github-stars-count", { order: "asc" });
+// });
 
-$("#sortHighLeft").on("click", function() {
-  sorter("high", $wrapper);
-});
+// $("#sortHighLeft").on("click", function() {
+//   cardList.sort("github-stars-count", { order: "desc" });
+//   alert("highest");
+// });
