@@ -2,39 +2,31 @@ var filterScript = $("script[src*=filter-hub-tags]");
 var listId = filterScript.attr("list-id");
 var displayCount = Number(filterScript.attr("display-count"));
 var pagination = filterScript.attr("pagination");
-var options, hubList;
+var filterScript = $("script[src*=filter-hub-tags]");
+var listId = filterScript.attr("list-id");
+var displayCount = Number(filterScript.attr("display-count"));
+var pagination = filterScript.attr("pagination");
 
-$.getJSON("/github-stars.json", function(data) {
-  githubInfo = data["data"];
+var options = {
+  valueNames: [{ data: ["tags"] }],
+  page: displayCount
+};
 
-  for (var i = 0; i < githubInfo.length; i++) {
-    $("[data-id='" + githubInfo[i].id + "'] .github-stars-count").html(
-      githubInfo[i].count
-    );
-  }
-
-  options = {
-    valueNames: ["github-stars-count", { data: ["tags"] }],
-    page: displayCount
-  };
-
-  // Only the hub index pages should have pagination
-
-  if (pagination == "true") {
-    options.pagination = true;
-  }
+$(".next-news-item").on("click" , function(){
+  $(".pagination").find(".active").next().trigger( "click" );
 });
 
-var hubList = new List("hub-cards", options);
-
-$("#sortLowLeft").on("click", function() {
-  hubList.sort("github-stars-count", { order: "asc" });
+$(".previous-news-item").on("click" , function(){
+  $(".pagination").find(".active").prev().trigger( "click" );
 });
 
-$("#sortHighLeft").on("click", function() {
-  hubList.sort("github-stars-count", { order: "desc" });
-  alert("highest");
-});
+// Only the hub index page should have pagination
+
+if (pagination == "true") {
+  options.pagination = true;
+}
+
+var hubList = new List(listId, options);
 
 function filterSelectedTags(cardTags, selectedTags) {
   return cardTags.some(function(tag) {
@@ -78,4 +70,16 @@ $(".filter-btn").on("click", function() {
   }
 
   updateList();
+});
+
+var cardList = new List("hub-cards", {
+  valueNames: ['github-stars-count']
+});
+
+$("#sortLowLeft").on("click", function() {
+  cardList.sort("github-stars-count", { order: "asc" });
+});
+
+$("#sortHighLeft").on("click", function() {
+  cardList.sort("github-stars-count", { order: "desc" });
 });

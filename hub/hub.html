@@ -40,7 +40,7 @@ body-class: hub
 
           <hr class="hub-divider">
 
-          <div id="hub-index-cards">
+          <div id="hub-cards">
             <div class="list row hub-cards-wrapper cards-left">
               {% assign hub = site.hub | where: "category", "researchers" | sort: "order" %}
 
@@ -55,7 +55,7 @@ body-class: hub
                             <div class="github-stars-image">
                               <img src="/assets/images/github-star.svg">
                             </div>
-                            <div class="github-stars-count"></div>
+                            <div class="github-stars-count">{{ item.github-stars }}</div>
                           </div>
                         </div>
                         <p class="card-summary">{{ item.summary }}</p>
