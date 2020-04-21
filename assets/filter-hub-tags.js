@@ -4,7 +4,7 @@ var displayCount = Number(filterScript.attr("display-count"));
 var pagination = filterScript.attr("pagination");
 
 var options = {
-  valueNames: [{ data: ["tags"] }],
+  valueNames: ["github-stars-count", { data: ["tags"] }],
   page: displayCount
 };
 
@@ -66,6 +66,14 @@ $(".filter-btn").on("click", function() {
   }
 
   updateList();
+});
+
+$("#sortLowLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "asc" });
+});
+
+$("#sortHighLeft").on("click", function() {
+  hubList.sort("github-stars-count", { order: "desc" });
 });
 
 //Scroll back to top of hub cards on click of next/previous page button
