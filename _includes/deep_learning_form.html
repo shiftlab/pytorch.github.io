@@ -1,15 +1,44 @@
 <div id="mc_embed_signup">
   <form
-    action="https://twitter.us14.list-manage.com/subscribe/post?u=75419c71fe0a935e53dfa4a3f&id=91d0dccd39"
+    action="https://shiftlab.us10.list-manage.com/subscribe/post?u=70ee71dbcda866ac46eb16e99&amp;id=ce4f38feea"
     method="post"
     id="mc-embedded-subscribe-form"
     name="mc-embedded-subscribe-form"
     class="email-subscribe-form validate deep-learning-form"
     target="_blank">
     <div id="mc_embed_signup_scroll" class="email-subscribe-form-fields-wrapper">
+
       <div class="mc-field-group">
-        <label for="mce-EMAIL" style="display:none;">Email Address</label>
-        <input type="email" value="" name="EMAIL" class="required email deep-learning-input" id="mce-EMAIL" placeholder="Enter Your Email">
+        <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+        <input type="email" value="" name="EMAIL" class="required" id="mce-EMAIL">
+      </div>
+
+      <div class="mc-field-group">
+        <label for="mce-MMERGE3">What is your Role?  <span class="asterisk">*</span></label>
+        <select name="MMERGE3" class="role-selection required" id="mce-MMERGE3">
+          <option value=""></option>
+          <option value="Data Scientist">Data Scientist</option>
+          <option value="AI / ML Researcher">AI / ML Researcher</option>
+          <option value="AI / ML Engineer">AI / ML Engineer</option>
+          <option value="Professional Developer or Software Engineer (Non-AI / ML)">Professional Developer or Software Engineer (Non-AI / ML)</option>
+          <option value="Student">Student</option>
+          <option value="Other">Other</option>
+
+        </select>
+      </div>
+
+      <div class="mc-field-group other-role">
+        <!-- Other role-->
+        <input type="text" value="" name="MMERGE4" id="mce-MMERGE4">
+      </div>
+
+      <div class="mc-field-group">
+        <label for="mce-MMERGE1">How do you intend to use PyTorch? What do you intend to build? <span class="asterisk">*</span></label>
+        <textarea type="text" value="" name="MMERGE1" class="required" id="mce-MMERGE1"></textarea>
+      </div>
+
+      <div class="mc-field-group error-field">
+        <input type="hidden" value="" name="MMERGE2" id="mce-MMERGE2"></textarea>
       </div>
 
       <div id="mce-responses" class="clear">
@@ -38,7 +67,7 @@
       $.ajax({
         type: "GET",
         url:
-          "https://twitter.us14.list-manage.com/subscribe/post-json?u=75419c71fe0a935e53dfa4a3f&amp;id=91d0dccd39&c=?",
+          "https://shiftlab.us10.list-manage.com/subscribe/post-json?u=70ee71dbcda866ac46eb16e99&amp;id=ce4f38feea&c=?",
         data: $form.serialize(),
         dataType: "json",
         contentType: "application/json; charset=utf-8",
@@ -66,4 +95,12 @@
     },
     false
   );
+
+  var selectElement = document.querySelector(".role-selection");
+
+  selectElement.addEventListener("change", function(event) {
+    if (event.target.value == "Other") {
+      console.log('hey other')
+    }
+  });
 </script>
