@@ -178,92 +178,39 @@
 }
 
 .deep-learning-form {
-    padding-bottom: rem(48px);
+  padding-bottom: rem(48px);
 
-    .mc-field-group {
-      padding-bottom: rem(25px);
+  .mc-field-group {
+    padding-bottom: rem(25px);
 
-      .error-message {
-        color: $orange;
-      }
-    }
-
-    h3 {
-      text-transform: uppercase;
-      padding-top: rem(25px);
-      padding-bottom: rem(30px);
-    }
-
-    label {
-      color: $dark_grey;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      //border: none;
-      //border-bottom: 2px solid $purple;
-      height: rem(44px);
-      outline: none;
-      padding-left: rem(15px);
-    }
-
-    ::placeholder {
-      color: $dark_grey;
-      opacity: 0.5;
-      ;
-    }
-
-    .submit-project {
-      @include desktop {
-        padding-left: rem(18px);
-        background-origin: content-box;
-        background-size: 30px 15px;
-      }
-      padding-left: rem(12px);
-      margin-top: rem(40px);
-      background-color: $orange;
-      color: $white;
-      cursor: pointer;
-      border: none;
-      width: 30%;
-      height: rem(45px);
-      text-align: left;
-      background-repeat: no-repeat;
-      background-image: url(/assets/images/arrow-right-with-tail-white.svg);
-      background-size: 30px 12px;
-      background-position: right;
-    }
-
-    .submit-field {
-      margin-top: -6px;
-      text-align: center;
-    }
-
-    .large-input {
-      height: rem(90px);
-      padding-top: rem(10px);
-    }
-
-    #submitting-project {
-      background-color: $dark_grey;
-    }
-
-    button {
-      outline: none;
-    }
-
-    #mce-error-response {
+    .error-message {
       color: $orange;
-      a {
-        text-decoration: underline;
-      }
     }
+  }
 
-    .error-field {
-      padding-bottom: 0;
-    }
+  label {
+    color: $dark_grey;
+  }
 
-    .other-role {
-      display: none;
+  input, textarea, select {
+    width: 100%;
+    height: rem(44px);
+    outline: none;
+    padding-left: rem(15px);
+  }
+
+  #mce-error-response {
+    color: $orange;
+    a {
+      text-decoration: underline;
     }
+  }
+
+  .error-field {
+    padding-bottom: 0;
+  }
+
+  .other-role {
+    display: none;
+  }
 }
