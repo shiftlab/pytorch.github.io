@@ -10,12 +10,12 @@
 
       <div class="mc-field-group">
         <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
-        <input type="email" value="" name="EMAIL" class="required" id="mce-EMAIL">
+        <input type="email" value="" name="EMAIL" class="required" required id="mce-EMAIL">
       </div>
 
       <div class="mc-field-group">
         <label for="mce-MMERGE3">What is your Role?  <span class="asterisk">*</span></label>
-        <select name="MMERGE3" class="role-selection required" id="mce-MMERGE3">
+        <select name="MMERGE3" class="role-selection required" required id="mce-MMERGE3">
           <option value=""></option>
           <option value="Data Scientist">Data Scientist</option>
           <option value="AI / ML Researcher">AI / ML Researcher</option>
@@ -28,13 +28,13 @@
       </div>
 
       <div class="mc-field-group other-role">
-        <!-- Other role-->
+        <label for="MMERGE2">Other Role<span class="asterisk">*</span></label>
         <input type="text" value="" name="MMERGE4" id="mce-MMERGE4">
       </div>
 
       <div class="mc-field-group">
         <label for="mce-MMERGE1">How do you intend to use PyTorch? What do you intend to build? <span class="asterisk">*</span></label>
-        <textarea type="text" value="" name="MMERGE1" class="required" id="mce-MMERGE1"></textarea>
+        <textarea type="text" value="" name="MMERGE1" class="required" required id="mce-MMERGE1"></textarea>
       </div>
 
       <div class="mc-field-group error-field">
@@ -96,11 +96,14 @@
     false
   );
 
-  var selectElement = document.querySelector(".role-selection");
-
-  selectElement.addEventListener("change", function(event) {
+  $(".role-selection").change(function(event) {
     if (event.target.value == "Other") {
-      console.log('hey other')
+      $(".other-role").show();
+      $("#mce-MMERGE4").prop("required",true);
+    }
+    else {
+      $(".other-role").hide();
+      $("#mce-MMERGE4").prop("required", false);
     }
   });
 </script>
