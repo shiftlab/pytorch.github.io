@@ -92,30 +92,31 @@
   function checkForOtherOption() {
     if ($(".role-selection option:selected").text() == "Other") {
       $(".other-role").show();
-      $("#mce-MMERGE4").prop("required",true);
-    }
-    else {
+      $("#mce-MMERGE4").prop("required", true);
+    } else {
       $(".other-role").hide();
       $("#mce-MMERGE4").prop("required", false);
     }
   }
 
   function randomizeOptions() {
-    var options = ["<option value='Data Scientist'>Data Scientist</option>",
-          "<option value='AI / ML Researcher'>AI / ML Researcher</option>",
-          "<option value='AI / ML Engineer'>AI / ML Engineer</option>",
-          "<option value='Professional Developer or Software Engineer (Non-AI / ML)'>Professional Developer or Software Engineer (Non-AI / ML)</option>",
-          "<option value='Student'>Student</option>",
-          "<option value='Other'>Other</option>"]
+    var options = [
+      "<option value='Data Scientist'>Data Scientist</option>",
+      "<option value='AI / ML Researcher'>AI / ML Researcher</option>",
+      "<option value='AI / ML Engineer'>AI / ML Engineer</option>",
+      "<option value='Professional Developer or Software Engineer (Non-AI / ML)'>Professional Developer or Software Engineer (Non-AI / ML)</option>",
+      "<option value='Student'>Student</option>",
+      "<option value='Other'>Other</option>"
+    ];
 
     // Fisher-Yates algorithm taken from
     // https://medium.com/@nitinpatel_20236/how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
 
-    for(var i = options.length - 1; i > 0; i--){
-      var j = Math.floor(Math.random() * i)
-      var temp = options[i]
-      options[i] = options[j]
-      options[j] = temp
+    for (var i = options.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * i);
+      var temp = options[i];
+      options[i] = options[j];
+      options[j] = temp;
     }
 
     for (var i = 0; i < options.length; i++) {
@@ -123,7 +124,7 @@
     }
   }
 
-  $(".role-selection").change(function(event) {
+  $(".role-selection").change(function (event) {
     checkForOtherOption();
   });
 
