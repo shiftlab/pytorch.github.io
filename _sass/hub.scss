@@ -575,3 +575,17 @@
     width: 0;
   }
 }
+
+.hub .hub-index-sort-container {
+  position: absolute;
+  right: 50px;
+  height: 2rem;
+
+  #dropdownSortLeft {
+    position: relative;
+  }
+
+  .dropdown-menu {
+    min-width: 12rem;
+  }
+}

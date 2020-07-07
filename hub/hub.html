@@ -32,13 +32,16 @@ body-class: hub
 
           <nav class="navbar navbar-expand-lg navbar-light research-menu col-12">
             {% include hub_model_tags.html category="researchers" %}
-            <div id="hub-icons" class="hub-select-container col-5">
-              {% include hub_sort.html %}
-            </div>
             {% include hub_search.html %}
           </nav>
 
-          <hr class="hub-divider">
+          <hr class="hub-index-divider hub-divider">
+
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <div id="hub-icons" class="hub-index-sort-container">
+              {% include hub_sort.html %}
+            </div>
+          </nav>
 
           <div id="hub-index-cards">
             <div class="list row hub-cards-wrapper cards-left">
