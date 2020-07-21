@@ -112,10 +112,6 @@ body-class: ecosystem
     });
   }
 
-  $(".page").on("click", function(e) {
-    e.preventDefault();
-  });
-
   function updateMenuSelection(category) {
     $(".nav-link").removeClass('selected');
     $(".nav-link[data-category=" + category + "]").addClass('selected');
