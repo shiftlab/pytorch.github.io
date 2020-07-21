@@ -20,6 +20,13 @@
             {% if page.deep-learning-landing == true %}
               <p class="lead deep-learning-landing-text">Download a free copy of the full book and learn how to get started with AI / ML development using PyTorch</p>
             {% else %}
+            <script>
+               var allowBookDownload = localStorage.getItem("allowBookDownload");
+
+               if (allowBookDownload !== true) {
+                window.location.href = "{{site.baseurl}}/deep-learning-with-pytorch";
+               }
+            </script>
               <p class="lead deep-learning-thank-you-text">Thanks for requesting a copy of the Deep Learning with PyTorch book!
                 <span class="download-book-link"><a href="/assets/deep-learning/Deep-Learning-with-PyTorch.pdf" target="_blank">Click here</a> to download the book.</span>
               </p>
