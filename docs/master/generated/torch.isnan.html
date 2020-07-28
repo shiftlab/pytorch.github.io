@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="torch.kthvalue" href="torch.kthvalue.html" />
+    <link rel="next" title="torch.isreal" href="torch.isreal.html" />
     <link rel="prev" title="torch.isinf" href="torch.isinf.html" /> 
 
   
@@ -159,7 +159,7 @@
               
               
                 <div class="version">
-                  <a href='http://pytorch.org/docs/versions.html'>1.7.0a0+e3e58e2 &#x25BC</a>
+                  <a href='http://pytorch.org/docs/versions.html'>1.7.0a0+b87f0e5 &#x25BC</a>
                 </div>
               
             
@@ -346,18 +346,16 @@
 <h1>torch.isnan<a class="headerlink" href="#torch-isnan" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="torch.isnan">
-<code class="sig-prename descclassname">torch.</code><code class="sig-name descname">isnan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#torch.isnan" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a new tensor with boolean elements representing if each element is <cite>NaN</cite> or not.
-Complex values are considered <cite>NaN</cite> when either their real and/or imaginary part is NaN.</p>
+<code class="sig-prename descclassname">torch.</code><code class="sig-name descname">isnan</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span> &#x2192; Tensor<a class="headerlink" href="#torch.isnan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new tensor with boolean elements representing if each element of <code class="xref py py-attr docutils literal notranslate"><span class="pre">input</span></code>
+is NaN or not. Complex values are considered NaN when either their real
+and/or imaginary part is NaN.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>input</strong> (<a class="reference internal" href="../tensors.html#torch.Tensor" title="torch.Tensor"><em>Tensor</em></a>) – A tensor to check</p>
+<dd class="field-odd"><p><strong>input</strong> (<a class="reference internal" href="../tensors.html#torch.Tensor" title="torch.Tensor"><em>Tensor</em></a>) – the input tensor.</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A <code class="docutils literal notranslate"><span class="pre">torch.BoolTensor</span></code> containing a True at each location of <cite>NaN</cite> elements.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference internal" href="../tensors.html#torch.Tensor" title="torch.Tensor">Tensor</a></p>
+<dd class="field-even"><p>A boolean tensor that is True where <code class="xref py py-attr docutils literal notranslate"><span class="pre">input</span></code> is NaN and False elsewhere</p>
 </dd>
 </dl>
 <p>Example:</p>
@@ -377,7 +375,7 @@ Complex values are considered <cite>NaN</cite> when either their real and/or ima
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="torch.kthvalue.html" class="btn btn-neutral float-right" title="torch.kthvalue" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
+        <a href="torch.isreal.html" class="btn btn-neutral float-right" title="torch.isreal" accesskey="n" rel="next">Next <img src="../_static/images/chevron-right-orange.svg" class="next-page"></a>
       
       
         <a href="torch.isinf.html" class="btn btn-neutral" title="torch.isinf" accesskey="p" rel="prev"><img src="../_static/images/chevron-right-orange.svg" class="previous-page"> Previous</a>
