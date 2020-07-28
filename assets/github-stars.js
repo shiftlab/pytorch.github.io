@@ -33,7 +33,6 @@ function updateStarCount() {
     localStorage.setItem(starCountData, JSON.stringify(data));
 
     updateStarsOnPage(data);
-    reloadFilterScript();
   });
 }
 
@@ -56,10 +55,4 @@ function updateStarsOnPage(data) {
     $("[data-id='" + data[i].id + "'] .github-stars-count-whole-number").html(data[i].stars);
     $("[data-id='" + data[i].id + "'] .github-stars-count").html(starCount);
   }
-}
-
-function reloadFilterScript() {
-  var filterScript = $("#filter-script")[0];
-  $("#filter-script")[0].remove();
-  $(filterScript).appendTo("head");
 }
