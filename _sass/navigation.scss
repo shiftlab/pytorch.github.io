@@ -295,9 +295,10 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
-
-.ecosystem-dropdown-menu.show-menu, .resources-dropdown-menu.show-menu {
-  display: block;
+.ecosystem-dropdown:hover {
+  .ecosystem-dropdown-menu {
+    display: block;
+  }
 }
 
 .main-menu ul li {
