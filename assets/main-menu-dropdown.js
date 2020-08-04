@@ -1,11 +1,11 @@
 $("[data-toggle='ecosystem-dropdown']").on("click", function() {
   toggleDropdown($(this).attr("data-toggle"));
-  $(this).children("a").toggleClass("with-right-white-arrow with-down-white-arrow")
+  toggleArrowClass(".ecosystem-option");
 });
 
 $("[data-toggle='resources-dropdown']").on("click", function() {
   toggleDropdown($(this).attr("data-toggle"));
-  $(this).children("a").toggleClass("with-right-white-arrow with-down-white-arrow")
+  toggleArrowClass(".resource-option");
 });
 
 function toggleDropdown(menuToggle) {
@@ -18,4 +18,8 @@ function toggleDropdown(menuToggle) {
     $("[data-toggle=" + menuToggle + "].show-menu").removeClass(showMenuClass);
     $(menuClass).addClass(showMenuClass);
   }
+}
+
+function toggleArrowClass(dropdown) {
+  $(dropdown).toggleClass("with-right-white-arrow with-down-white-arrow");
 }
