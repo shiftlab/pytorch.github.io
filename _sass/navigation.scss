@@ -279,13 +279,11 @@
   width: 226px;
   display: none;
   position: absolute;
-  top: rem(50px);
   z-index: 1000;
   display: none;
   float: left;
   min-width: 10rem;
   padding: 0.5rem 0;
-  margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #212529;
   text-align: left;
@@ -295,8 +293,8 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
 }
-.ecosystem-dropdown:hover {
-  .ecosystem-dropdown-menu {
+.ecosystem-dropdown:hover, .resources-dropdown:hover {
+  .ecosystem-dropdown-menu, .resources-dropdown-menu {
     display: block;
   }
 }
