@@ -247,8 +247,8 @@
       padding-right: rem(32px);
       position: relative;
       background-image: url($baseurl + "/assets/images/chevron-right-white.svg");
-      background-size: 7px 12px;
-      background-position: top 7px right 15px;
+      background-size: 7px 18px;
+      background-position: top 6px right 15px;
       background-repeat: no-repeat;
       &:hover {
         background-image: url($baseurl + "/assets/images/chevron-right-orange.svg");
@@ -259,7 +259,7 @@
       padding-right: rem(32px);
       position: relative;
       background-image: url($baseurl + "/assets/images/chevron-down-white.svg");
-      background-size: 13px 13px;
+      background-size: 14px 18px;
       background-position: top 7px right 10px;
       background-repeat: no-repeat;
       &:hover {
