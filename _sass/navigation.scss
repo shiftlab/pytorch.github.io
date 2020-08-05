@@ -294,7 +294,7 @@
   border-radius: 0.25rem;
 }
 
-.ecosystem-dropdown:hover, .resources-dropdown:hover {
+.ecosystem-dropdown.show-menu, .resources-dropdown.show-menu {
   .ecosystem-dropdown-menu, .resources-dropdown-menu {
     display: block;
   }
