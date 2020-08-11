@@ -1,8 +1,3 @@
-$("[data-toggle='ecosystem-dropdown']").hover(function() {
-  toggleDropdown($(this).attr("data-toggle"));
-  toggleArrowClass(".ecosystem-option");
-});
-
 $("[data-toggle='resources-dropdown']").hover(function() {
   toggleDropdown($(this).attr("data-toggle"));
   toggleArrowClass(".resource-option");
@@ -20,6 +15,8 @@ function toggleDropdown(menuToggle) {
   }
 }
 
-function toggleArrowClass(dropdown) {
-  $(dropdown).toggleClass("with-right-white-arrow with-down-white-arrow");
+function toggleArrowClass(dropdown, options) {
+  var options = ["with-right-white-arrow", "with-right-orange-arrow", "with-right-black-arrow"];
+  var string = "with-down-white-arrow";
+  $(dropdown).toggleClass(options + string);
 }

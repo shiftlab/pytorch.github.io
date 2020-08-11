@@ -254,6 +254,17 @@
         background-image: url($baseurl + "/assets/images/chevron-right-orange.svg");
       }
     }
+    .with-right-orange-arrow {
+      padding-right: rem(32px);
+      position: relative;
+      background-image: url($baseurl + "/assets/images/chevron-right-orange.svg");
+      background-size: 7px 18px;
+      background-position: top 6px right 15px;
+      background-repeat: no-repeat;
+      &:hover {
+        background-image: url($baseurl + "/assets/images/chevron-down-orange.svg");
+      }
+    }
 
     .with-down-white-arrow {
       padding-right: rem(32px);
@@ -261,6 +272,17 @@
       background-image: url($baseurl + "/assets/images/chevron-down-white.svg");
       background-size: 14px 18px;
       background-position: top 7px right 10px;
+      background-repeat: no-repeat;
+      &:hover {
+        background-image: url($baseurl + "/assets/images/chevron-down-orange.svg");
+      }
+    }
+    .with-right-black-arrow {
+      padding-right: rem(32px);
+      position: relative;
+      background-image: url($baseurl + "/assets/images/chevron-right-black.svg");
+      background-size: 7px 18px;
+      background-position: top 6px right 15px;
       background-repeat: no-repeat;
       &:hover {
         background-image: url($baseurl + "/assets/images/chevron-down-orange.svg");
