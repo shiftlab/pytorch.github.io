@@ -109,6 +109,10 @@
       a {
         color: $orange;
       }
+
+      .with-down-arrow {
+        background-image: url($baseurl + "/assets/images/chevron-down-orange.svg");
+      }
     }
 
     &:last-of-type {
@@ -237,6 +241,16 @@
   }
 }
 
+.resources, .features, .hub {
+  .main-menu ul li{
+    &.active {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
 .main-menu ul li {
   .ecosystem-dropdown, .resources-dropdown a {
     cursor: pointer;
@@ -264,7 +278,7 @@
       }
     }
 
-    .with-down-black-arrow {
+    .with-down-arrow {
       padding-right: rem(32px);
       position: relative;
       background-image: url($baseurl + "/assets/images/chevron-down-black.svg");
