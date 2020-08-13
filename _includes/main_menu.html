@@ -7,14 +7,7 @@
     <li class="main-menu-item {% if current[1] == 'ecosystem' %}active{% endif %}">
 
       <div id="dropdownMenuButton" data-toggle="ecosystem-dropdown" class="ecosystem-dropdown">
-        <a class="ecosystem-option {% if current[1] == 'ecosystem' %}
-            with-down-orange-arrow
-          {% elsif current[1] == {{ site.baseurl }}  %}
-            with-down-white-arrow
-          {% elsif current[1] != 'ecosystem'  %}
-              with-down-black-arrow
-          {% endif %}" 
-          href="{{ site.baseurl }}/ecosystem">
+        <a class="ecosystem-option" href="{{ site.baseurl }}/ecosystem">
           Ecosystem
         </a>
       </div>
@@ -42,11 +35,11 @@
 
       <div id="resourcesDropdownButton" data-toggle="resources-dropdown" class="resources-dropdown">
         <a class="resource-option
-        {% if current[1] == 'resources' or current[1] == 'features' %}
+        {% if resources contains current[1] %}
           with-down-orange-arrow
         {% elsif current[1] == {{ site.baseurl }}  %}
           with-down-white-arrow
-        {% elsif current[1] != 'resources'  %}
+        {% elsif current[1] != resources  %}
           with-down-black-arrow
         {% endif %}">
           Resources
