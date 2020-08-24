@@ -64,6 +64,9 @@ collections:
     output: true
   news:
     output: true
+  blog:
+    output: true
+    permalink: /blog/:path/
 
 pagination:
   enabled: true
