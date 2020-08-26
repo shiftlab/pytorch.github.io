@@ -139,7 +139,7 @@
         overflow: unset;
         white-space: unset;
         text-overflow: unset;
-      }    
+      }
     }
 
     h1 {
@@ -221,13 +221,22 @@
     }
   }
 
-  .page-link {
+  .page-link, .all-blogs {
     font-size: rem(20px);
     letter-spacing: 0;
     line-height: rem(34px);
     color: $orange;
     width: rem(120px);
     text-align: center;
+  }
+
+  .all-blogs {
+    width: inherit;
+    padding: 0.5rem 3.75rem;
+    color: $dark_grey;
+    &:hover {
+      color: $orange;
+    }
   }
 
   @media (max-width: 1067px) {
