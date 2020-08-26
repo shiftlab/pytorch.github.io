@@ -4,6 +4,7 @@ title: "PyTorch Internals Part II - The Build System"
 author: "Trevor Killeen"
 date: 2017-06-27 12:00:00 -0500
 redirect_from: /2017/06/27/Internals2.html
+image: /assets/images/bert2.png
 ---
 
 In the first [post]({{ site.baseurl }}{% link _posts/2017-5-11-a-tour-of-pytorch-internals-1.md %}) I explained how we generate a `torch.Tensor` object that you can use in your Python interpreter. Next, I will explore the build system for PyTorch. The PyTorch codebase has a variety of components:

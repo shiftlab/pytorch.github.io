@@ -62,7 +62,7 @@
     }
     @include desktop {
       margin-top: 380px + $desktop_header_height;
-      .row.blog-index
+      /*.row.blog-index
         [class*="col-"]:not(:first-child):not(:last-child):not(:nth-child(3n)) {
         padding-right: rem(35px);
         padding-left: rem(35px);
@@ -74,7 +74,7 @@
 
       .row.blog-index [class*="col-"]:nth-child(3n + 1) {
         padding-right: rem(35px);
-      }
+      }*/
 
       .col-md-4 {
         margin-bottom: rem(23px);
@@ -280,3 +280,17 @@ twitterwidget {
   margin-bottom: rem(18px) !important;
 }
 
+.blog .pagination {
+  .page {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .active .page {
+    background-color: #dee2e6;
+  }
+}
+
+.blog .blog-img {
+  border: 1px solid $dark_grey;
+}

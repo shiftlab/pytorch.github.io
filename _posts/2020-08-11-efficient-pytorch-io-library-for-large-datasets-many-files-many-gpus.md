@@ -2,6 +2,7 @@
 layout: blog_detail
 title: 'Efficient PyTorch I/O library for Large Datasets, Many Files, Many GPUs'
 author: Alex Aizman, Gavin Maltby, Thomas Breuel
+image: /assets/images/bert2.png
 ---
 
 Data sets are growing bigger every day and GPUs are getting faster. This means there are more data sets for deep learning researchers and engineers to train and validate their models.
@@ -20,7 +21,7 @@ However, working with the large amount of data sets presents a number of challen
 * **Shuffling and Augmentation:** training data needs to be shuffled and augmented prior to training.
 * **Scalability:** users often want to develop and test on small datasets and then rapidly scale up to large datasets.
 
-Traditional local and network file systems, and even object storage servers, are not designed for these kinds of applications. [The WebDataset I/O library](https://github.com/tmbdev/webdataset) for PyTorch, together with the optional [AIStore server](https://github.com/NVIDIA/aistore) and [Tensorcom](https://github.com/NVlabs/tensorcom) RDMA libraries, provide an efficient, simple, and standards-based solution to all these problems. The library is simple enough for day-to-day use, is based on mature open source standards, and is easy to migrate to from existing file-based datasets. 
+Traditional local and network file systems, and even object storage servers, are not designed for these kinds of applications. [The WebDataset I/O library](https://github.com/tmbdev/webdataset) for PyTorch, together with the optional [AIStore server](https://github.com/NVIDIA/aistore) and [Tensorcom](https://github.com/NVlabs/tensorcom) RDMA libraries, provide an efficient, simple, and standards-based solution to all these problems. The library is simple enough for day-to-day use, is based on mature open source standards, and is easy to migrate to from existing file-based datasets.
 
 Using WebDataset is simple and requires little effort, and it will let you scale up the same code from running local experiments to using hundreds of GPUs on clusters or in the cloud with linearly scalable performance. Even on small problems and on your desktop, it can speed up I/O tenfold and simplifies data management and processing of large datasets. The rest of this blog post tells you how to get started with WebDataset and how it works.
 
@@ -38,7 +39,7 @@ The WebDataset library is a complete solution for working with large datasets an
 
 ## Benefits
 
-The use of sharded, sequentially readable formats is essential for very large datasets. In addition, it has benefits in many other environments. WebDataset provides a solution that scales well from small problems on a desktop machine to very large deep learning problems in clusters or in the cloud. The following table summarizes some of the benefits in different environments. 
+The use of sharded, sequentially readable formats is essential for very large datasets. In addition, it has benefits in many other environments. WebDataset provides a solution that scales well from small problems on a desktop machine to very large deep learning problems in clusters or in the cloud. The following table summarizes some of the benefits in different environments.
 
   {:.table.table-striped.table-bordered}
  | Environment  | Benefits of WebDataset |
@@ -122,7 +123,7 @@ for inputs, targets in loader:
   ```
 
 This code is nearly identical to the file-based I/O pipeline found in the PyTorch Imagenet example: it creates a preprocessing/augmentation pipeline, instantiates a dataset using that pipeline and a data source location, and then constructs a DataLoader instance from the dataset.
- 
+
  WebDataset uses a fluent API for a configuration that internally builds up a processing pipeline. Without any added processing stages, In this example, WebDataset is used with the PyTorch DataLoader class, which replicates DataSet instances across multiple threads and performs both parallel I/O and parallel data augmentation.
 
 WebDataset instances themselves just iterate through each training sample as a dictionary:

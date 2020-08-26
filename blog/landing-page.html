@@ -18,14 +18,14 @@ pagination:
     <div class="container">
       <div class="row blog-index">
         {% for post in posts %}
-        <div class="col-md-4">
-          <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
-          <h4>
-            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-          </h4>
-          <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
-          <img src="{{ post.image }}" class="img-fluid">
-        </div>
+          <div class="col-md-4">
+            <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
+            <h4>
+              <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            </h4>
+            <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
+            <img src="{{ post.image }}" class="img-fluid">
+          </div>
         {% endfor %}
       </div>
 

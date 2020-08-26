@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'Model Serving in PyTorch'
 author: Jeff Smith
 redirect_from: /2019/05/08/model-serving-in-pyorch.html
+image: /assets/images/bert2.png
 ---
 
 PyTorch has seen a lot of adoption in research, but people can get confused about how well PyTorch models can be taken into production. This blog post is meant to clear up any confusion people might have about the road to production in PyTorch.
@@ -41,10 +42,10 @@ The above is a somewhat arbitrary breakdown of different approaches based on a s
 
 So, if you're a PyTorch user, what should you use if you want to take your models to production?
 
-If you're on mobile or working on an embedded system like a robot, direct embedding in your application is often the right choice. 
+If you're on mobile or working on an embedded system like a robot, direct embedding in your application is often the right choice.
 For mobile specifically, your use case might be served by the ONNX export functionality.
 Note that ONNX, by its very nature, has limitations and doesn't support all of the functionality provided by the larger PyTorch project.
-You can check out [this tutorial](https://pytorch.org/tutorials/advanced/super_resolution_with_caffe2.html) on deploying PyTorch models to mobile using ONNX to see if this path might suit your use case. 
+You can check out [this tutorial](https://pytorch.org/tutorials/advanced/super_resolution_with_caffe2.html) on deploying PyTorch models to mobile using ONNX to see if this path might suit your use case.
 That said, we've heard that there's a lot more that PyTorch users want to do on mobile, so look for more mobile-specific functionality in PyTorch in the future.
 For other embedded systems, like robots, running [inference on a PyTorch model from the C++ API](https://pytorch.org/tutorials/advanced/cpp_export.html) could be the right solution.
 
@@ -52,7 +53,7 @@ If you can't use the cloud or prefer to manage all services using the same techn
 
 If you want to manage multiple models within a non-cloud service solution, there are teams developing PyTorch support in model servers like [MLFlow](https://mlflow.org/), [Kubeflow](https://www.kubeflow.org/), and [RedisAI.](https://oss.redislabs.com/redisai/) We're excited to see innovation from multiple teams building OSS model servers, and we'll continue to highlight innovation in the PyTorch ecosystem in the future.
 
-If you can use the cloud for your application, there are several great choices for working with models in the cloud. For AWS Sagemaker, you can start find a guide to [all of the resources from AWS for working with PyTorch](https://docs.aws.amazon.com/sagemaker/latest/dg/pytorch.html), including docs on how to use the [Sagemaker Python SDK](https://sagemaker.readthedocs.io/en/stable/using_pytorch.html). You can also see [some](https://youtu.be/5h1Ot2dPi2E) [talks](https://youtu.be/qc5ZikKw9_w) we've given on using PyTorch on Sagemaker. Finally, if you happen to be using PyTorch via FastAI, then they've written a [really simple guide](https://course.fast.ai/deployment_amzn_sagemaker.html) to getting up and running on Sagemaker. 
+If you can use the cloud for your application, there are several great choices for working with models in the cloud. For AWS Sagemaker, you can start find a guide to [all of the resources from AWS for working with PyTorch](https://docs.aws.amazon.com/sagemaker/latest/dg/pytorch.html), including docs on how to use the [Sagemaker Python SDK](https://sagemaker.readthedocs.io/en/stable/using_pytorch.html). You can also see [some](https://youtu.be/5h1Ot2dPi2E) [talks](https://youtu.be/qc5ZikKw9_w) we've given on using PyTorch on Sagemaker. Finally, if you happen to be using PyTorch via FastAI, then they've written a [really simple guide](https://course.fast.ai/deployment_amzn_sagemaker.html) to getting up and running on Sagemaker.
 
 The story is similar across other major clouds. On Google Cloud, you can follow [these instructions](https://cloud.google.com/deep-learning-vm/docs/pytorch_start_instance) to get access to a Deep Learning VM with PyTorch pre-installed. On Microsoft Azure, you have a number of ways to get started from [Azure Machine Learning Service](https://azure.microsoft.com/en-us/services/machine-learning-service/) to [Azure Notebooks](https://notebooks.azure.com/pytorch/projects/tutorials) showing how to use PyTorch.
 
