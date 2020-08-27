@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'PyTorch 1.5 released, new and updated APIs including C++ frontend API parity with Python'
 author: Team PyTorch
 image: /assets/images/bert2.png
+tags: [five]
 ---
 
 

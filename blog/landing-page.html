@@ -23,8 +23,7 @@ pagination:
             <h4>
               <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
             </h4>
-            <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
-            <img src="{{ post.image }}" class="img-fluid">
+            <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500 | strip_html }}</p>
           </div>
         {% endfor %}
       </div>

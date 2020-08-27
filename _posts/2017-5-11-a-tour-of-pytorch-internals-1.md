@@ -5,6 +5,7 @@ author: "Trevor Killeen"
 date: 2017-05-11 12:00:00 -0500
 redirect_from: /2017/05/11/Internals.html
 image: /assets/images/bert2.png
+tags: [one]
 ---
 
 The fundamental unit in PyTorch is the Tensor. This post will serve as an overview for how we implement Tensors in PyTorch, such that the user can interact with it from the Python shell. In particular, we want to answer four main questions:

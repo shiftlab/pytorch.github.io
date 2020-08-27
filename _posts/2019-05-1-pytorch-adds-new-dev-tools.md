@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'PyTorch adds new dev tools as it hits production scale'
 author: The PyTorch Team
 image: /assets/images/bert2.png
+tags: [three]
 ---
 
 _This is a partial re-post of the original blog post on the Facebook AI Blog. The full post can be [viewed here](https://ai.facebook.com/blog/pytorch-adds-new-dev-tools-as-it-hits-production-scale/)_

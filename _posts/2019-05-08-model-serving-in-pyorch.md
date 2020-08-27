@@ -4,6 +4,7 @@ title: 'Model Serving in PyTorch'
 author: Jeff Smith
 redirect_from: /2019/05/08/model-serving-in-pyorch.html
 image: /assets/images/bert2.png
+tags: [three]
 ---
 
 PyTorch has seen a lot of adoption in research, but people can get confused about how well PyTorch models can be taken into production. This blog post is meant to clear up any confusion people might have about the road to production in PyTorch.

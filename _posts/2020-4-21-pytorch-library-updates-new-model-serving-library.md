@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'PyTorch library updates including new model serving library '
 author: Team PyTorch
 image: /assets/images/bert2.png
+tags: [five]
 ---
 
 

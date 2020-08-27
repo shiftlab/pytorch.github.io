@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'PyTorch feature classification changes'
 author: Team PyTorch
 image: /assets/images/bert2.png
+tags: [six]
 ---
 
 Traditionally features in PyTorch were classified as either stable or experimental with an implicit third option of testing bleeding edge features by building master or through installing nightly builds (available via prebuilt whls). This has, in a few cases, caused some confusion around the level of readiness, commitment to the feature and backward compatibility that can be expected from a user perspective. Moving forward, we’d like to better classify the 3 types of features as well as define explicitly here what each mean from a user perspective.

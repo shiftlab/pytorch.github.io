@@ -4,6 +4,7 @@ title: "Optimizing CUDA Recurrent Neural Networks with TorchScript"
 author: "The PyTorch Team"
 date: 2019-05-01 8:00:00 -0500
 image: /assets/images/bert2.png
+tags: [three]
 ---
 
 This week, we officially released PyTorch 1.1, a large feature update to PyTorch 1.0. One of the new features we've added is better support for fast, custom Recurrent Neural Networks (fastrnns) with TorchScript (the PyTorch JIT) (https://pytorch.org/docs/stable/jit.html).

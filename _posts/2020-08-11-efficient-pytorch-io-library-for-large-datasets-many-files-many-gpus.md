@@ -3,6 +3,7 @@ layout: blog_detail
 title: 'Efficient PyTorch I/O library for Large Datasets, Many Files, Many GPUs'
 author: Alex Aizman, Gavin Maltby, Thomas Breuel
 image: /assets/images/bert2.png
+tags: [six]
 ---
 
 Data sets are growing bigger every day and GPUs are getting faster. This means there are more data sets for deep learning researchers and engineers to train and validate their models.
