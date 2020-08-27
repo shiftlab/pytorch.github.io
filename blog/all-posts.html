@@ -1,0 +1,38 @@
+---
+layout: blog
+title: Blog
+permalink: /blog/all-posts
+body-class: blog
+---
+
+{% assign posts = site.posts %}
+
+{% include blog_jumbotron.html posts=posts %}
+
+<div class="main-content-wrapper">
+  <div class="main-content">
+    <div class="container">
+      <div id="all-blog-posts">
+
+        <div class="list row blog-index">
+          {% for post in posts %}
+            <div class="col-md-4">
+              <img src="{{ post.image }}" class="img-fluid blog-img">
+              <h4>
+                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+              </h4>
+              <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
+              <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="pagination d-flex justify-content-center"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script id="filter-script" list-id="all-blog-posts" display-count="200" pagination="false" src="{{ site.baseurl }}/assets/filter-hub-tags.js"></script>
