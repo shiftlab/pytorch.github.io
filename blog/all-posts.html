@@ -12,8 +12,20 @@ body-class: blog
 <div class="main-content-wrapper">
   <div class="main-content">
     <div class="container">
-      <div id="all-blog-posts">
+      {% assign all_tags = posts | map: "tags" | join: ',' | split: ',' | uniq | sort %}
 
+      <div class="dropdown">
+        <button id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Sort <img src="{{ site.baseurl }}/assets/images/filter-arrow.svg">
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          {% for tag in all_tags %}
+            <div class="dropdown-item filter-btn" data-tag="{{ tag }}">{{ tag | capitalize }}</div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div id="all-blog-posts">
         <div class="list row blog-index">
           {% for post in posts %}
             <div class="col-md-4" data-tags="{{ post.tags | join: ',' }}">
