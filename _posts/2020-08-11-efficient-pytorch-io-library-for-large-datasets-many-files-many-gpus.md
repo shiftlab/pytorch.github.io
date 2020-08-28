@@ -57,7 +57,7 @@ For high-performance computation on local clusters, the companion open-source [A
 
 Below is a benchmark of AIStore with WebDataset clients using 10 server nodes and 120 rotational drives each.
 
-<div class="text-center" id="img-container">
+<div class="text-center zoom-in">
   <img src="{{ site.url }}/assets/images/pytorchwebdataset1.png" width="100%">
 </div>
 
@@ -154,14 +154,3 @@ For a general introduction to how we handle large scale training with WebDataset
 * [Bigdata 2019 Paper with Benchmarks](https://arxiv.org/abs/2001.01858)
 
 Check out [the library](https://github.com/tmbdev/webdataset) and provide your feedback for [RFC 38419](https://github.com/pytorch/pytorch/issues/38419).
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
-<script>
-  var options = {
-    width: 400, // required
-    zoomPosition:"original"
-};
-new ImageZoom(document.getElementById("img-container"), options);
-</script>

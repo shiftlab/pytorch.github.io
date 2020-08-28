@@ -41,6 +41,11 @@
 
 <!--    {% include similar_posts_module.html %} -->
     {% include footer.html %}
+    <script>
+        $(".zoom-in").on("click", function() {
+            $(this).toggleClass("zoomed");
+        });
+    </script>
 
 </body>
 
