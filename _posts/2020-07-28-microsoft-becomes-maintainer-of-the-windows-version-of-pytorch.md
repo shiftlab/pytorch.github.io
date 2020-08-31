@@ -4,6 +4,7 @@ title: 'Microsoft becomes maintainer of the Windows version of PyTorch'
 author: Maxim Lukiyanov - Principal PM at Microsoft, Emad Barsoum - Group EM at Microsoft, Guoliang Hua - Principal EM at Microsoft, Nikita Shulga - Tech Lead at Facebook, Geeta Chauhan - PE Lead at Facebook, Chris Gottbrath - Technical PM at Facebook, Jiachen Pu - Engineer at Facebook
 image: /assets/images/bert2.png
 tags: [five]
+preview: 'Along with the PyTorch 1.6 release, we are excited to announce that Microsoft has expanded its participation in the PyTorch community and is taking ownership of the development and maintenance of the PyTorch build for Windows.'
 ---
 
 Along with the PyTorch 1.6 release, we are excited to announce that Microsoft has expanded its participation in the PyTorch community and is taking ownership of the development and maintenance of the PyTorch build for Windows.

@@ -4,6 +4,7 @@ title: 'PyTorch adds new tools and libraries, welcomes Preferred Networks to its
 author: Team PyTorch
 image: /assets/images/bert2.png
 tags: [four]
+preview: 'PyTorch continues to be used for the latest state-of-the-art research on display at the NeurIPS conference next week, making up nearly [70% of papers](https://chillee.github.io/pytorch-vs-tensorflow/) that cite a framework. In addition, we’re excited to welcome Preferred Networks, the maintainers of the Chainer framework, to the PyTorch community. Their teams are moving fully over to PyTorch for developing their ML capabilities and services.'
 ---
 
 PyTorch continues to be used for the latest state-of-the-art research on display at the NeurIPS conference next week, making up nearly [70% of papers](https://chillee.github.io/pytorch-vs-tensorflow/) that cite a framework. In addition, we’re excited to welcome Preferred Networks, the maintainers of the Chainer framework, to the PyTorch community. Their teams are moving fully over to PyTorch for developing their ML capabilities and services.

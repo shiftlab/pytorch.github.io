@@ -5,6 +5,7 @@ author: Priya Goyal (FAIR), Nicolas Vasilache (FAIR), Oleksandr Zinenko (Inria &
 redirect_from: /2018/03/05/tensor-comprehensions.html
 image: /assets/images/bert2.png
 tags: [two]
+preview: 'Tensor Comprehensions (TC) is a tool that lowers the barrier for writing high-performance code. It generates GPU code from a simple high-level language and autotunes the code for specific input sizes.'
 ---
 
 Tensor Comprehensions (TC) is a tool that lowers the barrier for writing high-performance code. It generates GPU code from a simple high-level language and autotunes the code for specific input sizes.

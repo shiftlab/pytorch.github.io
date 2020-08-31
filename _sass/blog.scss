@@ -239,6 +239,22 @@
     }
   }
 
+  #dropdownMenuButton {
+    cursor: pointer;
+    z-index: 1;
+    top: inherit;
+    left: 23%;
+    max-width: 4rem;
+    border: none;
+    background: inherit;
+    padding: inherit;
+  }
+
+  .dropdown-item:hover {
+    color: $orange;
+    cursor: pointer;
+  }
+
   @media (max-width: 1067px) {
     .jumbotron {
       h1 {

@@ -33,7 +33,7 @@ body-class: blog
               <h4>
                 <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
               </h4>
-              <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500 | strip_html }}</p>
+              <p>{{ post.preview | truncate: 150 }}</p>
               <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
             </div>
           {% endfor %}

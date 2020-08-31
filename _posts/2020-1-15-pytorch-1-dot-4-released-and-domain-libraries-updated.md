@@ -4,6 +4,7 @@ title: 'PyTorch 1.4 released, domain libraries updated'
 author: Team PyTorch
 image: /assets/images/bert2.png
 tags: [five]
+preview: 'Today, we’re announcing the availability of PyTorch 1.4, along with updates to the PyTorch domain libraries. These releases build on top of the announcements from [NeurIPS 2019](https://pytorch.org/blog/pytorch-adds-new-tools-and-libraries-welcomes-preferred-networks-to-its-community/), where we shared the availability of PyTorch Elastic, a new classification framework for image and video, and the addition of Preferred Networks to the PyTorch community. For those that attended the workshops at NeurIPS, the content can be found [here](https://research.fb.com/neurips-2019-expo-workshops/).'
 ---
 
 Today, we’re announcing the availability of PyTorch 1.4, along with updates to the PyTorch domain libraries. These releases build on top of the announcements from [NeurIPS 2019](https://pytorch.org/blog/pytorch-adds-new-tools-and-libraries-welcomes-preferred-networks-to-its-community/), where we shared the availability of PyTorch Elastic, a new classification framework for image and video, and the addition of Preferred Networks to the PyTorch community. For those that attended the workshops at NeurIPS, the content can be found [here](https://research.fb.com/neurips-2019-expo-workshops/).

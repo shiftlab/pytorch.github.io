@@ -4,6 +4,7 @@ title: 'PyTorch library updates including new model serving library '
 author: Team PyTorch
 image: /assets/images/bert2.png
 tags: [five]
+preview: 'Along with the PyTorch 1.5 release, we are announcing new libraries for high-performance PyTorch model serving and tight integration with TorchElastic and Kubernetes. Additionally, we are releasing updated packages for torch_xla (Google Cloud TPUs), torchaudio, torchvision, and torchtext. All of these new libraries and enhanced capabilities are available today and accompany all of the core features [released in PyTorch 1.5](https://pytorch.org/blog/pytorch-1-dot-5-released-with-new-and-updated-apis).'
 ---
 
 

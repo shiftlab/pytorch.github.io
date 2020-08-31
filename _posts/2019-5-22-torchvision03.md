@@ -5,6 +5,7 @@ author: Francisco Massa
 redirect_from: /2019/05/23/torchvision03.html
 image: /assets/images/bert2.png
 tags: [three]
+preview: 'PyTorch domain libraries like torchvision provide convenient access to common datasets and models that can be used to quickly create a state-of-the-art baseline. Moreover, they also provide common abstractions to reduce boilerplate code that users might have to otherwise repeatedly write. The torchvision 0.3 release brings several new features including models for semantic segmentation, object detection, instance segmentation, and person keypoint detection, as well as custom C++ / CUDA ops specific to computer vision.'
 ---
 
 PyTorch domain libraries like torchvision provide convenient access to common datasets and models that can be used to quickly create a state-of-the-art baseline. Moreover, they also provide common abstractions to reduce boilerplate code that users might have to otherwise repeatedly write. The torchvision 0.3 release brings several new features including models for semantic segmentation, object detection, instance segmentation, and person keypoint detection, as well as custom C++ / CUDA ops specific to computer vision.
