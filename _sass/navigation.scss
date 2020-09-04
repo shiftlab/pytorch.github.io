@@ -168,7 +168,7 @@
     padding: 0;
   }
 
-  ul li a {
+  ul li a, .resources-mobile-menu-title {
     font-size: rem(32px);
     color: $white;
     letter-spacing: 0;
@@ -395,4 +395,12 @@
 .header-holder .main-menu ul li a.nav-dropdown-item:hover .dropdown-title {
   background-color: $orange;
   color: white;
+}
+
+.mobile-main-menu-links-container {
+  ul.resources-mobile-menu {
+    li {
+      padding-left: 15px;
+    }
+  }
 }
