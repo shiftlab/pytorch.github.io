@@ -247,6 +247,22 @@
     text-align: center;
   }
 
+  .blog-modal {
+    max-width: 75%;
+    top: 5rem;
+    &:hover {
+      cursor: zoom-out;
+    }
+    @media (max-width: 575px) {
+      max-width: 100%;
+      top: 10rem;
+    }
+  }
+
+  .modal-image {
+    cursor: zoom-in;
+  }
+
   @media (max-width: 1067px) {
     .jumbotron {
       h1 {
