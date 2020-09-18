@@ -239,11 +239,17 @@
     }
   }
 
+  .dropdown {
+    margin-bottom: 3rem;
+  }
+
   #dropdownMenuButton {
     cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
     z-index: 1;
     top: inherit;
-    left: 23%;
     max-width: 4rem;
     border: none;
     background: inherit;
