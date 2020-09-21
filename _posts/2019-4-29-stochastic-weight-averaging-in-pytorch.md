@@ -3,6 +3,9 @@ layout: blog_detail
 title: 'Stochastic Weight Averaging in PyTorch'
 author: Pavel Izmailov and Andrew Gordon Wilson
 redirect_from: /2019/04/29/road-to-1.0.html
+image: /assets/images/bert2.png
+tags: [two]
+preview: 'In this blogpost we describe the recently proposed Stochastic Weight Averaging (SWA) technique [1, 2], and its new implementation in [`torchcontrib`](https://github.com/pytorch/contrib).  SWA is a simple procedure that improves generalization in deep learning over Stochastic Gradient Descent (SGD) at no additional cost, and can be used as a drop-in replacement for any other optimizer in PyTorch.'
 ---
 
 In this blogpost we describe the recently proposed Stochastic Weight Averaging (SWA) technique [1, 2], and its new implementation in [`torchcontrib`](https://github.com/pytorch/contrib).  SWA is a simple procedure that improves generalization in deep learning over Stochastic Gradient Descent (SGD) at no additional cost, and can be used as a drop-in replacement for any other optimizer in PyTorch. SWA has a wide range of applications and features:

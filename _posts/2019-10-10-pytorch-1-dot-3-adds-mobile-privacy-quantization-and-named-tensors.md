@@ -2,6 +2,9 @@
 layout: blog_detail
 title: 'PyTorch 1.3 adds mobile, privacy, quantization, and named tensors'
 author: Team PyTorch
+image: /assets/images/bert2.png
+tags: [four]
+preview: 'PyTorch continues to gain momentum because of its focus on meeting the needs of researchers, its streamlined workflow for production use, and most of all because of the enthusiastic support it has received from the AI community. PyTorch citations in papers on ArXiv [grew 194 percent in the first half of 2019 alone, as noted by O’Reilly](https://www.oreilly.com/ideas/one-simple-graphic-researchers-love-pytorch-and-tensorflow?fbclid=IwAR3kYmlyD7zky37IYFu0cafQn7yemhl8P-7MNyB30z0q5RDzxcTOrP8kxDk), and the number of contributors to the platform has grown more than 50 percent over the last year, to nearly 1,200. Facebook, Microsoft, Uber, and other organizations across industries are increasingly using it as the foundation for their most important machine learning (ML) research and production workloads.'
 ---
 
 PyTorch continues to gain momentum because of its focus on meeting the needs of researchers, its streamlined workflow for production use, and most of all because of the enthusiastic support it has received from the AI community. PyTorch citations in papers on ArXiv [grew 194 percent in the first half of 2019 alone, as noted by O’Reilly](https://www.oreilly.com/ideas/one-simple-graphic-researchers-love-pytorch-and-tensorflow?fbclid=IwAR3kYmlyD7zky37IYFu0cafQn7yemhl8P-7MNyB30z0q5RDzxcTOrP8kxDk), and the number of contributors to the platform has grown more than 50 percent over the last year, to nearly 1,200. Facebook, Microsoft, Uber, and other organizations across industries are increasingly using it as the foundation for their most important machine learning (ML) research and production workloads.

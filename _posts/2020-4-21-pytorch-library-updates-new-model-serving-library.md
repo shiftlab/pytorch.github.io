@@ -2,10 +2,13 @@
 layout: blog_detail
 title: 'PyTorch library updates including new model serving library '
 author: Team PyTorch
+image: /assets/images/bert2.png
+tags: [five]
+preview: 'Along with the PyTorch 1.5 release, we are announcing new libraries for high-performance PyTorch model serving and tight integration with TorchElastic and Kubernetes. Additionally, we are releasing updated packages for torch_xla (Google Cloud TPUs), torchaudio, torchvision, and torchtext. All of these new libraries and enhanced capabilities are available today and accompany all of the core features [released in PyTorch 1.5](https://pytorch.org/blog/pytorch-1-dot-5-released-with-new-and-updated-apis).'
 ---
 
 
-Along with the PyTorch 1.5 release, we are announcing new libraries for high-performance PyTorch model serving and tight integration with TorchElastic and Kubernetes. Additionally, we are releasing updated packages for torch_xla (Google Cloud TPUs), torchaudio, torchvision, and torchtext. All of these new libraries and enhanced capabilities are available today and accompany all of the core features [released in PyTorch 1.5](https://pytorch.org/blog/pytorch-1-dot-5-released-with-new-and-updated-apis). 
+Along with the PyTorch 1.5 release, we are announcing new libraries for high-performance PyTorch model serving and tight integration with TorchElastic and Kubernetes. Additionally, we are releasing updated packages for torch_xla (Google Cloud TPUs), torchaudio, torchvision, and torchtext. All of these new libraries and enhanced capabilities are available today and accompany all of the core features [released in PyTorch 1.5](https://pytorch.org/blog/pytorch-1-dot-5-released-with-new-and-updated-apis).
 
 ## TorchServe (Experimental)
 
@@ -35,7 +38,7 @@ To learn more see the [TorchElastic repo](http://pytorch.org/elastic/0.2.0rc0/ku
 
 ## torch_xla 1.5 now available
 
-[torch_xla](http://pytorch.org/xla/) is a Python package that uses the [XLA linear algebra compiler](https://www.tensorflow.org/xla) to accelerate the [PyTorch deep learning framework](https://pytorch.org/) on [Cloud TPUs](https://cloud.google.com/tpu/) and [Cloud TPU Pods](https://cloud.google.com/tpu/docs/tutorials/pytorch-pod). torch_xla aims to give PyTorch users the ability to do everything they can do on GPUs on Cloud TPUs as well while minimizing changes to the user experience. The project began with a conversation at NeurIPS 2017 and gathered momentum in 2018 when teams from Facebook and Google came together to create a proof of concept. We announced this collaboration at PTDC 2018 and made the PyTorch/XLA integration broadly available at PTDC 2019. The project already has 28 contributors, nearly 2k commits, and a repo that has been forked more than 100 times. 
+[torch_xla](http://pytorch.org/xla/) is a Python package that uses the [XLA linear algebra compiler](https://www.tensorflow.org/xla) to accelerate the [PyTorch deep learning framework](https://pytorch.org/) on [Cloud TPUs](https://cloud.google.com/tpu/) and [Cloud TPU Pods](https://cloud.google.com/tpu/docs/tutorials/pytorch-pod). torch_xla aims to give PyTorch users the ability to do everything they can do on GPUs on Cloud TPUs as well while minimizing changes to the user experience. The project began with a conversation at NeurIPS 2017 and gathered momentum in 2018 when teams from Facebook and Google came together to create a proof of concept. We announced this collaboration at PTDC 2018 and made the PyTorch/XLA integration broadly available at PTDC 2019. The project already has 28 contributors, nearly 2k commits, and a repo that has been forked more than 100 times.
 
 This release of [torch_xla](http://pytorch.org/xla/) is aligned and tested with PyTorch 1.5 to reduce friction for developers and to provide a stable and mature PyTorch/XLA stack for training models using Cloud TPU hardware. You can [try it for free](https://medium.com/pytorch/get-started-with-pytorch-cloud-tpus-and-colab-a24757b8f7fc) in your browser on an 8-core Cloud TPU device with [Google Colab](https://colab.research.google.com/), and you can use it at a much larger scaleon [Google Cloud](https://cloud.google.com/gcp).
 
@@ -48,9 +51,9 @@ torchaudio, torchvision, and torchtext complement PyTorch with common datasets, 
 ### torchaudio 0.5
 The torchaudio 0.5 release includes new transforms, functionals, and datasets. Highlights for the release include:
 
-* Added the Griffin-Lim functional and transform, `InverseMelScale` and `Vol` transforms, and `DB_to_amplitude`. 
+* Added the Griffin-Lim functional and transform, `InverseMelScale` and `Vol` transforms, and `DB_to_amplitude`.
 * Added support for `allpass`, `fade`, `bandpass`, `bandreject`, `band`, `treble`, `deemph`, and `riaa` filters and transformations.
-* New datasets added including `LJSpeech` and `SpeechCommands` datasets. 
+* New datasets added including `LJSpeech` and `SpeechCommands` datasets.
 
 See the release full notes [here](https://github.com/pytorch/audio/releases) and full docs can be found [here](https://pytorch.org/audio/).
 
@@ -58,7 +61,7 @@ See the release full notes [here](https://github.com/pytorch/audio/releases) and
 The torchvision 0.6 release includes updates to datasets, models and a significant number of bug fixes. Highlights include:
 
 * Faster R-CNN now supports negative samples which allows the feeding of images without annotations at training time.
-* Added `aligned` flag to `RoIAlign` to match Detectron2. 
+* Added `aligned` flag to `RoIAlign` to match Detectron2.
 * Refactored abstractions for C++ video decoder
 
 See the release full notes [here](https://github.com/pytorch/vision/releases) and full docs can be found [here](https://pytorch.org/docs/stable/torchvision/index.html).
@@ -68,9 +71,9 @@ The torchtext 0.6 release includes a number of bug fixes and improvements to doc
 
 * Fixed an issue related to the SentencePiece dependency in conda package.
 * Added support for the experimental IMDB dataset to allow a custom vocab.
-* A number of documentation updates including adding a code of conduct and a deduplication of the docs on the torchtext site. 
+* A number of documentation updates including adding a code of conduct and a deduplication of the docs on the torchtext site.
 
-Your feedback and discussions on the experimental datasets API are welcomed. You can send them to [issue #664](https://github.com/pytorch/text/issues/664). We would also like to highlight the pull request [here](https://github.com/pytorch/text/pull/701) where the latest dataset abstraction is applied to the text classification datasets. The feedback can be beneficial to finalizing this abstraction. 
+Your feedback and discussions on the experimental datasets API are welcomed. You can send them to [issue #664](https://github.com/pytorch/text/issues/664). We would also like to highlight the pull request [here](https://github.com/pytorch/text/pull/701) where the latest dataset abstraction is applied to the text classification datasets. The feedback can be beneficial to finalizing this abstraction.
 
 See the release full notes [here](https://github.com/pytorch/text/releases) and full docs can be found [here](https://pytorch.org/text/).
 

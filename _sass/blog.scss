@@ -62,7 +62,7 @@
     }
     @include desktop {
       margin-top: 380px + $desktop_header_height;
-      .row.blog-index
+      /*.row.blog-index
         [class*="col-"]:not(:first-child):not(:last-child):not(:nth-child(3n)) {
         padding-right: rem(35px);
         padding-left: rem(35px);
@@ -74,7 +74,7 @@
 
       .row.blog-index [class*="col-"]:nth-child(3n + 1) {
         padding-right: rem(35px);
-      }
+      }*/
 
       .col-md-4 {
         margin-bottom: rem(23px);
@@ -221,13 +221,44 @@
     }
   }
 
-  .page-link {
+  .page-link, .all-blogs {
     font-size: rem(20px);
     letter-spacing: 0;
     line-height: rem(34px);
     color: $orange;
     width: rem(120px);
     text-align: center;
+  }
+
+  .all-blogs {
+    width: inherit;
+    padding: 0.5rem 3.75rem;
+    color: $dark_grey;
+    &:hover {
+      color: $orange;
+    }
+  }
+
+  .dropdown {
+    margin-bottom: 3rem;
+  }
+
+  #dropdownMenuButton {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    bottom: 1rem;
+    z-index: 1;
+    top: inherit;
+    max-width: 4rem;
+    border: none;
+    background: inherit;
+    padding: inherit;
+  }
+
+  .dropdown-item:hover {
+    color: $orange;
+    cursor: pointer;
   }
 
   @media (max-width: 1067px) {
@@ -279,3 +310,17 @@ twitterwidget {
   margin-bottom: rem(18px) !important;
 }
 
+.blog .pagination {
+  .page {
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .active .page {
+    background-color: #dee2e6;
+  }
+}
+
+.blog .blog-img {
+  border: 1px solid $dark_grey;
+}

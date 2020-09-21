@@ -1,0 +1,36 @@
+---
+layout: blog
+title: Blog
+permalink: /blog/
+body-class: blog
+redirect_from: "/blog/categories/"
+pagination:
+  enabled: true
+  permalink: /:num/
+---
+
+{% assign posts = paginator.posts %}
+
+{% include blog_jumbotron.html posts=posts %}
+
+<div class="main-content-wrapper">
+  <div class="main-content">
+    <div class="container">
+      <div class="row blog-index">
+        {% for post in posts %}
+          <div class="col-md-4">
+            <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
+            <h4>
+              <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            </h4>
+            <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500 | strip_html }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <a class="page-link all-blogs" href="{{ site.baseurl }}/blog/all-posts">See All Blogs</a>
+      </div>
+    </div>
+  </div>
+</div>

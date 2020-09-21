@@ -3,6 +3,9 @@ layout: blog_detail
 title: 'OpenMined and PyTorch partner to launch fellowship funding for privacy-preserving ML community'
 author: Andrew Trask (OpenMined/U.Oxford), Shubho Sengupta, Laurens van der Maaten, Joe Spisak
 excerpt: Many applications of machine learning (ML) pose a range of security and privacy challenges.
+image: /assets/images/bert2.png
+tags: [red]
+preview: Many applications of machine learning (ML) pose a range of security and privacy challenges. In particular, users may not be willing or allowed to share their data, which prevents them from taking full advantage of ML platforms like PyTorch. To take the field of privacy-preserving ML (PPML) forward, OpenMined and PyTorch are announcing plans to jointly develop a combined platform to accelerate PPML research as well as new funding for fellowships.'
 ---
 
 <div class="text-center">
