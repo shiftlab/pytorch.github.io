@@ -58,23 +58,10 @@ For high-performance computation on local clusters, the companion open-source [A
 Below is a benchmark of AIStore with WebDataset clients using 10 server nodes and 120 rotational drives each.
 
 <div class="text-center">
-  <img class="modal-image" data-toggle="modal" data-target="#blog-modal" src="{{ site.baseurl }}/assets/images/pytorchwebdataset1.png" width="100%">
+  <img class="blog-image" data-toggle="modal" data-target="#blog-modal" src="{{ site.baseurl }}/assets/images/pytorchwebdataset1.png" width="100%">
 </div>
 
-<div class="container">
-  <div class="modal fade" id="blog-modal" role="dialog">
-    <div class="blog-modal modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-body">
-          <img data-toggle="modal" data-target="#blog-modal" src="{{ site.baseurl }}/assets/images/pytorchwebdataset1.png" width="100%">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+{% include blog_modal.html blog-image="pytorchwebdataset1.png" %}
 
 The left axis shows the aggregate bandwidth from the cluster, while the right scale shows the measured per drive I/O bandwidth. WebDataset and AIStore scale linearly to about 300 clients, at which point they are increasingly limited by the maximum I/O bandwidth available from the rotational drives (about 150 MBytes/s per drive). For comparison, HDFS is shown. HDFS uses a similar approach to AIStore/WebDataset and also exhibits linear scaling up to about 192 clients; at that point, it hits a performance limit of about 120 MBytes/s per drive, and it failed when using more than 1024 clients. Unlike HDFS, the WebDataset-based code just uses standard URLs and HTTP to access data and works identically with local files, with files stored on web servers, and with AIStore. For comparison, NFS in similar experiments delivers about 10-20 MBytes/s per drive.
 
@@ -170,11 +157,3 @@ For a general introduction to how we handle large scale training with WebDataset
 
 Check out [the library](https://github.com/tmbdev/webdataset) and provide your feedback for [RFC 38419](https://github.com/pytorch/pytorch/issues/38419).
 
-<script src="https://cdn.jsdelivr.net/npm/js-image-zoom/js-image-zoom.min.js"></script>
-<script>
-  var options = {
-    width: 400, // required
-    zoomPosition:"original"
-};
-new ImageZoom(document.getElementById("img-container"), options);
-</script>
