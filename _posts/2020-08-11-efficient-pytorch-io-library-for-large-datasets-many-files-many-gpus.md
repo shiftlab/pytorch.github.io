@@ -55,10 +55,10 @@ We will be adding more examples giving benchmarks and showing how to use WebData
 ## High-Performance
 For high-performance computation on local clusters, the companion open-source [AIStore](https://github.com/NVIDIA/AIStore) server provides full disk to GPU I/O bandwidth, subject only to hardware constraints. [This Bigdata 2019 Paper](https://arxiv.org/abs/2001.01858) contains detailed benchmarks and performance measurements. In addition to benchmarks, research projects at NVIDIA and Microsoft have used WebDataset for petascale datasets and billions of training samples.
 
-Below is a benchmark of AIStore with WebDataset clients using 10 server nodes and 120 rotational drives each.
+Below is a benchmark of AIStore with WebDataset clients using 12 server nodes with 10 rotational drives each.
 
 <div class="text-center">
-  {% include blog_modal.html image="pytorchwebdataset1.png" target="blog-1" %}
+  <img src="{{ site.url }}/assets/images/pytorchwebdataset1.png" width="100%">
 </div>
 
 The left axis shows the aggregate bandwidth from the cluster, while the right scale shows the measured per drive I/O bandwidth. WebDataset and AIStore scale linearly to about 300 clients, at which point they are increasingly limited by the maximum I/O bandwidth available from the rotational drives (about 150 MBytes/s per drive). For comparison, HDFS is shown. HDFS uses a similar approach to AIStore/WebDataset and also exhibits linear scaling up to about 192 clients; at that point, it hits a performance limit of about 120 MBytes/s per drive, and it failed when using more than 1024 clients. Unlike HDFS, the WebDataset-based code just uses standard URLs and HTTP to access data and works identically with local files, with files stored on web servers, and with AIStore. For comparison, NFS in similar experiments delivers about 10-20 MBytes/s per drive.
@@ -149,9 +149,8 @@ For a general introduction to how we handle large scale training with WebDataset
 
 * [tensorcom](https://github.com/NVLabs/tensorcom) is a library supporting distributed data augmentation and RDMA to GPU.
 
-* [webdataset-examples](https://github.com/tmbdev/webdataset-examples) contains an example (and soon more examples) of how to use WebDataset in practice.
+* [pytorch-imagenet-wds](https://github.com/tmbdev/pytorch-imagenet-wds) contains an example of how to use WebDataset with ImageNet, based on the PyTorch ImageNet example.
 
 * [Bigdata 2019 Paper with Benchmarks](https://arxiv.org/abs/2001.01858)
 
 Check out [the library](https://github.com/tmbdev/webdataset) and provide your feedback for [RFC 38419](https://github.com/pytorch/pytorch/issues/38419).
-

@@ -110,7 +110,7 @@ Training accuracy: NVIDIA DGX-1 (8x V100 16GB)
 AMP with FP16 is the most performant option for DL training on the V100. In Table 1, we can observe that for various models, AMP on V100 provides a speedup of 1.5x to 5.5x over FP32 on V100 while converging to the same final accuracy.
 
 <div class="text-center">
-  {% include blog_modal.html image="nvidiafp32onv100.jpg" target="blog-1" %}
+  <img src="{{ site.baseurl }}/assets/images/nvidiafp32onv100.jpg" width="100%">
 </div>
 *Figure 2. Performance of mixed precision training on NVIDIA 8xV100 vs. FP32 training on 8xV100 GPU. Bars represent the speedup factor of V100 AMP over V100 FP32. The higher the better.*
 
@@ -119,7 +119,7 @@ AMP with FP16 is the most performant option for DL training on the V100. In Tabl
 AMP with FP16 remains the most performant option for DL training on the A100. In Figure 3, we can observe that for various models, AMP on A100 provides a speedup of 1.3x to 2.5x over AMP on V100 while converging to the same final accuracy.
 
 <div class="text-center">
-  {% include blog_modal.html image="nvidiafp16onv100.png" target="blog-2" %}
+  <img src="{{ site.baseurl }}/assets/images/nvidiafp16onv100.png" width="100%">
 </div>
 *Figure 3. Performance of mixed precision training on NVIDIA 8xA100 vs. 8xV100 GPU. Bars represent the speedup factor of A100 over V100. The higher the better.*
 
