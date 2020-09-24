@@ -119,11 +119,11 @@ $(".blog-filter-btn").on("click", function() {
 });
 
 function filterBlogPosts(tag) {
-  hubList.filter(function(item) {
+  hubList.filter(function (item) {
     if (item.values().tags == tag) {
-       return true;
+      return true;
     } else {
-       return false;
+      return false;
     }
-  })
+  });
 }
