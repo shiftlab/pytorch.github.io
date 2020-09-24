@@ -20,7 +20,7 @@ body-class: blog
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           {% for tag in all_tags %}
-            <div class="dropdown-item filter-btn" data-tag="{{ tag }}">{{ tag | capitalize }}</div>
+            <div class="dropdown-item blog-filter-btn" data-tag="{{ tag }}">{{ tag | capitalize }}</div>
           {% endfor %}
         </div>
       </div>

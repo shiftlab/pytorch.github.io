@@ -2,11 +2,21 @@ var filterScript = $("script[src*=filter-hub-tags]");
 var listId = filterScript.attr("list-id");
 var displayCount = Number(filterScript.attr("display-count"));
 var pagination = filterScript.attr("pagination");
+var options;
 
-var options = {
-  valueNames: ["github-stars-count-whole-number", { data: ["tags", "date-added", "title"] }],
-  page: displayCount
-};
+if (listId == "all-blog-posts") {
+  options = {
+    valueNames: [{ data: ["tags"] }],
+    page: displayCount
+  };
+}
+else {
+  options = {
+    valueNames: ["github-stars-count-whole-number", { data: ["tags", "date-added", "title"] }],
+    page: displayCount
+  };
+}
+
 
 $(".next-news-item").on("click" , function(){
   $(".pagination").find(".active").next().trigger( "click" );
@@ -101,3 +111,19 @@ $("#sortTitleLow").on("click", function() {
 $("#sortTitleHigh").on("click", function() {
   hubList.sort("title", { order: "asc" });
 });
+
+// Filter the blog posts based on the selected tag
+
+$(".blog-filter-btn").on("click", function() {
+  filterBlogPosts($(this).data("tag"));
+});
+
+function filterBlogPosts(tag) {
+  hubList.filter(function(item) {
+    if (item.values().tags == tag) {
+       return true;
+    } else {
+       return false;
+    }
+  })
+}
