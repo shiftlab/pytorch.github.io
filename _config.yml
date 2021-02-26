@@ -68,7 +68,7 @@ collections:
 
 pagination:
   enabled: true
-  per_page: 8
+  per_page: 3
   permalink: '/:num/'
   title: ':title | :num of :max'
   limit: 0

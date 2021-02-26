@@ -38,20 +38,27 @@ pagination:
           </div>
         </div>
         <div class="hidden">
-          <div class="row contributor-index blog-index">
+          <div class="contributor-vertical row blog-vertical ">
+
             {% for post in posts %}
-            <div class="col-md-12">
-              <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
-              <h4>
-                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-              </h4>
-              <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
-              <img src="{{ post.image }}" class="img-fluid">
-            </div>
+              <div class="vertical-blog-container">
+                <div class="col-md-12">
+                  <p class="blog-date">{{ post.date | date: '%B %d, %Y' }}</p>
+                  <h4>
+                    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                  </h4>
+                  <p>{{ post.excerpt | remove: '<p>' | remove: '</p>' | truncate: 500}}</p>
+                  <img src="{{ post.image }}" class="img-fluid">
+                </div>
+                <a href="{{ site.baseurl }}{{ post.url }}" class="btn btn-lg with-right-arrow">
+                  Read More
+                </a>
+              </div>
             {% endfor %}
           </div>
-
-          {% include pagination_buttons.html %}
+          <div class="contributor-pagination">
+            {% include pagination_buttons.html %}
+          </div>
         </div>
       </div>
 
@@ -67,6 +74,8 @@ pagination:
 
 <script type="text/javascript">
   $("#submit").on( "click", function() {
+    $(".marketo-contain").addClass("contributor-expand")
+    $(".marketo-left").addClass("contributor-left")
     $(".hidden").toggle();
     $(".marketo-left .contributor-row").hide();
   });

@@ -69,6 +69,9 @@
   justify-content: center;
   top: 2rem;
   white-space: pre-line;
+  margin-bottom: 4rem;
+  margin-left: auto;
+  margin-right: auto;
   h2 {
     text-transform: uppercase;
     color: $purple;
@@ -119,4 +122,27 @@
 
 .hidden {
   display: none;
+}
+
+.contributor-expand {
+  height: auto !important;
+  a.with-right-arrow, .btn.with-right-arrow {
+    background-position: top 15px right 12px;
+    background-color: white;
+    margin-bottom: 1rem;
+    margin-left: 15px;
+  }
+}
+
+.contributor-left {
+  white-space: normal;
+}
+
+.contributor-vertical {
+  margin-left: inherit;
+  margin-right: inherit;
+}
+
+.contributor-pagination {
+  margin-bottom: 2rem;
 }
