@@ -4,9 +4,6 @@ title: Contributors
 permalink: /contributors/
 body-class: ecosystem
 background-class: features-background
-pagination:
-  enabled: true
-  permalink: /:num/
 ---
 {% assign posts = paginator.posts %}
 {% assign display_post_categories = site.posts | map: 'categories' | join: ',' | replace: '-', ' ' | split: ',' | uniq | sort %}
@@ -27,12 +24,12 @@ pagination:
     <div class="container-fluid nav-menu-wrapper">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light main-content-menu">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav contributor-nav">
               <li class="nav-item nav-select">
                 <span id="sign-up" class="nav-link contributor-nav-link">Sign Up</span>
               </li>
               <li class="nav-item">
-                <span id="past-issues" class="nav-link contributor-nav-link">Past Issues</span>
+                <span id="past-issues" class="nav-link contributor-nav-link">PyTorch Contributors</span>
               </li>
           </ul>
         </nav>
@@ -42,7 +39,8 @@ pagination:
     <div class="marketo-contain container-fluid">
       <!-- START CONTENT -->
       <div class="row col-md-6 marketo-left">
-        <div class="contributor-row">
+        <h2>Coming Soon</h2>
+        <!-- <div class="contributor-row">
           <h2>Sign up for the newsletter</h2>
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="email" aria-label="email" aria-describedby="email">
@@ -50,7 +48,7 @@ pagination:
               <button id ="submit" class="contributor-submit btn btn-outline-secondary" type="button">Submit</button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <div class="row col-md-6 marketo-right">
@@ -70,18 +68,15 @@ pagination:
 
   $("#past-issues").on("click", function() {
     $(".hidden").show();
-    $(".marketo-right").hide();
-    $(".marketo-left").hide();
+    $(".marketo-contain").hide();
     $("#sign-up").parent().removeClass("nav-select");
     $(this).parent().addClass("nav-select");
   })
 
   $("#sign-up").on("click", function() {
     $(".hidden").hide();
-    $(".marketo-right").show();
-    $(".marketo-left").show();
+    $(".marketo-contain").show();
     $("#past-issues").parent().removeClass("nav-select");
-    console.log($(this).parent().prev("li").text())
     $(this).parent().addClass("nav-select");
   })
 </script>
