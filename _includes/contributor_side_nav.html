@@ -27,11 +27,36 @@
   function removeActiveClass() {
     $("#get-started-contributor-sidebar-list li a").each(function() {
       $(this).removeClass("active");
-    });
+    })
   }
 
   function addActiveClass(element) {
-    $(element)
-      .addClass("active");
+    $(element).addClass("active");
   }
+
+  function addActiveScroll() {
+    $("#get-started-contributor-sidebar-list li a").each(function() {
+      $(this).removeClass("active");
+    })
+  }
+
+  var sideNavItems = document.querySelectorAll("#get-started-contributor-sidebar-list li a");
+  console.log(sideNavItems);
+
+  $(window).on('scroll', function() {
+    $(sideNavItems).each(function() {
+      var offsetTop = $(".pytorch-article").offset().top;
+      var articleHeight = $(".pytorch-article").height();
+      console.log(offsetTop - articleHeight / 3)
+      if($(window).scrollTop() >= offsetTop - articleHeight / 3) {
+        var current = $(this).attr('href');
+          $(this).removeClass('active');
+          if ($(this).text(current)) {
+            $(this).addClass('active');
+          }
+      }
+    })
+  });
+
 </script>
+<script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
