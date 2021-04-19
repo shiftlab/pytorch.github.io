@@ -34,29 +34,58 @@
     $(element).addClass("active");
   }
 
-  function addActiveScroll() {
-    $("#get-started-contributor-sidebar-list li a").each(function() {
-      $(this).removeClass("active");
-    })
-  }
+  // var sideNavItems = $("#get-started-contributor-sidebar-list li a");
 
-  var sideNavItems = document.querySelectorAll("#get-started-contributor-sidebar-list li a");
-  console.log(sideNavItems);
+  // $(window).on('scroll', function() {
+  //   $(sideNavItems).each(function() {
+  //     console.log($(window).scrollTop())
+  //     console.log($(this).offset().top)
+  //     // console.log($(this))
+  //     var id = $(this).attr('href');
+  //         console.log(id)
+  //         console.log($(window).scrollTop() >= $(this).offset().top - 400)
+  //         console.log('#get-started-contributor-sidebar-list li a[href="'+ id +'"]')
+  //     if($(window).scrollTop() >= $(this).offset().top) {
+  //         var id = $(this).attr('href');
+  //         console.log(id)
+  //         $(this).removeClass('active');
+  //         if($(this).attr('href') == id) {
+  //           $(this).addClass('active');
+  //         }
+  //       }
+  //   })
+  // });
 
-  $(window).on('scroll', function() {
-    $(sideNavItems).each(function() {
-      var offsetTop = $(".pytorch-article").offset().top;
-      var articleHeight = $(".pytorch-article").height();
-      console.log(offsetTop - articleHeight / 3)
-      if($(window).scrollTop() >= offsetTop - articleHeight / 3) {
-        var current = $(this).attr('href');
-          $(this).removeClass('active');
-          if ($(this).text(current)) {
-            $(this).addClass('active');
-          }
+$(window).on('scroll', function() {
+  var position = jQuery(this).scrollTop();
+  var classSet = 0;
+  var article = $('.pytorch-article').children();
+  console.log(article.attr('id'));
+  $('.pytorch-article').each(function() {
+    var target = jQuery(this).offset().top;
+    var id = $(this).attr('id');
+    if (classSet == 0) {
+      jQuery('#get-started-contributor-sidebar-list li a[href=' + id + ']').removeClass('active');
+      console.log('#get-started-contributor-sidebar-list li a[href="'+ id +'"]')
+      console.log(position >= (target - 200))
+      console.log(position < target + $(this).height())
+      if (position >= (target - 200) && position < target + $(this).height() && $(article.attr('id') == id)) {
+        $(this).addClass('active');
+        classSet = 1;
       }
-    })
+
+      }
+    // if($(window).scrollTop() >= $(this).offset().top) {
+    //   var current = "#" + $(this).children().attr('id');
+    //   $(this).children().removeClass('active');
+    //   console.log(current)
+    //   if($(this).children().attr('id') == current) {
+    //     $(this).addClass('active');
+    //     console.log($(this))
+    //   }
+    // }
   });
+});
 
 </script>
 <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
