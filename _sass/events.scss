@@ -111,6 +111,7 @@
   border: 1px solid $mid_gray;
   height: 21rem;
   margin-top: 2.5rem;
+  display: flex;
   .video-tabs {
     display: flex;
   }
@@ -137,6 +138,11 @@
     position: relative;
     height: 0;
     padding-bottom: 30%;
+    place-self: center;
+  }
+  .video-info {
+    padding-left: 5rem;
+    padding-top: 2rem;
   }
   iframe {
     height: 100%;
