@@ -111,7 +111,11 @@
   border: 1px solid $mid_gray;
   height: 21rem;
   margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
   display: flex;
+  .video-container {
+    display: flex;
+  }
   .video-tabs {
     display: flex;
   }
@@ -150,3 +154,15 @@
     position: absolute;
   }
 }
+
+.video-links-container {
+  border: 1px solid $mid_gray;
+  .video-links {
+    display: flex;
+    .video-link-item {
+      padding-left: 1rem;
+      list-style: none;
+    }
+  }
+}
+
