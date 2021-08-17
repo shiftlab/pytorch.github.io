@@ -3,7 +3,7 @@ layout: blog_detail
 title: Udacity
 logo: assets/images/udacity.png
 featured-home: true
-order: 3
+order: 6
 link: https://www.facebook.com
 ---
 
