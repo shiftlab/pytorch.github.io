@@ -43,6 +43,7 @@ external_urls:
 livereload: true
 markdown: kramdown
 highlighter: rouge
+filter_tags: [PyTorch Utilities, Time Series, Probabilistic Programming, Reinforcement Learning, NLP, Style Transfer, Computer Vision, Medical,Tabular Data]
 collections:
   get_started:
     output: true
