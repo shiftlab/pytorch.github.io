@@ -29,10 +29,13 @@ body-class: ecosystem
         <div class="ecosystem-tags-container">
           <div>
             <div class="ecosystem-filter-menu">
-              <a class="ecosystem-filter tag-filter-btn all-tag-selected" data-tag="all">All</a>
+              <div class="ecosystem-filter tag-filter-btn all-tag-selected">
+                <input onClick="check_uncheck_checkbox(this.checked);" id="all" type="checkbox" name="all" class="hidden2" data-value="all" />
+                <label for="all">All</label>
+              </div>
               {% for tag in site.filter_tags %}
               <div class="ecosystem-filter tag-filter-btn">
-                <input id="{{tag | downcase | replace: ' ', '-'}}" type="checkbox" name="{{tag | downcase | replace: ' ', '-'}}" class="filter2 hidden2" data-value="{{tag | downcase | replace: ' ', '-'}}" />
+                <input id="{{tag | downcase | replace: ' ', '-'}}" type="checkbox" name="{{tag | downcase | replace: ' ', '-'}}" class="filter2 hidden2 filterChk" data-value="{{tag | downcase | replace: ' ', '-'}}" />
                 <label for="{{tag | downcase | replace: ' ', '-'}}">{{tag}}</label>
               </div>
               {% endfor %}

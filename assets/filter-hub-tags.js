@@ -102,18 +102,30 @@ $("#sortTitleHigh").on("click", function() {
   hubList.sort("title", { order: "asc" });
 });
 
-$(".tag-filter-btn[data-tag='all']").on("click", function() {
-  $('input:checkbox').each(function() { 
-    this.checked = false; 
-  });
-  return hubList.filter();
-});
-
+// $(".tag-filter-btn[data-tag='all']").on("click", function() {
+//   $('input:checkbox').each(function() { 
+//     this.checked = false; 
+//   });
+//   return hubList.filter();
+// });
 var activeFilters = [];
+
+var chck = $(".all-tag-selected input");
+chck.prop('checked', true);
+
+function check_uncheck_checkbox(isChecked) {
+		$('.filterChk').each(function() {
+			this.checked = false;
+		});
+  activeFilters = [];
+  return hubList.filter();
+}
+
 
 $('.filter2').on("change", function() {
   var isChecked = this.checked;
   var value = $(this).data("value");
+  chck.prop('checked', false);
 
 if(isChecked){
 //  add to list of active filters

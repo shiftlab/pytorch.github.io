@@ -477,19 +477,25 @@
     .tag-filter-btn {
       
       &.all-tag-selected {
-        background-color: #979797;
-        color: #ffffff;
-        height: unset;
-        border: 1px solid #979797;
-        display: inline-block;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: middle;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        margin-bottom: 5px;
-        cursor: pointer;
+        label {
+          background-color: unset;
+          color: #979797;
+          height: unset;
+          border: 1px solid #979797;
+          display: inline-block;
+          text-align: center;
+          white-space: nowrap;
+          vertical-align: middle;
+          padding: 0.375rem 0.75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          margin-bottom: 5px;
+          cursor: pointer;
+        }
+        input[type=checkbox]:checked ~ label {
+          background-color: #979797;
+          color: #ffffff;
+        }
       }
     }
   }
@@ -522,7 +528,6 @@ input[type=checkbox]:checked ~ label {
     line-height: 1.5;
     margin-bottom: 5px;
     cursor: pointer;
-    background-color: white;
   }
   &:not(.all-tag-selected):hover {
     label {
