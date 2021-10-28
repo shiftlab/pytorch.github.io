@@ -7,5 +7,5 @@ summary-home: An open source hyperparameter optimization framework to automate h
 featured-home: false
 github-id: optuna/optuna
 date-added: 4/6/20
-tags: [nlp, ori]
+tags: [ pytorch-utilities, time-series, probabilistic-programming, reinforcement-learning, style-transfer, computer-vision, medical, tabular-data]
 ---

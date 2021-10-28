@@ -25,18 +25,21 @@ body-class: ecosystem
 
       <!-- START CONTENT -->
 
-    <nav class="filterTagNavbar">
-      <div class="ecosystem-tags-container">
+      <nav class="filterTagNavbar">
+        <div class="ecosystem-tags-container">
           <div>
-              <div class="ecosystem-filter-menu">
-                  <a class="ecosystem-filter tag-filter-btn all-tag-selected" data-tag="all">All</a>
-                  {% for tag in site.filter_tags %}
-                    <a class="ecosystem-filter tag-filter-btn filter-tag" data-tag="{{tag | downcase | replace: ' ', '-'}}">{{tag}}</a>
-                  {% endfor %}
+            <div class="ecosystem-filter-menu">
+              <a class="ecosystem-filter tag-filter-btn all-tag-selected" data-tag="all">All</a>
+              {% for tag in site.filter_tags %}
+              <div class="ecosystem-filter tag-filter-btn">
+                <input id="{{tag | downcase | replace: ' ', '-'}}" type="checkbox" name="{{tag | downcase | replace: ' ', '-'}}" class="filter2 hidden2" data-value="{{tag | downcase | replace: ' ', '-'}}" />
+                <label for="{{tag | downcase | replace: ' ', '-'}}">{{tag}}</label>
               </div>
+              {% endfor %}
+            </div>
           </div>
-      </div>
-    </nav>
+        </div>
+      </nav>
 
       {% include ecosystem_sort.html %}
 
@@ -47,7 +50,7 @@ body-class: ecosystem
           {% assign ecosystem = site.ecosystem | sample: site.ecosystem.size %}
           {% assign ecosystem2 = ecosystem %}
           {% for item in ecosystem2 %}
-            <div class="col-md-6 ecosystem-card-wrapper" id="ecosystemCards" data-tags="{{ item.tags | join: "," | prepend: "[" | append: "]" }}" data-categories="{{ item.category | join: "," }}" data-date-added="{{ item.date-added }}" data-id="{{ item.github-id }}" data-title="{{ item.title }}">
+            <div class="col-md-6 ecosystem-card-wrapper" id="ecosystemCards" data-tags="{{ item.tags | join: "," }}" data-categories="{{ item.category | join: "," }}" data-date-added="{{ item.date-added }}" data-id="{{ item.github-id }}" data-title="{{ item.title }}">
               <div class="card ecosystem-card">
                 <a href="{{ item.link }}" target="_blank">
                   <div class="card-body {{ item.logo-class }} {% if item.experimental %}experimental{% endif %}">

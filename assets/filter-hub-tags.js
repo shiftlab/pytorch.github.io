@@ -23,8 +23,6 @@ if (pagination == "true") {
 }
 
 var hubList = new List(listId, options);
-var filterHubList = new List(listId, options);
-var filterHubList2 = new List(listId, options);
 
 function filterSelectedTags(cardTags, selectedTags) {
   return cardTags.some(function(tag) {
@@ -105,12 +103,34 @@ $("#sortTitleHigh").on("click", function() {
 });
 
 $(".tag-filter-btn[data-tag='all']").on("click", function() {
-  return hubList;
+  $('input:checkbox').each(function() { 
+    this.checked = false; 
+  });
+  return hubList.filter();
 });
 
-$(".tag-filter-btn[data-tag='nlp']").on("click", function() {
-  console.log(listId);
-  console.log(filterHubList);
-  console.log(filterHubList2);
-  filterHubList.filter(s => s.values().tags.includes('nlp'));
+var activeFilters = [];
+
+$('.filter2').on("change", function() {
+  var isChecked = this.checked;
+  var value = $(this).data("value");
+
+if(isChecked){
+//  add to list of active filters
+activeFilters.push(value);
+}
+else
+{
+// remove from active filters
+activeFilters.splice(activeFilters.indexOf(value), 1);
+}
+
+hubList.filter(function (item) {
+  var arr = (item.values().tags && item.values().tags.split(",")) || [];
+  if(activeFilters.length > 0)
+  {
+  return activeFilters.some(r=> arr.includes(r));
+}
+return true;
+});
 });
