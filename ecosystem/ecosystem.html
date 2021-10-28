@@ -29,9 +29,9 @@ body-class: ecosystem
       <div class="ecosystem-tags-container">
           <div>
               <div class="ecosystem-filter-menu">
-                  <a onclick="filterByKeyword('all')" class="ecosystem-filter tag-filter-btn all-tag-selected" data-tag="all">All</a>
+                  <a class="ecosystem-filter tag-filter-btn all-tag-selected" data-tag="all">All</a>
                   {% for tag in site.filter_tags %}
-                    <a onclick="filterByKeyword(this.dataset.tag)" class="ecosystem-filter tag-filter-btn filter-tag" data-tag="{{tag | downcase | replace: ' ', '-'}}">{{tag}}</a>
+                    <a class="ecosystem-filter tag-filter-btn filter-tag" data-tag="{{tag | downcase | replace: ' ', '-'}}">{{tag}}</a>
                   {% endfor %}
               </div>
           </div>
@@ -45,9 +45,9 @@ body-class: ecosystem
       <div id="ecosystem-index-cards">
         <div class="list row ecosystem-cards-wrapper cards-right">
           {% assign ecosystem = site.ecosystem | sample: site.ecosystem.size %}
-          {% assign ecosystem2 = ecosystem | where:"title","Optuna" %}
+          {% assign ecosystem2 = ecosystem %}
           {% for item in ecosystem2 %}
-            <div class="col-md-6 ecosystem-card-wrapper" id="ecosystemCards" data-categories="{{ item.category | join: "," }}" data-date-added="{{ item.date-added }}" data-id="{{ item.github-id }}" data-title="{{ item.title }}">
+            <div class="col-md-6 ecosystem-card-wrapper" id="ecosystemCards" data-tags="{{ item.tags | join: "," | prepend: "[" | append: "]" }}" data-categories="{{ item.category | join: "," }}" data-date-added="{{ item.date-added }}" data-id="{{ item.github-id }}" data-title="{{ item.title }}">
               <div class="card ecosystem-card">
                 <a href="{{ item.link }}" target="_blank">
                   <div class="card-body {{ item.logo-class }} {% if item.experimental %}experimental{% endif %}">
@@ -86,62 +86,6 @@ body-class: ecosystem
 </div>
 
 <script type="text/javascript">
-  function filterByKeyword(key) {
-    console.log(key);
-  }
-  var hubList2 = $(this);
-// Only the hub index page should have pagination
-
-function filterSelectedTags(cardTags, selectedTags) {
-  return cardTags.some(function(tag) {
-    return selectedTags.some(function(selectedTag) {
-      return selectedTag == tag;
-    });
-  });
-}
-
-function updateList2() {
-  var selectedTags = [];
-
-  $(".selected").each(function() {
-    selectedTags.push($(this).data("tag"));
-  });
-
-  hubList2.filter(function(item) {
-  console.log('AAA', hubList2);
-  console.log('AAA', item);
-
-    var cardTags = item.values().tags.split(",");
-
-    if (selectedTags.length == 0) {
-      return true;
-    } else {
-      return filterSelectedTags(cardTags, selectedTags);
-    }
-  });
-}
-
-$(".tag-filter-btn").on("click", function() {
-  if ($(this).data("tag") == "all") {
-    $(this).addClass("all-tag-selected");
-    !$(".filter-tag").removeClass("selected");
-  } else {
-    $(this).toggleClass("selected");
-    $("[data-tag='all']").removeClass("all-tag-selected");
-  }
-
-  // If no tags are selected then highlight the 'All' tag
-
-  if (!$(".selected")[0]) {
-    $("[data-tag='all']").addClass("all-tag-selected");
-  }
-  updateList2()
-});
-
-
-
-
-
   var category = window.location.hash.replace(/^#/, '');;
 
   if (category) {

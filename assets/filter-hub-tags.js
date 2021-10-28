@@ -23,6 +23,8 @@ if (pagination == "true") {
 }
 
 var hubList = new List(listId, options);
+var filterHubList = new List(listId, options);
+var filterHubList2 = new List(listId, options);
 
 function filterSelectedTags(cardTags, selectedTags) {
   return cardTags.some(function(tag) {
@@ -100,4 +102,15 @@ $("#sortTitleLow").on("click", function() {
 
 $("#sortTitleHigh").on("click", function() {
   hubList.sort("title", { order: "asc" });
+});
+
+$(".tag-filter-btn[data-tag='all']").on("click", function() {
+  return hubList;
+});
+
+$(".tag-filter-btn[data-tag='nlp']").on("click", function() {
+  console.log(listId);
+  console.log(filterHubList);
+  console.log(filterHubList2);
+  filterHubList.filter(s => s.values().tags.includes('nlp'));
 });
