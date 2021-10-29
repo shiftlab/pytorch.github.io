@@ -193,7 +193,7 @@
           <div class="pytorch-left-menu-search">
             
     <div class="version">
-      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+git55eac26 ) &#x25BC</a>
+      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+git5658775 ) &#x25BC</a>
     </div>
     
 
@@ -241,6 +241,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/large_scale_deployments.html">Features for large-scale deployments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/multiprocessing.html">Multiprocessing best practices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/numerical_accuracy.html">Numerical accuracy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/randomness.html">Reproducibility</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/serialization.html">Serialization semantics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../../../notes/windows.html">Windows FAQ</a></li>
@@ -395,7 +396,7 @@
 <span class="kn">import</span> <span class="nn">torch.nn.intrinsic</span> <span class="k">as</span> <span class="nn">nni</span>
 <span class="kn">from</span> <span class="nn">torch.nn.quantized.modules.utils</span> <span class="kn">import</span> <span class="n">_quantize_weight</span>
 
-<div class="viewcode-block" id="Linear"><a class="viewcode-back" href="../../../../../../torch.nn.quantized.dynamic.html#torch.nn.quantized.dynamic.Linear">[docs]</a><span class="k">class</span> <span class="nc">Linear</span><span class="p">(</span><span class="n">nnq</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+<div class="viewcode-block" id="Linear"><a class="viewcode-back" href="../../../../../../generated/torch.nn.quantized.dynamic.Linear.html#torch.nn.quantized.dynamic.Linear">[docs]</a><span class="k">class</span> <span class="nc">Linear</span><span class="p">(</span><span class="n">nnq</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A dynamic quantized linear module with floating point tensor as inputs and outputs.</span>
 <span class="sd">    We adopt the same interface as `torch.nn.Linear`, please see</span>
@@ -464,12 +465,12 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Linear</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_load_from_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">local_metadata</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span>
                                                   <span class="n">missing_keys</span><span class="p">,</span> <span class="n">unexpected_keys</span><span class="p">,</span> <span class="n">error_msgs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Linear.from_float"><a class="viewcode-back" href="../../../../../../torch.nn.quantized.dynamic.html#torch.nn.quantized.dynamic.Linear.from_float">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Linear.from_float"><a class="viewcode-back" href="../../../../../../generated/torch.nn.quantized.dynamic.Linear.html#torch.nn.quantized.dynamic.Linear.from_float">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_float</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mod</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create a dynamic quantized module from a float module or qparams_dict</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            mod (Module): a float module, either produced by torch.quantization</span>
+<span class="sd">            mod (Module): a float module, either produced by torch.ao.quantization</span>
 <span class="sd">                          utilities or provided by the user</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">float_modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">linear</span><span class="o">.</span><span class="n">NonDynamicallyQuantizableLinear</span><span class="p">,</span>
@@ -487,7 +488,7 @@
             <span class="c1"># We have the circular import issues if we import the qconfig in the beginning of this file:</span>
             <span class="c1"># https://github.com/pytorch/pytorch/pull/24231. The current workaround is to postpone the</span>
             <span class="c1"># import until we need it.</span>
-            <span class="kn">from</span> <span class="nn">torch.quantization.qconfig</span> <span class="kn">import</span> <span class="n">default_dynamic_qconfig</span>
+            <span class="kn">from</span> <span class="nn">torch.ao.quantization.qconfig</span> <span class="kn">import</span> <span class="n">default_dynamic_qconfig</span>
             <span class="n">weight_observer</span> <span class="o">=</span> <span class="n">default_dynamic_qconfig</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span>
         <span class="n">dtype</span> <span class="o">=</span> <span class="n">weight_observer</span><span class="o">.</span><span class="n">dtype</span>
         <span class="k">assert</span> <span class="n">dtype</span> <span class="ow">in</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">qint8</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">float16</span><span class="p">],</span> <span class="s2">&quot;The only supported dtypes for &quot;</span> \
