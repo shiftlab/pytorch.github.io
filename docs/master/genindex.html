@@ -192,7 +192,7 @@
           <div class="pytorch-left-menu-search">
             
     <div class="version">
-      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+git5658775 ) &#x25BC</a>
+      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+git40631bb ) &#x25BC</a>
     </div>
     
 
@@ -734,6 +734,8 @@
         <li><a href="generated/torch.Tensor.allclose.html#torch.Tensor.allclose">(torch.Tensor method)</a>
 </li>
       </ul></li>
+      <li><a href="backends.html#torch.backends.cuda.matmul.allow_fp16_reduced_precision_reduction">allow_fp16_reduced_precision_reduction (torch.backends.cuda.matmul attribute)</a>
+</li>
       <li><a href="backends.html#torch.backends.cuda.matmul.allow_tf32">allow_tf32 (torch.backends.cuda.matmul attribute)</a>
 
       <ul>
@@ -764,14 +766,14 @@
         <li><a href="generated/torch.Tensor.aminmax.html#torch.Tensor.aminmax">(torch.Tensor method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.angle.html#torch.angle">angle() (in module torch)</a>
 
       <ul>
         <li><a href="generated/torch.Tensor.angle.html#torch.Tensor.angle">(torch.Tensor method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.jit.annotate.html#torch.jit.annotate">annotate() (in module torch.jit)</a>
 </li>
       <li><a href="generated/torch.any.html#torch.any">any() (in module torch)</a>
@@ -870,6 +872,14 @@
         <li><a href="generated/torch.Tensor.arctan.html#torch.Tensor.arctan">(torch.Tensor method)</a>
 </li>
       </ul></li>
+      <li><a href="generated/torch.arctan2.html#torch.arctan2">arctan2() (in module torch)</a>
+
+      <ul>
+        <li><a href="generated/torch.Tensor.arctan2.html#torch.Tensor.arctan2">(torch.Tensor method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/torch.Tensor.arctan2_.html#torch.Tensor.arctan2_">arctan2_() (torch.Tensor method)</a>
+</li>
       <li><a href="generated/torch.Tensor.arctan_.html#torch.Tensor.arctan_">arctan_() (torch.Tensor method)</a>
 </li>
       <li><a href="generated/torch.arctanh.html#torch.arctanh">arctanh() (in module torch)</a>
@@ -978,6 +988,12 @@
 
       <ul>
         <li><a href="generated/torch.Tensor.argsort.html#torch.Tensor.argsort">(torch.Tensor method)</a>
+</li>
+      </ul></li>
+      <li><a href="generated/torch.argwhere.html#torch.argwhere">argwhere() (in module torch)</a>
+
+      <ul>
+        <li><a href="generated/torch.Tensor.argwhere.html#torch.Tensor.argwhere">(torch.Tensor method)</a>
 </li>
       </ul></li>
       <li><a href="benchmark_utils.html#torch.utils.benchmark.CallgrindStats.as_standardized">as_standardized() (torch.utils.benchmark.CallgrindStats method)</a>
@@ -2179,6 +2195,8 @@
       <li><a href="generated/torch.cross.html#torch.cross">cross() (in module torch)</a>
 
       <ul>
+        <li><a href="generated/torch.linalg.cross.html#torch.linalg.cross">(in module torch.linalg)</a>
+</li>
         <li><a href="generated/torch.Tensor.cross.html#torch.Tensor.cross">(torch.Tensor method)</a>
 </li>
       </ul></li>
@@ -2550,7 +2568,7 @@
       </ul></li>
       <li><a href="generated/torch.nn.parallel.DistributedDataParallel.html#torch.nn.parallel.DistributedDataParallel">DistributedDataParallel (class in torch.nn.parallel)</a>
 </li>
-      <li><a href="rpc.html#torch.distributed.optim.DistributedOptimizer">DistributedOptimizer (class in torch.distributed.optim)</a>
+      <li><a href="distributed.optim.html#torch.distributed.optim.DistributedOptimizer">DistributedOptimizer (class in torch.distributed.optim)</a>
 </li>
       <li><a href="data.html#torch.utils.data.distributed.DistributedSampler">DistributedSampler (class in torch.utils.data.distributed)</a>
 </li>
@@ -2809,6 +2827,8 @@
       <ul>
         <li><a href="distributions.html#torch.distributions.beta.Beta.entropy">(torch.distributions.beta.Beta method)</a>
 </li>
+        <li><a href="distributions.html#torch.distributions.binomial.Binomial.entropy">(torch.distributions.binomial.Binomial method)</a>
+</li>
         <li><a href="distributions.html#torch.distributions.categorical.Categorical.entropy">(torch.distributions.categorical.Categorical method)</a>
 </li>
         <li><a href="distributions.html#torch.distributions.cauchy.Cauchy.entropy">(torch.distributions.cauchy.Cauchy method)</a>
@@ -2842,6 +2862,8 @@
         <li><a href="distributions.html#torch.distributions.log_normal.LogNormal.entropy">(torch.distributions.log_normal.LogNormal method)</a>
 </li>
         <li><a href="distributions.html#torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal.entropy">(torch.distributions.lowrank_multivariate_normal.LowRankMultivariateNormal method)</a>
+</li>
+        <li><a href="distributions.html#torch.distributions.multinomial.Multinomial.entropy">(torch.distributions.multinomial.Multinomial method)</a>
 </li>
         <li><a href="distributions.html#torch.distributions.multivariate_normal.MultivariateNormal.entropy">(torch.distributions.multivariate_normal.MultivariateNormal method)</a>
 </li>
@@ -2905,6 +2927,8 @@
       </ul></li>
       <li><a href="generated/torch.Tensor.erf_.html#torch.Tensor.erf_">erf_() (torch.Tensor method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.erfc.html#torch.erfc">erfc() (in module torch)</a>
 
       <ul>
@@ -2913,8 +2937,6 @@
         <li><a href="generated/torch.Tensor.erfc.html#torch.Tensor.erfc">(torch.Tensor method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.Tensor.erfc_.html#torch.Tensor.erfc_">erfc_() (torch.Tensor method)</a>
 </li>
       <li><a href="special.html#torch.special.erfcx">erfcx() (in module torch.special)</a>
@@ -3655,6 +3677,8 @@
 </li>
       <li><a href="generated/torch.get_default_dtype.html#torch.get_default_dtype">get_default_dtype() (in module torch)</a>
 </li>
+      <li><a href="generated/torch.get_deterministic_debug_mode.html#torch.get_deterministic_debug_mode">get_deterministic_debug_mode() (in module torch)</a>
+</li>
       <li><a href="storage.html#torch.BFloat16Storage.get_device">get_device() (torch.BFloat16Storage method)</a>
 
       <ul>
@@ -4121,6 +4145,8 @@
         <li><a href="generated/torch.Tensor.histogram.html#torch.Tensor.histogram">(torch.Tensor method)</a>
 </li>
       </ul></li>
+      <li><a href="generated/torch.histogramdd.html#torch.histogramdd">histogramdd() (in module torch)</a>
+</li>
       <li><a href="generated/torch.quantization.observer.HistogramObserver.html#torch.quantization.observer.HistogramObserver">HistogramObserver (class in torch.quantization.observer)</a>
 </li>
       <li><a href="generated/torch.linalg.householder_product.html#torch.linalg.householder_product">householder_product() (in module torch.linalg)</a>
@@ -4505,6 +4531,8 @@
         <li><a href="storage.html#torch.ShortStorage.is_cuda">(torch.ShortStorage property)</a>
 </li>
       </ul></li>
+      <li><a href="generated/torch.is_deterministic_algorithms_warn_only_enabled.html#torch.is_deterministic_algorithms_warn_only_enabled">is_deterministic_algorithms_warn_only_enabled() (in module torch)</a>
+</li>
       <li><a href="amp.html#torch.cuda.amp.GradScaler.is_enabled">is_enabled() (torch.cuda.amp.GradScaler method)</a>
 </li>
       <li><a href="generated/torch.is_floating_point.html#torch.is_floating_point">is_floating_point() (in module torch)</a>
@@ -4975,6 +5003,8 @@
 
       <ul>
         <li><a href="generated/torch.nn.qat.Linear.html#torch.nn.qat.Linear">(class in torch.nn.qat)</a>
+</li>
+        <li><a href="generated/torch.nn.qat.dynamic.Linear.html#torch.nn.qat.dynamic.Linear">(class in torch.nn.qat.dynamic)</a>
 </li>
         <li><a href="generated/torch.nn.quantized.Linear.html#torch.nn.quantized.Linear">(class in torch.nn.quantized)</a>
 </li>
@@ -5747,7 +5777,7 @@
 </li>
         <li><a href="distributed.html#module-torch.distributed.launch">torch.distributed.launch</a>
 </li>
-        <li><a href="rpc.html#module-torch.distributed.optim">torch.distributed.optim</a>
+        <li><a href="distributed.optim.html#module-torch.distributed.optim">torch.distributed.optim</a>
 </li>
         <li><a href="rpc.html#module-torch.distributed.rpc">torch.distributed.rpc</a>
 </li>
@@ -6178,6 +6208,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.quantization.observer.ObserverBase.html#torch.quantization.observer.ObserverBase">ObserverBase (class in torch.quantization.observer)</a>
 </li>
+      <li><a href="fx.html#torch.fx.Graph.on_generate_code">on_generate_code() (torch.fx.Graph method)</a>
+</li>
       <li><a href="generated/torch.nn.functional.one_hot.html#torch.nn.functional.one_hot">one_hot() (in module torch.nn.functional)</a>
 </li>
       <li><a href="generated/torch.optim.lr_scheduler.OneCycleLR.html#torch.optim.lr_scheduler.OneCycleLR">OneCycleLR (class in torch.optim.lr_scheduler)</a>
@@ -6426,10 +6458,10 @@
 </li>
       <li><a href="distributions.html#torch.distributions.poisson.Poisson">Poisson (class in torch.distributions.poisson)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.poisson.html#torch.poisson">poisson() (in module torch)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="generated/torch.nn.functional.poisson_nll_loss.html#torch.nn.functional.poisson_nll_loss">poisson_nll_loss() (in module torch.nn.functional)</a>
 </li>
       <li><a href="generated/torch.nn.PoissonNLLLoss.html#torch.nn.PoissonNLLLoss">PoissonNLLLoss (class in torch.nn)</a>
@@ -6463,6 +6495,8 @@
 </li>
       </ul></li>
       <li><a href="distributed.algorithms.join.html#torch.distributed.algorithms.JoinHook.post_hook">post_hook() (torch.distributed.algorithms.JoinHook method)</a>
+</li>
+      <li><a href="distributed.optim.html#torch.distributed.optim.PostLocalSGDOptimizer">PostLocalSGDOptimizer (class in torch.distributed.optim)</a>
 </li>
       <li><a href="generated/torch.pow.html#torch.pow">pow() (in module torch)</a>
 
@@ -7396,6 +7430,8 @@
 </li>
       <li><a href="autograd.html#torch.autograd.set_detect_anomaly">set_detect_anomaly (class in torch.autograd)</a>
 </li>
+      <li><a href="generated/torch.set_deterministic_debug_mode.html#torch.set_deterministic_debug_mode">set_deterministic_debug_mode() (in module torch)</a>
+</li>
       <li><a href="generated/torch.cuda.set_device.html#torch.cuda.set_device">set_device() (in module torch.cuda)</a>
 </li>
       <li><a href="rpc.html#torch.distributed.rpc.TensorPipeRpcBackendOptions.set_device_map">set_device_map() (torch.distributed.rpc.TensorPipeRpcBackendOptions method)</a>
@@ -7917,7 +7953,9 @@
       <li><a href="amp.html#torch.cuda.amp.GradScaler.step">step() (torch.cuda.amp.GradScaler method)</a>
 
       <ul>
-        <li><a href="rpc.html#torch.distributed.optim.DistributedOptimizer.step">(torch.distributed.optim.DistributedOptimizer method)</a>
+        <li><a href="distributed.optim.html#torch.distributed.optim.DistributedOptimizer.step">(torch.distributed.optim.DistributedOptimizer method)</a>
+</li>
+        <li><a href="distributed.optim.html#torch.distributed.optim.PostLocalSGDOptimizer.step">(torch.distributed.optim.PostLocalSGDOptimizer method)</a>
 </li>
         <li><a href="distributed.optim.html#torch.distributed.optim.ZeroRedundancyOptimizer.step">(torch.distributed.optim.ZeroRedundancyOptimizer method)</a>
 </li>
@@ -8452,7 +8490,7 @@
     torch.distributed.optim
 
       <ul>
-        <li><a href="rpc.html#module-torch.distributed.optim">module</a>
+        <li><a href="distributed.optim.html#module-torch.distributed.optim">module</a>
 </li>
       </ul></li>
       <li>
