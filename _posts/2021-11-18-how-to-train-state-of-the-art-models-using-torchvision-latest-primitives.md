@@ -5,6 +5,8 @@ author: Vasilis Vryniotis
 featured-img: 'assets/images/fx-image2.png'
 ---
 
+A few weeks ago, TorchVision v0.11 was released packed with numerous new primitives, models and training recipe improvements which allowed achieving state-of-the-art (SOTA) results. The project was dubbed “[TorchVision with Batteries Included](https://github.com/pytorch/vision/issues/3911)” and aimed to modernize our library. We wanted to enable researchers to reproduce papers and conduct research more easily by using common building blocks. Moreover, we aspired to provide the necessary tools to Applied ML practitioners to train their models on their own data using the same SOTA techniques as in research. Finally, we wanted to refresh our pre-trained weights and offer better off-the-shelf models to our users, hoping that they would build better applications.
+
 <style type="text/css">
 article.pytorch-article table tr th, article.pytorch-article table td {line-height: 1.5rem}
 </style>

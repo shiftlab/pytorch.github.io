@@ -5,6 +5,8 @@ author: Alexander Soare and Francisco Massa
 featured-img: 'assets/images/fx-image2.png'
 ---
 
+[FX](https://pytorch.org/docs/stable/fx.html) based feature extraction is a new [TorchVision utility](https://pytorch.org/vision/stable/feature_extraction.html) that lets us access intermediate transformations of an input during the forward pass of a PyTorch Module. It does so by symbolically tracing the forward method to produce a graph where each node represents a single operation. Nodes are named in a human-readable manner such that one may easily specify which nodes they want to access.
+
 <style type="text/css">
 article.pytorch-article table tr th, article.pytorch-article table td {line-height: 1.5rem}
 </style>
