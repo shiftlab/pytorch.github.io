@@ -5,13 +5,13 @@ author: Pytorch Team
 featured-img: ''
 ---
 
-<style type="text/css">
-article.pytorch-article table tr th, article.pytorch-article table td {line-height: 1.5rem}
-</style>
-
 Ensuring the right memory format for your inputs can significantly impact the running time of your PyTorch vision models. When in doubt, choose a Channels Last memory format.
 
 When dealing with vision models in PyTorch that accept multimedia (for example image Tensorts) as input, the Tensor’s memory format can significantly impact the inference execution speed of your model on mobile platforms when using the CPU backend along with XNNPACK. This holds true for training and inference on server platforms as well, but latency is particularly critical for mobile devices and users.
+
+<style type="text/css">
+article.pytorch-article table tr th, article.pytorch-article table td {line-height: 1.5rem}
+</style>
 
 ## Outline of this article
 1. Deep Dive into matrix storage/memory representation in C++. Introduction to [Row and Column major order](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
