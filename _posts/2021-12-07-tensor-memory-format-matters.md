@@ -1,13 +1,13 @@
 ---
 layout: blog_detail
-title: '[1/N] Efficient PyTorch: Tensor Memory Format matters'
+title: 'Efficient PyTorch: Tensor Memory Format Matters'
 author: Pytorch Team
 featured-img: ''
 ---
 
 Ensuring the right memory format for your inputs can significantly impact the running time of your PyTorch vision models. When in doubt, choose a Channels Last memory format.
 
-When dealing with vision models in PyTorch that accept multimedia (for example image Tensorts) as input, the Tensor’s memory format can significantly impact the inference execution speed of your model on mobile platforms when using the CPU backend along with XNNPACK. This holds true for training and inference on server platforms as well, but latency is particularly critical for mobile devices and users.
+When dealing with vision models in PyTorch that accept multimedia (for example image Tensorts) as input, the Tensor’s memory format can significantly impact **the inference execution speed of your model on mobile platforms when using the CPU backend along with XNNPACK**. This holds true for training and inference on server platforms as well, but latency is particularly critical for mobile devices and users.
 
 <style type="text/css">
 article.pytorch-article table tr th, article.pytorch-article table td {line-height: 1.5rem}
@@ -18,7 +18,7 @@ article.pytorch-article table tr th, article.pytorch-article table td {line-heig
 2. Impact of looping over a matrix in the same or different order as the storage representation, along with an example.
 3. Introduction to Cachegrind; a tool to inspect the cache friendliness of your code.
 4. Memory formats supported by PyTorch Operators.
-5. Best practices to ensure efficient model execution on mobile platforms when using PyTorch Mobile.
+5. Best practices example to ensure efficient model execution with XNNPACK optimizations
 
 ## Matrix Storage Representation in C++
 
@@ -223,26 +223,17 @@ When you combine it with the fact that accelerated operators work better with a 
 
 From the XNNPACK home page:
 
-“All operators in XNNPACK support NHWC layout, but additionally allow custom stride along the Channel dimension".
+> “All operators in XNNPACK support NHWC layout, but additionally allow custom stride along the Channel dimension".
 
 ## PyTorch Best Practice
 
 The best way to get the most performance from your PyTorch vision models is to ensure that your input tensor is in a **Channels Last** [memory format](https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html) before it is fed into the model.
 
-
-```python
-import torch
-
-N, C, H, W = 10, 3, 32, 32
-x = torch.empty(N, C, H, W)
-print(x.stride())  # Outputs: (3072, 1024, 32, 1)
-x = x.to(memory_format=torch.channels_last)
-print(x.shape)  # Outputs: (10, 3, 32, 32) as dimensions order preserved
-print(x.stride())  # Outputs: (3072, 1, 96, 3)
-
-```
+You can get even more speedups by optimizing your model to use the XNNPACK backend (by simply calling `optimize_for_mobile()` on your torchscripted model). Note that XNNPACK models will run slower if the inputs are contiguous, so definitely make sure it is in Channels-Last format.
 
 ## Working example showing speedup
+
+Run this example on [Google Colab](https://colab.research.google.com/gist/suraj813/ad9aebcbffbdd6d02b23ca7231130a30/channels-last-with-xnnpack.ipynb#scrollTo=xvJN73YWXgDF) - note that runtimes on colab CPUs might not reflect accurate performance; it is recommended to run this code on your local machine.
 
 ```python
 import torch
@@ -250,73 +241,60 @@ from torch.utils.mobile_optimizer import optimize_for_mobile
 import torch.backends.xnnpack
 import time
 
-print(torch.backends.xnnpack.enabled)
+print("XNNPACK is enabled: ", torch.backends.xnnpack.enabled, "\n")
 
-# Output
-#
-# True
-
-N, C, H, W = 1, 64, 200, 200
-COUT = C * 2
+N, C, H, W = 1, 3, 200, 200
 x = torch.rand(N, C, H, W)
-print(x.stride())
+print("Contiguous shape: ", x.shape)
+print("Contiguous stride: ", x.stride())
+print()
+
 xcl = x.to(memory_format=torch.channels_last)
-print(x.shape)
-print(x.stride())
-
-weight = torch.rand(COUT, 1, 4, 4)
-weight_cl = weight.to(memory_format=torch.channels_last)
-bias = torch.rand(COUT)
-
-class TestConvModel(torch.nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.conv = torch.nn.Conv2d(C, COUT, 4)
-
-    def forward(self, input):
-        return self.conv(input)
-
-m = TestConvModel()
-scripted = torch.jit.script(m)
-
-mm = optimize_for_mobile(scripted)
-
-print(mm.graph)
-
-# Output
-#
-# (2560000, 40000, 200, 1)
-# torch.Size([1, 64, 200, 200])
-# (2560000, 40000, 200, 1)
-#
-# graph(%self : __torch__.___torch_mangle_18.TestConvModel,
-#       %input.1 : Tensor):
-#   %self.prepack_folding_forward._jit_pass_packed_weight_0 : # __torch__.torch.classes.xnnpack.Conv2dOpContext = prim::Constant[value=object(0x7ff54dd1c2d0)]()
-#   %3 : Tensor = prepacked::conv2d_clamp_run(%input.1, %self.prepack_folding_forward._jit_pass_packed_weight_0) # # /mnt/xarfuse/uid-22594/3d661d25-seed-nspid4026533861_cgpid10109128-ns-4026533857/torch/nn/modules/conv.py:443:15
-#   return (%3)
-
-start = time.perf_counter()
-for i in range(100):
-  mm(x)
-end = time.perf_counter()
-print(end-start)
-
-# Output
-#
-# 4.145837433999986
-
-start = time.perf_counter()
-for i in range(100):
-  mm(xcl)
-end = time.perf_counter()
-print(end-start)
-
-# Output
-#
-# 3.4262036769996485
+print("Channels-Last shape: ", xcl.shape)
+print("Channels-Last stride: ", xcl.stride())
 ```
 
-This represents a **speedup of ~17% when using a Channels Last Memory Format** for the conv2d operation compared to a Channels First Memory Format.
+The input shape stays the same for contiguous and channels-last formats. Internally however, the tensor's layout has changed as you can see in the strides. Now, the number of jumps required to go across channels is only 1 (instead of 40000 in the contiguous tensor).
+This better data locality means convolution layers can access all the channels for a given pixel much faster. Let's see now how the memory format affects runtime:
+
+```python
+from torchvision.models import resnet34, resnet50, resnet101
+
+m = resnet34(pretrained=False)
+# m = resnet50(pretrained=False)
+# m = resnet101(pretrained=False)
+
+def get_optimized_model(mm):
+  mm = mm.eval()
+  scripted = torch.jit.script(mm)
+  optimized = optimize_for_mobile(scripted)  # explicitly call the xnnpack rewrite 
+  return scripted, optimized
+
+
+def compare_contiguous_CL(mm):
+  # inference on contiguous
+  start = time.perf_counter()
+  for i in range(20):
+    mm(x)
+  end = time.perf_counter()
+  print("Contiguous: ", end-start)
+
+  # inference on channels-last
+  start = time.perf_counter()
+  for i in range(20):
+    mm(xcl)
+  end = time.perf_counter()
+  print("Channels-Last: ", end-start)
+
+with torch.inference_mode():
+  scripted, optimized = get_optimized_model(m)
+
+  print("Runtimes for torchscripted model: ")
+  compare_contiguous_CL(scripted.eval())
+  print()
+  print("Runtimes for mobile-optimized model: ")
+  compare_contiguous_CL(optimized.eval())
+```
 
 ## Conclusion
 
@@ -332,16 +310,3 @@ The Memory Layout of an input tensor can significantly impact a model’s runnin
 - [XNNPACK](https://github.com/google/XNNPACK)
 - [PyTorch memory format tutorial](https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html)
 - [Supported operators](https://github.com/pytorch/pytorch/wiki/Operators-with-Channels-Last-support)
-
-<p align="center">
-<img src="/assets/images/tensor/image1.png" alt="C++ stores multi-dimensional data in row-major format." width="100%">
-</p>
-
-<div style="display:flex;">
-<p align="center">
-<img src="/assets/images/tensor/image2.png" alt="C++ stores multi-dimensional data in row-major format." width="80%">
-</p>
-<p align="center">
-<img src="/assets/images/tensor/image3.png" alt="C++ stores multi-dimensional data in row-major format." width="80%">
-</p>
-</div>
