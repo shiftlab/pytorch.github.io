@@ -296,8 +296,6 @@ with torch.inference_mode():
   compare_contiguous_CL(optimized.eval())
 ```
 
-This represents a **speedup of ~17% when using a Channels Last Memory Format** for the conv2d operation compared to a Channels First Memory Format.
-
 ## Conclusion
 
 The Memory Layout of an input tensor can significantly impact a model’s running time. For Vision Models, prefer a **Channels Last** memory format to get the most out of your PyTorch models.
