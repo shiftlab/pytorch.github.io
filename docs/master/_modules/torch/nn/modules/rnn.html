@@ -193,7 +193,7 @@
           <div class="pytorch-left-menu-search">
             
     <div class="version">
-      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+git4b0e1e1 ) &#x25BC</a>
+      <a href='https://pytorch.org/docs/versions.html'>master (1.11.0a0+gitf8f96d4 ) &#x25BC</a>
     </div>
     
 
@@ -250,6 +250,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cpp_index.html">C++</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://pytorch.org/javadoc/">Javadoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../deploy.html">torch::deploy</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python API</span></p>
 <ul>
@@ -414,7 +415,7 @@
     <span class="k">return</span> <span class="n">tensor</span><span class="o">.</span><span class="n">index_select</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">permutation</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="RNNBase"><a class="viewcode-back" href="../../../../generated/torch.nn.RNNBase.html#torch.nn.RNNBase">[docs]</a><span class="k">class</span> <span class="nc">RNNBase</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RNNBase</span><span class="p">(</span><span class="n">Module</span><span class="p">):</span>
     <span class="n">__constants__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;input_size&#39;</span><span class="p">,</span> <span class="s1">&#39;hidden_size&#39;</span><span class="p">,</span> <span class="s1">&#39;num_layers&#39;</span><span class="p">,</span> <span class="s1">&#39;bias&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;batch_first&#39;</span><span class="p">,</span> <span class="s1">&#39;dropout&#39;</span><span class="p">,</span> <span class="s1">&#39;bidirectional&#39;</span><span class="p">,</span> <span class="s1">&#39;proj_size&#39;</span><span class="p">]</span>
     <span class="n">__jit_unused_properties__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;all_weights&#39;</span><span class="p">]</span>
@@ -523,7 +524,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_flat_weights</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RNNBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RNNBase.flatten_parameters"><a class="viewcode-back" href="../../../../generated/torch.nn.RNNBase.html#torch.nn.RNNBase.flatten_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">flatten_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">flatten_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Resets parameter data pointer so that they can use faster code paths.</span>
 
 <span class="sd">        Right now, this works only if the module is on the GPU and cuDNN is enabled.</span>
@@ -569,7 +570,7 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">_flat_weights</span><span class="p">,</span> <span class="n">num_weights</span><span class="p">,</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">input_size</span><span class="p">,</span> <span class="n">rnn</span><span class="o">.</span><span class="n">get_cudnn_mode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">),</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">proj_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_layers</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span><span class="p">))</span></div>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">batch_first</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bidirectional</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">):</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">RNNBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_apply</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
@@ -694,10 +695,10 @@
         <span class="c1"># flat weights list.</span>
         <span class="n">replica</span><span class="o">.</span><span class="n">_flat_weights</span> <span class="o">=</span> <span class="n">replica</span><span class="o">.</span><span class="n">_flat_weights</span><span class="p">[:]</span>
         <span class="n">replica</span><span class="o">.</span><span class="n">_flat_weights_names</span> <span class="o">=</span> <span class="n">replica</span><span class="o">.</span><span class="n">_flat_weights_names</span><span class="p">[:]</span>
-        <span class="k">return</span> <span class="n">replica</span></div>
+        <span class="k">return</span> <span class="n">replica</span>
 
 
-<div class="viewcode-block" id="RNN"><a class="viewcode-back" href="../../../../generated/torch.nn.RNN.html#torch.nn.RNN">[docs]</a><span class="k">class</span> <span class="nc">RNN</span><span class="p">(</span><span class="n">RNNBase</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RNN</span><span class="p">(</span><span class="n">RNNBase</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Applies a multi-layer Elman RNN with :math:`\tanh` or :math:`\text{ReLU}` non-linearity to an</span>
 <span class="sd">    input sequence.</span>
 
@@ -864,7 +865,7 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orig_input</span><span class="p">,</span> <span class="n">PackedSequence</span><span class="p">):</span>
             <span class="n">output_packed</span> <span class="o">=</span> <span class="n">PackedSequence</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">,</span> <span class="n">sorted_indices</span><span class="p">,</span> <span class="n">unsorted_indices</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">output_packed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_hidden</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">unsorted_indices</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_hidden</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">unsorted_indices</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_hidden</span><span class="p">(</span><span class="n">hidden</span><span class="p">,</span> <span class="n">unsorted_indices</span><span class="p">)</span>
 
 <span class="c1"># XXX: LSTM and GRU implementation is different from RNNBase, this is because:</span>
 <span class="c1"># 1. we want to support nn.LSTM and nn.GRU in TorchScript and TorchScript in</span>
@@ -1316,7 +1317,7 @@
             <span class="n">init</span><span class="o">.</span><span class="n">uniform_</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="o">-</span><span class="n">stdv</span><span class="p">,</span> <span class="n">stdv</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="RNNCell"><a class="viewcode-back" href="../../../../generated/torch.nn.RNNCell.html#torch.nn.RNNCell">[docs]</a><span class="k">class</span> <span class="nc">RNNCell</span><span class="p">(</span><span class="n">RNNCellBase</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RNNCell</span><span class="p">(</span><span class="n">RNNCellBase</span><span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;An Elman RNN cell with tanh or ReLU non-linearity.</span>
 
 <span class="sd">    .. math::</span>
@@ -1333,9 +1334,8 @@
 <span class="sd">        nonlinearity: The non-linearity to use. Can be either ``&#39;tanh&#39;`` or ``&#39;relu&#39;``. Default: ``&#39;tanh&#39;``</span>
 
 <span class="sd">    Inputs: input, hidden</span>
-<span class="sd">        - **input** of shape `(batch, input_size)`: tensor containing input features</span>
-<span class="sd">        - **hidden** of shape `(batch, hidden_size)`: tensor containing the initial hidden</span>
-<span class="sd">          state for each element in the batch.</span>
+<span class="sd">        - **input**: tensor containing input features</span>
+<span class="sd">        - **hidden**: tensor containing the initial hidden state</span>
 <span class="sd">          Defaults to zero if not provided.</span>
 
 <span class="sd">    Outputs: h&#39;</span>
@@ -1343,13 +1343,11 @@
 <span class="sd">          for each element in the batch</span>
 
 <span class="sd">    Shape:</span>
-<span class="sd">        - Input1: :math:`(N, H_{in})` tensor containing input features where</span>
-<span class="sd">          :math:`H_{in}` = `input_size`</span>
-<span class="sd">        - Input2: :math:`(N, H_{out})` tensor containing the initial hidden</span>
-<span class="sd">          state for each element in the batch where :math:`H_{out}` = `hidden_size`</span>
-<span class="sd">          Defaults to zero if not provided.</span>
-<span class="sd">        - Output: :math:`(N, H_{out})` tensor containing the next hidden state</span>
-<span class="sd">          for each element in the batch</span>
+<span class="sd">        - input: :math:`(N, H_{in})` or :math:`(H_{in})` tensor containing input features where</span>
+<span class="sd">          :math:`H_{in}` = `input_size`.</span>
+<span class="sd">        - hidden: :math:`(N, H_{out})` or :math:`(H_{out})` tensor containing the initial hidden</span>
+<span class="sd">          state where :math:`H_{out}` = `hidden_size`. Defaults to zero if not provided.</span>
+<span class="sd">        - output: :math:`(N, H_{out})` or :math:`(H_{out})` tensor containing the next hidden state.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        weight_ih: the learnable input-hidden weights, of shape</span>
@@ -1383,8 +1381,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span> <span class="o">=</span> <span class="n">nonlinearity</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">hx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> \
+            <span class="sa">f</span><span class="s2">&quot;RNNCell: Expected input to be 1-D or 2-D but received </span><span class="si">{</span><span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span><span class="si">}</span><span class="s2">-D tensor&quot;</span>
+        <span class="n">is_batched</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">hx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">hx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hx</span> <span class="o">=</span> <span class="n">hx</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span> <span class="k">else</span> <span class="n">hx</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span> <span class="o">==</span> <span class="s2">&quot;tanh&quot;</span><span class="p">:</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">_VF</span><span class="o">.</span><span class="n">rnn_tanh_cell</span><span class="p">(</span>
                 <span class="nb">input</span><span class="p">,</span> <span class="n">hx</span><span class="p">,</span>
@@ -1401,7 +1408,11 @@
             <span class="n">ret</span> <span class="o">=</span> <span class="nb">input</span>  <span class="c1"># TODO: remove when jit supports exception flow</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
                 <span class="s2">&quot;Unknown nonlinearity: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nonlinearity</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">ret</span></div>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
 
 
 <div class="viewcode-block" id="LSTMCell"><a class="viewcode-back" href="../../../../generated/torch.nn.LSTMCell.html#torch.nn.LSTMCell">[docs]</a><span class="k">class</span> <span class="nc">LSTMCell</span><span class="p">(</span><span class="n">RNNCellBase</span><span class="p">):</span>
@@ -1427,19 +1438,15 @@
 <span class="sd">            `b_hh`. Default: ``True``</span>
 
 <span class="sd">    Inputs: input, (h_0, c_0)</span>
-<span class="sd">        - **input** of shape `(batch, input_size)`: tensor containing input features</span>
-<span class="sd">        - **h_0** of shape `(batch, hidden_size)`: tensor containing the initial hidden</span>
-<span class="sd">          state for each element in the batch.</span>
-<span class="sd">        - **c_0** of shape `(batch, hidden_size)`: tensor containing the initial cell state</span>
-<span class="sd">          for each element in the batch.</span>
+<span class="sd">        - **input** of shape `(batch, input_size)` or `(input_size)`: tensor containing input features</span>
+<span class="sd">        - **h_0** of shape `(batch, hidden_size)` or `(hidden_size)`: tensor containing the initial hidden state</span>
+<span class="sd">        - **c_0** of shape `(batch, hidden_size)` or `(hidden_size)`: tensor containing the initial cell state</span>
 
 <span class="sd">          If `(h_0, c_0)` is not provided, both **h_0** and **c_0** default to zero.</span>
 
 <span class="sd">    Outputs: (h_1, c_1)</span>
-<span class="sd">        - **h_1** of shape `(batch, hidden_size)`: tensor containing the next hidden state</span>
-<span class="sd">          for each element in the batch</span>
-<span class="sd">        - **c_1** of shape `(batch, hidden_size)`: tensor containing the next cell state</span>
-<span class="sd">          for each element in the batch</span>
+<span class="sd">        - **h_1** of shape `(batch, hidden_size)` or `(hidden_size)`: tensor containing the next hidden state</span>
+<span class="sd">        - **c_1** of shape `(batch, hidden_size)` or `(hidden_size)`: tensor containing the next cell state</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        weight_ih: the learnable input-hidden weights, of shape</span>
@@ -1472,14 +1479,27 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">LSTMCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">num_chunks</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="o">**</span><span class="n">factory_kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">hx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Tensor</span><span class="p">]:</span>
+        <span class="k">assert</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> \
+            <span class="sa">f</span><span class="s2">&quot;LSTMCell: Expected input to be 1-D or 2-D but received </span><span class="si">{</span><span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span><span class="si">}</span><span class="s2">-D tensor&quot;</span>
+        <span class="n">is_batched</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">hx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">zeros</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
             <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">zeros</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">_VF</span><span class="o">.</span><span class="n">lstm_cell</span><span class="p">(</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hx</span> <span class="o">=</span> <span class="p">(</span><span class="n">hx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">hx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span> <span class="k">else</span> <span class="n">hx</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">_VF</span><span class="o">.</span><span class="n">lstm_cell</span><span class="p">(</span>
             <span class="nb">input</span><span class="p">,</span> <span class="n">hx</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weight_ih</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_hh</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bias_ih</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias_hh</span><span class="p">,</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">ret</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
 
 
 <span class="k">class</span> <span class="nc">GRUCell</span><span class="p">(</span><span class="n">RNNCellBase</span><span class="p">):</span>
@@ -1503,23 +1523,21 @@
 <span class="sd">            `b_hh`. Default: ``True``</span>
 
 <span class="sd">    Inputs: input, hidden</span>
-<span class="sd">        - **input** of shape `(batch, input_size)`: tensor containing input features</span>
-<span class="sd">        - **hidden** of shape `(batch, hidden_size)`: tensor containing the initial hidden</span>
+<span class="sd">        - **input** : tensor containing input features</span>
+<span class="sd">        - **hidden** : tensor containing the initial hidden</span>
 <span class="sd">          state for each element in the batch.</span>
 <span class="sd">          Defaults to zero if not provided.</span>
 
 <span class="sd">    Outputs: h&#39;</span>
-<span class="sd">        - **h&#39;** of shape `(batch, hidden_size)`: tensor containing the next hidden state</span>
+<span class="sd">        - **h&#39;** : tensor containing the next hidden state</span>
 <span class="sd">          for each element in the batch</span>
 
 <span class="sd">    Shape:</span>
-<span class="sd">        - Input1: :math:`(N, H_{in})` tensor containing input features where</span>
-<span class="sd">          :math:`H_{in}` = `input_size`</span>
-<span class="sd">        - Input2: :math:`(N, H_{out})` tensor containing the initial hidden</span>
-<span class="sd">          state for each element in the batch where :math:`H_{out}` = `hidden_size`</span>
-<span class="sd">          Defaults to zero if not provided.</span>
-<span class="sd">        - Output: :math:`(N, H_{out})` tensor containing the next hidden state</span>
-<span class="sd">          for each element in the batch</span>
+<span class="sd">        - input: :math:`(N, H_{in})` or :math:`(H_{in})` tensor containing input features where</span>
+<span class="sd">          :math:`H_{in}` = `input_size`.</span>
+<span class="sd">        - hidden: :math:`(N, H_{out})` or :math:`(H_{out})` tensor containing the initial hidden</span>
+<span class="sd">          state where :math:`H_{out}` = `hidden_size`. Defaults to zero if not provided.</span>
+<span class="sd">        - output: :math:`(N, H_{out})` or :math:`(H_{out})` tensor containing the next hidden state.</span>
 
 <span class="sd">    Attributes:</span>
 <span class="sd">        weight_ih: the learnable input-hidden weights, of shape</span>
@@ -1550,13 +1568,27 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">GRUCell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">input_size</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">num_chunks</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="o">**</span><span class="n">factory_kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">hx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> \
+            <span class="sa">f</span><span class="s2">&quot;GRUCell: Expected input to be 1-D or 2-D but received </span><span class="si">{</span><span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span><span class="si">}</span><span class="s2">-D tensor&quot;</span>
+        <span class="n">is_batched</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="nb">input</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">hx</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">hx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="nb">input</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">_VF</span><span class="o">.</span><span class="n">gru_cell</span><span class="p">(</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">hx</span> <span class="o">=</span> <span class="n">hx</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span> <span class="k">else</span> <span class="n">hx</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">_VF</span><span class="o">.</span><span class="n">gru_cell</span><span class="p">(</span>
             <span class="nb">input</span><span class="p">,</span> <span class="n">hx</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">weight_ih</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight_hh</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bias_ih</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bias_hh</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">is_batched</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
 </pre></div>
 
              </article>
