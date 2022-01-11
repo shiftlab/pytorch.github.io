@@ -1,0 +1,92 @@
+---
+layout: default
+title: Developer Day 2021
+permalink: ecosystem/ptdd/2021
+background-class: features-background
+body-class: ecosystem
+---
+
+<div class="jumbotron jumbotron-fluid contributor-jumbotron">
+  <div class="contributor-jumbo-text container">
+    <h1>PyTorch Developer Day</h1>
+    <h1 class="lead">2021</h1>
+  </div>
+</div>
+
+<div class="main-content-wrapper">
+  <div class="main-content">
+    <div class="container">
+      <p class="lead">
+        PYTORCH DEVELOPER DAY INFORMATION
+      </p>
+      <p class="lead">
+        The PyTorch Developer Day is a virtual event that brings together leading researchers and developers from the Machine Learning (ML) community to join a multiple set of talks covering new software releases, ways PyTorch is being used in academia and industry, and current trends in ML development. Find all the talks below:
+      </p>
+      <ul class="lead">
+        <li>
+          <a href="https://www.youtube.com/watch?v=7yQ4FgtYvj8"
+            >Keynotes</a
+          >: Learn about the innovations, the new features, updates, and release of PyTorch, and how industries are using it for production and deployment.
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=7yQ4FgtYvj8"
+            >Fireside Chat</a
+          >: An informal and intimate conversation with two pioneers in the field of AI (and PyTorch) sharing their thoughts and vision for the future, commentary on top-of-mind trends they are seeing
+        </li>
+        <li>
+          <a href="https://www.youtube.com/watch?v=7yQ4FgtYvj8"
+            >Community Talks</a
+          >: PyTorch has grown thanks to our community. Hear from our members on the work being done with PyTorch.
+        </li>
+      </ul>
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          id="pted-filter"
+          placeholder="Filter..."
+          class="form-control"
+        />
+      </div>
+      <hr />
+      <div class="row">
+        <h1>Posters</h1>
+        {% for poster in site.data.ecosystem.ptdd['2021'].posters %}
+        <div class="card">
+          <div class="card-body">
+            {% if poster.poster_link %}
+            <a href="{{poster.poster_link}}"
+              ><img src="{{ poster.thumbnail_link }}"
+            /></a>
+            {% endif %}
+            <h5 class="card-title">
+              {% if poster.poster_link %}
+              <a href="{{ poster.poster_link }}">{{ poster.title }}</a>
+              {% else %} {{ poster.title }} {% endif %}
+            </h5>
+            <h6 class="card-subtitle">{{ poster.authors | join: ", "}}</h6>
+            <p class="card-text">{{ poster.description }}</p>
+            {% if poster.link %}
+            <p class="card-text">
+              <a href="{{poster.link}}">{{ poster.link }}</a>
+            </p>
+            {% endif %}
+            <p class="card-text">
+              <small class="text-muted">{{ poster.categories }}</small>
+            </p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  // this isn't efficient please don't use for more than a few hundred items
+  $("#pted-filter").on("keyup", function () {
+    var input = $(this).val().toLowerCase();
+
+    $(".card").filter(function () {
+      $(this).toggle($(this).text().toLowerCase().indexOf(input) > -1);
+    });
+  });
+</script>
