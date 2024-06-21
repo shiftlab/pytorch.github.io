@@ -28,3 +28,38 @@
     margin-bottom: rem(36px);
   }
 }
+
+.resources .article-page-module {
+  background: $white;
+
+  .educational-resources-container {
+    h2 {
+      text-transform: uppercase;
+    }
+
+    h4 {
+      color: $black;
+    }
+
+    h5 {
+      padding-top: rem(30px);
+      padding-bottom: rem(10px);
+      color: $grey;
+    }
+
+    p {
+      color: $grey;
+    }
+
+    .educational-courses-intro {
+      @include desktop {
+        width: 41%;
+      }
+
+      padding-top: rem(20px);
+      p {
+        color: $not_quite_black;
+      }
+    }
+  }
+}
